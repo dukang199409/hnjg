@@ -33,8 +33,8 @@
 	</bean>	
 	<!-- jedis客户端单机版 -->
 	<bean id="redisClient" class="redis.clients.jedis.JedisPool">
-		<constructor-arg name="host" value="192.168.122.98"></constructor-arg>
-		<!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
+		<!--<constructor-arg name="host" value="192.168.122.98"></constructor-arg>-->
+		<constructor-arg name="host" value="127.0.0.1"></constructor-arg>
 		<constructor-arg name="port" value="6379"></constructor-arg>
 		<constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
 	</bean>

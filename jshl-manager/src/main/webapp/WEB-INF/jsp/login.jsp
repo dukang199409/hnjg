@@ -74,8 +74,8 @@
 				$.post("/user/login", $("#formlogin").serialize(),function(data){
 					if (data.status == 200) {
 						if (redirectUrl == "") {
-							location.href = "http://localhost:8080/index";
-							//location.href = "http://121.5.38.133:8080/index";
+							//location.href = "http://localhost:8080/index";
+							location.href = "http://121.5.38.133:8080/index";
 						} else {
 							location.href = redirectUrl;
 						}

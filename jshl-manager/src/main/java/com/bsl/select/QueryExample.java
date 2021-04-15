@@ -63,7 +63,14 @@ public class QueryExample {
 	private String planJz;
 	private String prodMakeJz;
 	private String prodOrirawid;
+	private String prodLength;
 
+	public String getProdLength() {
+		return prodLength;
+	}
+	public void setProdLength(String prodLength) {
+		this.prodLength = prodLength;
+	}
 	public String getProdType() {
 		return prodType;
 	}

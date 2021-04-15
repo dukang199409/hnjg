@@ -50,5 +50,8 @@ public interface BslProductInfoMapper {
     List<BslSaleCarInfo> prodSaleCarInfo(QueryCriteria queryCriteria);
     List<BslHalfProdMakeInfo> halfProdMakeInfo(QueryExample queryExample);
     
+    List<BslProductInfo> getRawCanOutProds(QueryExample queryExample);
+    List<BslProductInfo> getProdCanOutProds(QueryCriteria queryExample);
+    
     
 }

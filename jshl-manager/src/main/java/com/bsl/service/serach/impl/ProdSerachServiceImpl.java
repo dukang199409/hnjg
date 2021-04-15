@@ -63,9 +63,14 @@ public class ProdSerachServiceImpl implements ProdSerachService {
 			criteria.andProdStatusEqualTo(DictItemOperation.产品状态_已入库);
 		}else if("2".equals(flag)){
 			//在库的纵剪带查询
-			criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
-			criteria.andProdStatusEqualTo(DictItemOperation.产品状态_已入库);
-			criteria.andProdUserTypeNotEqualTo(DictItemOperation.纵剪带用途_外销);
+			if(DictItemOperation.产品类型_半成品.equals(bslProductInfo.getProdType())){
+				criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
+				criteria.andProdStatusEqualTo(DictItemOperation.产品状态_已入库);
+				criteria.andProdUserTypeNotEqualTo(DictItemOperation.纵剪带用途_外销);
+			}else{
+				criteria.andProdTypeEqualTo(DictItemOperation.产品类型_成品);
+				criteria.andProdStatusEqualTo(DictItemOperation.产品状态_已入库);
+			}
 		}
 
 		bslProductInfos = bslProductInfoMapper.selectByExample(bslProductInfoExample);

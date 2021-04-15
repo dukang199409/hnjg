@@ -142,7 +142,7 @@
 	        	<th data-options="field:'prodOutPlan',width:100,sortable:true">出库指令号</th>
 	        	<th data-options="field:'prodLength',width:80,sortable:true">定尺/米</th>
 	            <th data-options="field:'prodLevel',width:110,formatter:BSL.formatProdLevel,sortable:true">质量等级</th>
-	            <th data-options="field:'prodParentNo',width:130,sortable:true">父级盘号</th>
+	            <th data-options="field:'prodParentNo',width:130,sortable:true">父级物料编码</th>
 	            <th data-options="field:'prodOriId',width:140,sortable:true">父级待处理品编号</th>
 	            <th data-options="field:'prodBc',width:120,formatter:BSL.formatProdBcStatus,sortable:true">生产班次</th>
 	            <th data-options="field:'prodMakeJz',width:120,formatter:BSL.formatPlanJz,sortable:true">生产机组</th>

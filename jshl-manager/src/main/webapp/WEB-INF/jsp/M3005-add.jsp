@@ -46,7 +46,7 @@
 	            </td>
 	        </tr>
 	        <tr>     
-	            <td width="120" align="right">父级盘号:</td>
+	            <td width="120" align="right">父级物料编码:</td>
 	             <td width="210" align="right">
 	            	<select name="prodParentNo" id="prodParentNoM3005Add" class="easyui-combobox" panelHeight="auto" data-options="editable:true,onChange:onProdParentNoChangeM3005Add" style="width:200px;">
 			            	<option value="">请选择</option>

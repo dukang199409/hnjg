@@ -1,7 +1,6 @@
 package com.bsl.service.prodmanager.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -82,42 +81,38 @@ public class HalfProdOutPutServiceImpl implements HalfProdOutPutService {
 		if(prodPlanInfoExe == null){
 			throw new BSLException(ErrorCodeInfo.错误类型_查询无记录, "没有查询到正在执行的生产指令，无法出库！");
 		}
-		//创建查询的实例，并赋值
-		BslProductInfoExample bslProductInfoExample = new BslProductInfoExample();
-		Criteria criteria = bslProductInfoExample.createCriteria();
-		criteria.andProdTypeEqualTo(prodPlanInfoExe.getProdType());//可能是成品制造出库
-		if(DictItemOperation.产品类型_半成品.equals(prodPlanInfoExe.getProdType())){
-			criteria.andProdUserTypeNotEqualTo(DictItemOperation.纵剪带用途_外销);
-		}
-		criteria.andProdMaterialEqualTo(prodPlanInfoExe.getProdMaterial());//钢种是正在执行的指令指定钢种
-		criteria.andProdNormEqualTo(prodPlanInfoExe.getProdNorm());//规格是正在执行的指令指定规格
-		//criteria.andProdLunoEqualTo(prodPlanInfoExe.getPlanLuno());//炉号是正在执行的指令指定炉号
-		if(!StringUtils.isBlank(queryCriteria.getProdStatus())){
-			criteria.andProdStatusEqualTo(queryCriteria.getProdStatus());
+		queryCriteria.setProdMaterial(prodPlanInfoExe.getProdMaterial());
+		queryCriteria.setProdNorm(prodPlanInfoExe.getProdNorm());
+		queryCriteria.setProdOutPlan(prodPlanInfoExe.getPlanId());
+		queryCriteria.setProdType(prodPlanInfoExe.getProdType());
+		if (!StringUtils.isBlank(queryCriteria.getProdId())) {
+			queryCriteria.setProdId("%"+ queryCriteria.getProdId()+"%");
 		}else{
-			List<String> values = new ArrayList<>();
-			values.add(DictItemOperation.产品状态_已入库);
-			values.add(DictItemOperation.产品状态_已出库);
-			criteria.andProdStatusIn(values);
+			queryCriteria.setProdId(null);
 		}
-		if(!StringUtils.isBlank(queryCriteria.getProdPlanNo())){
-			criteria.andProdPlanNoLike("%"+ queryCriteria.getProdPlanNo()+"%");
+		if (!StringUtils.isBlank(queryCriteria.getProdPlanNo())) {
+			queryCriteria.setProdPlanNo("%"+ queryCriteria.getProdPlanNo()+"%");
+		}else{
+			queryCriteria.setProdPlanNo(null);
 		}
-		if(!StringUtils.isBlank(queryCriteria.getProdId())){
-			criteria.andProdIdLike("%"+ queryCriteria.getProdId()+"%");
+		if (!StringUtils.isBlank(queryCriteria.getProdStatus())) {
+			queryCriteria.setProdStatus(queryCriteria.getProdStatus());
+		}else{
+			queryCriteria.setProdStatus(null);
 		}
+		
 		//分页处理
 		PageHelper.startPage(Integer.parseInt(queryCriteria.getPage()), Integer.parseInt(queryCriteria.getRows()));
 		//调用sql查询
 		if(StringUtils.isBlank(queryCriteria.getSort()) || StringUtils.isBlank(queryCriteria.getOrder())){
-			bslProductInfoExample.setOrderByClause("`prod_id` asc,`prod_plan_no` desc");
+			queryCriteria.setOrderByClause("`prod_id` asc,`prod_plan_no` desc");
 		}else{
 			String sortSql = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, queryCriteria.getSort());
 			if(!StringUtils.isBlank(sortSql)){
-				bslProductInfoExample.setOrderByClause("`"+sortSql+"` "+ queryCriteria.getOrder());
+				queryCriteria.setOrderByClause("`"+sortSql+"` "+ queryCriteria.getOrder());
 			}
 		}
-		List<BslProductInfo> bslProductInfos = bslProductInfoMapper.selectByExample(bslProductInfoExample);
+		List<BslProductInfo> bslProductInfos = bslProductInfoMapper.getProdCanOutProds(queryCriteria);
 		PageInfo<BslProductInfo> pageInfo = new PageInfo<BslProductInfo>(bslProductInfos);
 		return BSLResult.ok(pageInfo.getTotal(),bslProductInfos);
 	}

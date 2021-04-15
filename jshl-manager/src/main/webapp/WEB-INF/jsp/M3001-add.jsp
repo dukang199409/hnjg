@@ -9,21 +9,6 @@
 <div style="padding:10px 10px 10px 10px">
 	<form id="prodPlanAddForm" class="itemForm" method="post">
 	    <table cellpadding="5">
-	        <tr>
-	       		<td width="120" align="right">用料规格:</td>
-            	 <td width="210" align="right">
-	            	<input name="prodNorm" id="prodNormM3001Add" class="easyui-textbox" type="text" data-options="required:true,validType:'length[0,40]',events:{blur:onProdNormBlurM3001}" style="width:200px;"></input>
-	            </td>
-	             <td width="120" align="right">用料钢种:</td>
-	            <td width="210" align="right">
-	            	<select name="prodMaterial" id="prodMaterialM3001Add" class="easyui-combobox" panelHeight="auto" data-options="editable:true,required:true,onChange:onProdMaterialChangeM3001" style="width:200px;">
-			          <option value="">请选择...</option>
-			           <c:forEach items="${prodMaterialList}" var="a">
-			          	   	<option value="${a.enumKey}">${a.enumValue}</option>
-			          </c:forEach>
-					</select>
-	            </td>
-	        </tr>
 	         <tr>
 	          	<td width="120" align="right">用料产品类型:</td>
 	            <td width="210" align="right">
@@ -37,6 +22,21 @@
 	            <td width="120" align="right">生产订单号:</td>
 	            <td width="210"  align="right">
 	            	<input name="prodOrder" class="easyui-textbox" data-options="required:false,validType:'length[0,20]'" style="text; width: 200px;"></input>
+	            </td>
+	        </tr>
+	        <tr>
+	       		<td width="120" align="right">用料规格:</td>
+            	 <td width="210" align="right">
+	            	<input name="prodNorm" id="prodNormM3001Add" class="easyui-textbox" type="text" data-options="required:true,validType:'length[0,40]',events:{blur:onProdNormBlurM3001}" style="width:200px;"></input>
+	            </td>
+	             <td width="120" align="right">用料钢种:</td>
+	            <td width="210" align="right">
+	            	<select name="prodMaterial" id="prodMaterialM3001Add" class="easyui-combobox" panelHeight="auto" data-options="editable:true,required:true,onChange:onProdMaterialChangeM3001" style="width:200px;">
+			          <option value="">请选择...</option>
+			           <c:forEach items="${prodMaterialList}" var="a">
+			          	   	<option value="${a.enumKey}">${a.enumValue}</option>
+			          </c:forEach>
+					</select>
 	            </td>
 	        </tr>
 	         <tr>
@@ -156,7 +156,9 @@
 	
 	//根据规格回显库存纵剪带的钢种、炉号、库存数量、库存重量等信息
 	function onProdNormBlurM3001(){
-		var params = {'prodNorm':$("#prodNormM3001Add").textbox("getValue")};
+		var params = {'prodNorm':$("#prodNormM3001Add").textbox("getValue"),
+				'prodType':$("#prodTypeM3001Add").combobox("getValue")
+		}
 		$.post("/leftInfo/haflProdInfo",params,function(data){
 			if(data.status == 200){
 				if(data.data.prodMaterials.length > 0){
@@ -193,7 +195,8 @@
 	//根据规格/钢种回显库存纵剪带的炉号、库存数量、库存重量等信息
 	function onProdMaterialChangeM3001(){
 		var params = {'prodNorm':$("#prodNormM3001Add").textbox("getValue"),
-				'prodMaterial':$("#prodMaterialM3001Add").combobox("getValue")}
+				'prodMaterial':$("#prodMaterialM3001Add").combobox("getValue"),
+				'prodType':$("#prodTypeM3001Add").combobox("getValue")}
 		$.post("/leftInfo/haflProdInfo",params,function(data){
 			if(data.status == 200){
 				//添加炉号枚举

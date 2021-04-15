@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div>
-	<div class="easyui-panel" title="纵剪带生产出库信息查询" style="padding:10px 10px 10px 10px">
+	<div class="easyui-panel" title="用料生产出库信息查询" style="padding:10px 10px 10px 10px">
 		<form id="halfRawOutputSearchForm" class="itemForm" method="post">
 		   <table>
 		        <tr>
-		        	<td width="120" align="right">纵剪带指令号:</td>
+		        	<td width="120" align="right">用料生产指令号:</td>
 		            <td width="210" align="right">
 		            	<input name="prodPlanNo" id="prodPlanNoM3004" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
 		            </td>
-		            <td width="120" align="right">盘号:</td>
+		            <td width="120" align="right">物料编码:</td>
 		            <td width="210" align="right">
 		            	<input name="prodId" id="prodIdM3004" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
 		            </td>
@@ -63,17 +63,16 @@
 	    	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearM3004Form()">重置</a>
 		</div>
 	</div>
-	 <table class="easyui-datagrid" id="halfRawOutputList" title="纵剪带生产出库信息管理"  style="height:620px"
+	 <table class="easyui-datagrid" id="halfRawOutputList" title="用料生产出库信息管理"  style="height:620px"
 	       data-options="singleSelect:true,rownumbers:true,remoteSort:false,onSortColumn:sortSerachM3004,collapsible:true,pagination:true,url:'/halfRawOutput/listByCriteria',method:'post',onBeforeLoad:onBeforeLoadM3004,pageSize:30,toolbar:toolbarM3004">
 	    <thead>
 	        <tr>
 	        	<th data-options="field:'ck',checkbox:true"></th>
-	        	<th data-options="field:'prodId',width:170,sortable:true">盘号</th>
-	        	<th data-options="field:'prodPlanNo',width:150,sortable:true">纵剪带指令号</th>
+	        	<th data-options="field:'prodId',width:170,sortable:true">物料编码</th>
+	        	<th data-options="field:'prodPlanNo',width:150,sortable:true">用料生产指令号</th>
 	            <th data-options="field:'prodStatus',width:100,formatter:BSL.formatHalfProdStatus,sortable:true">状态</th>
 	        	<th data-options="field:'prodLuno',width:120,sortable:true">炉(批)号</th>
 	        	<th data-options="field:'prodOrirawid',width:100,sortable:true">来源钢卷号</th>
-	        	<th data-options="field:'prodOriId',width:100,sortable:true">来源盘号</th>
 	        	<th data-options="field:'prodName',width:100,sortable:true">物料名称</th>
 	        	<th data-options="field:'prodNorm',sortable:true,width:100">规格</th>
 	        	<th data-options="field:'prodMaterial',width:80,formatter:BSL.formatProdMaterial,sortable:true">钢种</th>

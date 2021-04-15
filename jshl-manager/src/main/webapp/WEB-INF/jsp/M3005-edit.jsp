@@ -34,7 +34,7 @@
 				</td>      
 	        </tr>
 	        <tr>	 
-	            <td width="120" align="right">父级盘号:</td>
+	            <td width="120" align="right">父级物料编码:</td>
 	            <td width="210" align="right">
 	            	<input name="prodParentNo" id="prodIdCfm_M2004" class="easyui-textbox" type="text" data-options="required:true,validType:'length[0,20]'"  style="width:200px;"></input>
 	            </td>  

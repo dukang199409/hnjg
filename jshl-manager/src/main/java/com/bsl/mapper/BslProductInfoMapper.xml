@@ -1149,4 +1149,48 @@
 		 order by t1.prod_ru_weight asc,t1.prod_id asc
   </select>
   
+  <select id="getRawCanOutProds" resultMap="BaseResultMap" parameterType="com.bsl.select.QueryExample">
+  		select 
+  			* 
+  		from bsl_product_info t
+  		where
+  			t.prod_type = '0'
+  			and t.prod_material = #{prodMaterial,jdbcType=VARCHAR}
+  			and t.prod_norm = #{prodNorm,jdbcType=VARCHAR}
+  			and (t.prod_status = '1' 
+  				or (t.prod_status = '2' and t.prod_out_plan = #{prodOutPlan,jdbcType=VARCHAR}))
+  		 	<if test="prodId != null" >
+		        and t.prod_id like #{prodId,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="prodPlanNo != null" >
+		        and t.prod_plan_no like #{prodPlanNo,jdbcType=VARCHAR} 
+		    </if>
+		     <if test="prodStatus != null" >
+		        and t.prod_status = #{prodStatus,jdbcType=VARCHAR} 
+		    </if>
+  </select>
+  
+   <select id="getProdCanOutProds" resultMap="BaseResultMap" parameterType="com.bsl.select.QueryCriteria">
+  		select 
+  			* 
+  		from bsl_product_info t
+  		where
+  			t.prod_type = #{prodType,jdbcType=VARCHAR}
+  			and ((t.prod_type = '1' and t.prod_user_type != '1')
+  				or ( t.prod_type = '2'))
+  			and t.prod_material = #{prodMaterial,jdbcType=VARCHAR}
+  			and t.prod_norm = #{prodNorm,jdbcType=VARCHAR}
+  			and (t.prod_status = '1' 
+  				or (t.prod_status = '2' and t.prod_out_plan = #{prodOutPlan,jdbcType=VARCHAR}))
+  		 	<if test="prodId != null" >
+		        and t.prod_id like #{prodId,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="prodPlanNo != null" >
+		        and t.prod_plan_no like #{prodPlanNo,jdbcType=VARCHAR} 
+		    </if>
+		     <if test="prodStatus != null" >
+		        and t.prod_status = #{prodStatus,jdbcType=VARCHAR} 
+		    </if>
+  </select>
+  
 </mapper>

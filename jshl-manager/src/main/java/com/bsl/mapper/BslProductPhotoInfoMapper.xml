@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslProductPhotoInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslProductPhotoInfo" >
+    <result column="trans_date" property="transDate" jdbcType="DATE" />
+    <result column="prod_id" property="prodId" jdbcType="VARCHAR" />
+    <result column="prod_status" property="prodStatus" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="BaseResultMapNew" type="com.bsl.reportbean.BslStockPhotoReport" >
+    <result column="trans_date" property="transDate" jdbcType="DATE" />
+    <result column="prod_id" property="prodId" jdbcType="VARCHAR" />
+    <result column="prod_status" property="prodStatus" jdbcType="CHAR" />
+    <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
+    <result column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="prod_norm" property="prodNorm" jdbcType="CHAR" />
+    <result column="prod_material" property="prodMaterial" jdbcType="CHAR" />
+    <result column="prod_length" property="prodLength" jdbcType="REAL" />
+    <result column="prod_num" property="prodNum" jdbcType="INTEGER" />
+    <result column="prod_user_type" property="prodMaterial" jdbcType="CHAR" />
+    <result column="prod_print_weight" property="prodPrintWeight" jdbcType="REAL" />
+    <result column="prod_luno" property="prodLuno" jdbcType="VARCHAR" />
+    <result column="prod_inputuser" property="prodInputuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trans_date, prod_id, prod_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslProductPhotoInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_product_photo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslProductPhotoInfoExample" >
+    delete from bsl_product_photo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslProductPhotoInfo" >
+    insert into bsl_product_photo_info (trans_date, prod_id, prod_status
+      )
+    values (#{transDate,jdbcType=DATE}, #{prodId,jdbcType=VARCHAR}, #{prodStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslProductPhotoInfo" >
+    insert into bsl_product_photo_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transDate != null" >
+        trans_date,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="prodStatus != null" >
+        prod_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transDate != null" >
+        #{transDate,jdbcType=DATE},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodStatus != null" >
+        #{prodStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslProductPhotoInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_product_photo_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_product_photo_info
+    <set >
+      <if test="record.transDate != null" >
+        trans_date = #{record.transDate,jdbcType=DATE},
+      </if>
+      <if test="record.prodId != null" >
+        prod_id = #{record.prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodStatus != null" >
+        prod_status = #{record.prodStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_product_photo_info
+    set trans_date = #{record.transDate,jdbcType=DATE},
+      prod_id = #{record.prodId,jdbcType=VARCHAR},
+      prod_status = #{record.prodStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+   <select id="selectByExampleNew" resultMap="BaseResultMapNew" parameterType="com.bsl.select.QueryCriteria" >
+	    select
+	    	a.*,
+	    	c.prod_name,
+	    	c.prod_norm,
+	    	c.prod_material,
+	    	c.prod_print_weight,
+	    	c.prod_type,
+	    	c.prod_length,
+	    	c.prod_num,
+	    	c.prod_user_type,
+	    	c.prod_luno,
+	    	c.prod_inputuser,
+	    	c.crt_date,
+	    	c.remark
+	    from bsl_product_photo_info a 
+	    left join bsl_product_info c
+	    on a.prod_id = c.prod_id
+	    where 1=1
+    <if test="dateStart != null" >
+      and a.trans_date >= #{dateStart,jdbcType=DATE}
+    </if>
+     <if test="dateEnd != null" >
+      and #{dateEnd,jdbcType=DATE} >= a.trans_date 
+    </if>
+     <if test="prodId != null" >
+      and a.prod_id like #{prodId,jdbcType=VARCHAR}
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <delete id="deleteProductPhotoInfoOnyears">
+    delete from bsl_product_photo_info where date_add(now(),interval -1 year) >= trans_date  
+  </delete>
+  
+</mapper>

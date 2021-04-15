@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslPlanLuInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslPlanLuInfo" >
+    <id column="no" property="no" jdbcType="INTEGER" />
+    <result column="plan_id" property="planId" jdbcType="VARCHAR" />
+    <result column="plan_luno" property="planLuno" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    no, plan_id, plan_luno
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslPlanLuInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_plan_lu_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_plan_lu_info
+    where no = #{no,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from bsl_plan_lu_info
+    where no = #{no,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslPlanLuInfoExample" >
+    delete from bsl_plan_lu_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslPlanLuInfo" >
+    insert into bsl_plan_lu_info (no, plan_id, plan_luno
+      )
+    values (#{no,jdbcType=INTEGER}, #{planId,jdbcType=VARCHAR}, #{planLuno,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslPlanLuInfo" >
+    insert into bsl_plan_lu_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        no,
+      </if>
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="planLuno != null" >
+        plan_luno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="no != null" >
+        #{no,jdbcType=INTEGER},
+      </if>
+      <if test="planId != null" >
+        #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="planLuno != null" >
+        #{planLuno,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslPlanLuInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_plan_lu_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_plan_lu_info
+    <set >
+      <if test="record.no != null" >
+        no = #{record.no,jdbcType=INTEGER},
+      </if>
+      <if test="record.planId != null" >
+        plan_id = #{record.planId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planLuno != null" >
+        plan_luno = #{record.planLuno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_plan_lu_info
+    set no = #{record.no,jdbcType=INTEGER},
+      plan_id = #{record.planId,jdbcType=VARCHAR},
+      plan_luno = #{record.planLuno,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslPlanLuInfo" >
+    update bsl_plan_lu_info
+    <set >
+      <if test="planId != null" >
+        plan_id = #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="planLuno != null" >
+        plan_luno = #{planLuno,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where no = #{no,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslPlanLuInfo" >
+    update bsl_plan_lu_info
+    set plan_id = #{planId,jdbcType=VARCHAR},
+      plan_luno = #{planLuno,jdbcType=VARCHAR}
+    where no = #{no,jdbcType=INTEGER}
+  </update>
+</mapper>

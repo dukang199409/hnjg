@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslBsPlanInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslBsPlanInfo" >
+    <id column="bs_id" property="bsId" jdbcType="VARCHAR" />
+    <result column="bs_type" property="bsType" jdbcType="CHAR" />
+    <result column="bs_company" property="bsCompany" jdbcType="VARCHAR" />
+    <result column="bs_customer" property="bsCustomer" jdbcType="VARCHAR" />
+    <result column="bs_hasguarantee" property="bsHasguarantee" jdbcType="CHAR" />
+    <result column="bs_amt" property="bsAmt" jdbcType="INTEGER" />
+    <result column="bs_weight" property="bsWeight" jdbcType="REAL" />
+    <result column="bs_flag" property="bsFlag" jdbcType="CHAR" />
+    <result column="bs_order_no" property="bsOrderNo" jdbcType="VARCHAR" />
+    <result column="bs_transport" property="bsTransport" jdbcType="VARCHAR" />
+    <result column="bs_carno" property="bsCarno" jdbcType="VARCHAR" />
+    <result column="bs_gettype" property="bsGettype" jdbcType="CHAR" />
+    <result column="bs_status" property="bsStatus" jdbcType="CHAR" />
+    <result column="bs_relweight" property="bsRelweight" jdbcType="REAL" />
+    <result column="bs_price" property="bsPrice" jdbcType="REAL" />
+    <result column="bs_fbweight" property="bsFbweight" jdbcType="REAL" />
+    <result column="bs_retweight" property="bsRetweight" jdbcType="REAL" />
+    <result column="bs_chaweight" property="bsChaweight" jdbcType="REAL" />
+    <result column="bs_norm" property="bsNorm" jdbcType="VARCHAR" />
+    <result column="bs_arrdate" property="bsArrdate" jdbcType="DATE" />
+    <result column="bs_jsnum" property="bsJsnum" jdbcType="INTEGER" />
+    <result column="bs_jsweight" property="bsJsweight" jdbcType="REAL" />
+    <result column="bs_inputuser" property="bsInputuser" jdbcType="VARCHAR" />
+    <result column="bs_checkuser" property="bsCheckuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="upd_date" property="updDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    bs_id, bs_type, bs_company, bs_customer, bs_hasguarantee, bs_amt, bs_weight, bs_flag, 
+    bs_order_no, bs_transport, bs_carno, bs_gettype, bs_status, bs_relweight, bs_price, 
+    bs_fbweight, bs_retweight, bs_chaweight, bs_norm, bs_arrdate, bs_jsnum, bs_jsweight, 
+    bs_inputuser, bs_checkuser, crt_date, upd_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslBsPlanInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_bs_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_bs_plan_info
+    where bs_id = #{bsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_bs_plan_info
+    where bs_id = #{bsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslBsPlanInfoExample" >
+    delete from bsl_bs_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslBsPlanInfo" >
+    insert into bsl_bs_plan_info (bs_id, bs_type, bs_company, 
+      bs_customer, bs_hasguarantee, bs_amt, 
+      bs_weight, bs_flag, bs_order_no, 
+      bs_transport, bs_carno, bs_gettype, 
+      bs_status, bs_relweight, bs_price, 
+      bs_fbweight, bs_retweight, bs_chaweight, 
+      bs_norm, bs_arrdate, bs_jsnum, 
+      bs_jsweight, bs_inputuser, bs_checkuser, 
+      crt_date, upd_date, remark)
+    values (#{bsId,jdbcType=VARCHAR}, #{bsType,jdbcType=CHAR}, #{bsCompany,jdbcType=VARCHAR}, 
+      #{bsCustomer,jdbcType=VARCHAR}, #{bsHasguarantee,jdbcType=CHAR}, #{bsAmt,jdbcType=INTEGER}, 
+      #{bsWeight,jdbcType=REAL}, #{bsFlag,jdbcType=CHAR}, #{bsOrderNo,jdbcType=VARCHAR}, 
+      #{bsTransport,jdbcType=VARCHAR}, #{bsCarno,jdbcType=VARCHAR}, #{bsGettype,jdbcType=CHAR}, 
+      #{bsStatus,jdbcType=CHAR}, #{bsRelweight,jdbcType=REAL}, #{bsPrice,jdbcType=REAL}, 
+      #{bsFbweight,jdbcType=REAL}, #{bsRetweight,jdbcType=REAL}, #{bsChaweight,jdbcType=REAL}, 
+      #{bsNorm,jdbcType=VARCHAR}, #{bsArrdate,jdbcType=DATE}, #{bsJsnum,jdbcType=INTEGER}, 
+      #{bsJsweight,jdbcType=REAL}, #{bsInputuser,jdbcType=VARCHAR}, #{bsCheckuser,jdbcType=VARCHAR}, 
+      #{crtDate,jdbcType=DATE}, #{updDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslBsPlanInfo" >
+    insert into bsl_bs_plan_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bsId != null" >
+        bs_id,
+      </if>
+      <if test="bsType != null" >
+        bs_type,
+      </if>
+      <if test="bsCompany != null" >
+        bs_company,
+      </if>
+      <if test="bsCustomer != null" >
+        bs_customer,
+      </if>
+      <if test="bsHasguarantee != null" >
+        bs_hasguarantee,
+      </if>
+      <if test="bsAmt != null" >
+        bs_amt,
+      </if>
+      <if test="bsWeight != null" >
+        bs_weight,
+      </if>
+      <if test="bsFlag != null" >
+        bs_flag,
+      </if>
+      <if test="bsOrderNo != null" >
+        bs_order_no,
+      </if>
+      <if test="bsTransport != null" >
+        bs_transport,
+      </if>
+      <if test="bsCarno != null" >
+        bs_carno,
+      </if>
+      <if test="bsGettype != null" >
+        bs_gettype,
+      </if>
+      <if test="bsStatus != null" >
+        bs_status,
+      </if>
+      <if test="bsRelweight != null" >
+        bs_relweight,
+      </if>
+      <if test="bsPrice != null" >
+        bs_price,
+      </if>
+      <if test="bsFbweight != null" >
+        bs_fbweight,
+      </if>
+      <if test="bsRetweight != null" >
+        bs_retweight,
+      </if>
+      <if test="bsChaweight != null" >
+        bs_chaweight,
+      </if>
+      <if test="bsNorm != null" >
+        bs_norm,
+      </if>
+      <if test="bsArrdate != null" >
+        bs_arrdate,
+      </if>
+      <if test="bsJsnum != null" >
+        bs_jsnum,
+      </if>
+      <if test="bsJsweight != null" >
+        bs_jsweight,
+      </if>
+      <if test="bsInputuser != null" >
+        bs_inputuser,
+      </if>
+      <if test="bsCheckuser != null" >
+        bs_checkuser,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="updDate != null" >
+        upd_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bsId != null" >
+        #{bsId,jdbcType=VARCHAR},
+      </if>
+      <if test="bsType != null" >
+        #{bsType,jdbcType=CHAR},
+      </if>
+      <if test="bsCompany != null" >
+        #{bsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCustomer != null" >
+        #{bsCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="bsHasguarantee != null" >
+        #{bsHasguarantee,jdbcType=CHAR},
+      </if>
+      <if test="bsAmt != null" >
+        #{bsAmt,jdbcType=INTEGER},
+      </if>
+      <if test="bsWeight != null" >
+        #{bsWeight,jdbcType=REAL},
+      </if>
+      <if test="bsFlag != null" >
+        #{bsFlag,jdbcType=CHAR},
+      </if>
+      <if test="bsOrderNo != null" >
+        #{bsOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bsTransport != null" >
+        #{bsTransport,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCarno != null" >
+        #{bsCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="bsGettype != null" >
+        #{bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="bsStatus != null" >
+        #{bsStatus,jdbcType=CHAR},
+      </if>
+      <if test="bsRelweight != null" >
+        #{bsRelweight,jdbcType=REAL},
+      </if>
+      <if test="bsPrice != null" >
+        #{bsPrice,jdbcType=REAL},
+      </if>
+      <if test="bsFbweight != null" >
+        #{bsFbweight,jdbcType=REAL},
+      </if>
+      <if test="bsRetweight != null" >
+        #{bsRetweight,jdbcType=REAL},
+      </if>
+      <if test="bsChaweight != null" >
+        #{bsChaweight,jdbcType=REAL},
+      </if>
+      <if test="bsNorm != null" >
+        #{bsNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="bsArrdate != null" >
+        #{bsArrdate,jdbcType=DATE},
+      </if>
+      <if test="bsJsnum != null" >
+        #{bsJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="bsJsweight != null" >
+        #{bsJsweight,jdbcType=REAL},
+      </if>
+      <if test="bsInputuser != null" >
+        #{bsInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCheckuser != null" >
+        #{bsCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslBsPlanInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_bs_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_bs_plan_info
+    <set >
+      <if test="record.bsId != null" >
+        bs_id = #{record.bsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsType != null" >
+        bs_type = #{record.bsType,jdbcType=CHAR},
+      </if>
+      <if test="record.bsCompany != null" >
+        bs_company = #{record.bsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsCustomer != null" >
+        bs_customer = #{record.bsCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsHasguarantee != null" >
+        bs_hasguarantee = #{record.bsHasguarantee,jdbcType=CHAR},
+      </if>
+      <if test="record.bsAmt != null" >
+        bs_amt = #{record.bsAmt,jdbcType=INTEGER},
+      </if>
+      <if test="record.bsWeight != null" >
+        bs_weight = #{record.bsWeight,jdbcType=REAL},
+      </if>
+      <if test="record.bsFlag != null" >
+        bs_flag = #{record.bsFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.bsOrderNo != null" >
+        bs_order_no = #{record.bsOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsTransport != null" >
+        bs_transport = #{record.bsTransport,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsCarno != null" >
+        bs_carno = #{record.bsCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsGettype != null" >
+        bs_gettype = #{record.bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="record.bsStatus != null" >
+        bs_status = #{record.bsStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.bsRelweight != null" >
+        bs_relweight = #{record.bsRelweight,jdbcType=REAL},
+      </if>
+      <if test="record.bsPrice != null" >
+        bs_price = #{record.bsPrice,jdbcType=REAL},
+      </if>
+      <if test="record.bsFbweight != null" >
+        bs_fbweight = #{record.bsFbweight,jdbcType=REAL},
+      </if>
+      <if test="record.bsRetweight != null" >
+        bs_retweight = #{record.bsRetweight,jdbcType=REAL},
+      </if>
+      <if test="record.bsChaweight != null" >
+        bs_chaweight = #{record.bsChaweight,jdbcType=REAL},
+      </if>
+      <if test="record.bsNorm != null" >
+        bs_norm = #{record.bsNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsArrdate != null" >
+        bs_arrdate = #{record.bsArrdate,jdbcType=DATE},
+      </if>
+      <if test="record.bsJsnum != null" >
+        bs_jsnum = #{record.bsJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.bsJsweight != null" >
+        bs_jsweight = #{record.bsJsweight,jdbcType=REAL},
+      </if>
+      <if test="record.bsInputuser != null" >
+        bs_inputuser = #{record.bsInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsCheckuser != null" >
+        bs_checkuser = #{record.bsCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.updDate != null" >
+        upd_date = #{record.updDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_bs_plan_info
+    set bs_id = #{record.bsId,jdbcType=VARCHAR},
+      bs_type = #{record.bsType,jdbcType=CHAR},
+      bs_company = #{record.bsCompany,jdbcType=VARCHAR},
+      bs_customer = #{record.bsCustomer,jdbcType=VARCHAR},
+      bs_hasguarantee = #{record.bsHasguarantee,jdbcType=CHAR},
+      bs_amt = #{record.bsAmt,jdbcType=INTEGER},
+      bs_weight = #{record.bsWeight,jdbcType=REAL},
+      bs_flag = #{record.bsFlag,jdbcType=CHAR},
+      bs_order_no = #{record.bsOrderNo,jdbcType=VARCHAR},
+      bs_transport = #{record.bsTransport,jdbcType=VARCHAR},
+      bs_carno = #{record.bsCarno,jdbcType=VARCHAR},
+      bs_gettype = #{record.bsGettype,jdbcType=CHAR},
+      bs_status = #{record.bsStatus,jdbcType=CHAR},
+      bs_relweight = #{record.bsRelweight,jdbcType=REAL},
+      bs_price = #{record.bsPrice,jdbcType=REAL},
+      bs_fbweight = #{record.bsFbweight,jdbcType=REAL},
+      bs_retweight = #{record.bsRetweight,jdbcType=REAL},
+      bs_chaweight = #{record.bsChaweight,jdbcType=REAL},
+      bs_norm = #{record.bsNorm,jdbcType=VARCHAR},
+      bs_arrdate = #{record.bsArrdate,jdbcType=DATE},
+      bs_jsnum = #{record.bsJsnum,jdbcType=INTEGER},
+      bs_jsweight = #{record.bsJsweight,jdbcType=REAL},
+      bs_inputuser = #{record.bsInputuser,jdbcType=VARCHAR},
+      bs_checkuser = #{record.bsCheckuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      upd_date = #{record.updDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslBsPlanInfo" >
+    update bsl_bs_plan_info
+    <set >
+      <if test="bsType != null" >
+        bs_type = #{bsType,jdbcType=CHAR},
+      </if>
+      <if test="bsCompany != null" >
+        bs_company = #{bsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCustomer != null" >
+        bs_customer = #{bsCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="bsHasguarantee != null" >
+        bs_hasguarantee = #{bsHasguarantee,jdbcType=CHAR},
+      </if>
+      <if test="bsAmt != null" >
+        bs_amt = #{bsAmt,jdbcType=INTEGER},
+      </if>
+      <if test="bsWeight != null" >
+        bs_weight = #{bsWeight,jdbcType=REAL},
+      </if>
+      <if test="bsFlag != null" >
+        bs_flag = #{bsFlag,jdbcType=CHAR},
+      </if>
+      <if test="bsOrderNo != null" >
+        bs_order_no = #{bsOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bsTransport != null" >
+        bs_transport = #{bsTransport,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCarno != null" >
+        bs_carno = #{bsCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="bsGettype != null" >
+        bs_gettype = #{bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="bsStatus != null" >
+        bs_status = #{bsStatus,jdbcType=CHAR},
+      </if>
+      <if test="bsRelweight != null" >
+        bs_relweight = #{bsRelweight,jdbcType=REAL},
+      </if>
+      <if test="bsPrice != null" >
+        bs_price = #{bsPrice,jdbcType=REAL},
+      </if>
+      <if test="bsFbweight != null" >
+        bs_fbweight = #{bsFbweight,jdbcType=REAL},
+      </if>
+      <if test="bsRetweight != null" >
+        bs_retweight = #{bsRetweight,jdbcType=REAL},
+      </if>
+      <if test="bsChaweight != null" >
+        bs_chaweight = #{bsChaweight,jdbcType=REAL},
+      </if>
+      <if test="bsNorm != null" >
+        bs_norm = #{bsNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="bsArrdate != null" >
+        bs_arrdate = #{bsArrdate,jdbcType=DATE},
+      </if>
+      <if test="bsJsnum != null" >
+        bs_jsnum = #{bsJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="bsJsweight != null" >
+        bs_jsweight = #{bsJsweight,jdbcType=REAL},
+      </if>
+      <if test="bsInputuser != null" >
+        bs_inputuser = #{bsInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="bsCheckuser != null" >
+        bs_checkuser = #{bsCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        upd_date = #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where bs_id = #{bsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslBsPlanInfo" >
+    update bsl_bs_plan_info
+    set bs_type = #{bsType,jdbcType=CHAR},
+      bs_company = #{bsCompany,jdbcType=VARCHAR},
+      bs_customer = #{bsCustomer,jdbcType=VARCHAR},
+      bs_hasguarantee = #{bsHasguarantee,jdbcType=CHAR},
+      bs_amt = #{bsAmt,jdbcType=INTEGER},
+      bs_weight = #{bsWeight,jdbcType=REAL},
+      bs_flag = #{bsFlag,jdbcType=CHAR},
+      bs_order_no = #{bsOrderNo,jdbcType=VARCHAR},
+      bs_transport = #{bsTransport,jdbcType=VARCHAR},
+      bs_carno = #{bsCarno,jdbcType=VARCHAR},
+      bs_gettype = #{bsGettype,jdbcType=CHAR},
+      bs_status = #{bsStatus,jdbcType=CHAR},
+      bs_relweight = #{bsRelweight,jdbcType=REAL},
+      bs_price = #{bsPrice,jdbcType=REAL},
+      bs_fbweight = #{bsFbweight,jdbcType=REAL},
+      bs_retweight = #{bsRetweight,jdbcType=REAL},
+      bs_chaweight = #{bsChaweight,jdbcType=REAL},
+      bs_norm = #{bsNorm,jdbcType=VARCHAR},
+      bs_arrdate = #{bsArrdate,jdbcType=DATE},
+      bs_jsnum = #{bsJsnum,jdbcType=INTEGER},
+      bs_jsweight = #{bsJsweight,jdbcType=REAL},
+      bs_inputuser = #{bsInputuser,jdbcType=VARCHAR},
+      bs_checkuser = #{bsCheckuser,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=DATE},
+      upd_date = #{updDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where bs_id = #{bsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslLunoQualityMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslLunoQuality" >
+    <id column="lu_id" property="luId" jdbcType="VARCHAR" />
+    <result column="lu_company" property="luCompany" jdbcType="VARCHAR" />
+    <result column="chemical_C" property="chemicalC" jdbcType="INTEGER" />
+    <result column="chemical_Mn" property="chemicalMn" jdbcType="INTEGER" />
+    <result column="chemical_Si" property="chemicalSi" jdbcType="INTEGER" />
+    <result column="chemical_S" property="chemicalS" jdbcType="INTEGER" />
+    <result column="chemical_P" property="chemicalP" jdbcType="INTEGER" />
+    <result column="chemical_Ti" property="chemicalTi" jdbcType="INTEGER" />
+    <result column="chemical_Ni" property="chemicalNi" jdbcType="INTEGER" />
+    <result column="chemical_Cr" property="chemicalCr" jdbcType="INTEGER" />
+    <result column="chemical_Cu" property="chemicalCu" jdbcType="INTEGER" />
+    <result column="chemical_Nb" property="chemicalNb" jdbcType="INTEGER" />
+    <result column="mechanical_s" property="mechanicalS" jdbcType="REAL" />
+    <result column="mechanical_b" property="mechanicalB" jdbcType="REAL" />
+    <result column="mechanical_l" property="mechanicalL" jdbcType="REAL" />
+    <result column="impact_T" property="impactT" jdbcType="REAL" />
+    <result column="impact_N1" property="impactN1" jdbcType="VARCHAR" />
+    <result column="impact_N2" property="impactN2" jdbcType="VARCHAR" />
+    <result column="impact_N3" property="impactN3" jdbcType="VARCHAR" />
+    <result column="bendWC" property="bendwc" jdbcType="VARCHAR" />
+    <result column="bendYB" property="bendyb" jdbcType="VARCHAR" />
+    <result column="inputUser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="upd_date" property="updDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lu_id, lu_company, chemical_C, chemical_Mn, chemical_Si, chemical_S, chemical_P, 
+    chemical_Ti, chemical_Ni, chemical_Cr, chemical_Cu, chemical_Nb, mechanical_s, mechanical_b, 
+    mechanical_l, impact_T, impact_N1, impact_N2, impact_N3, bendWC, bendYB, inputUser, 
+    crt_date, upd_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslLunoQualityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_luno_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_luno_quality
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_luno_quality
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslLunoQualityExample" >
+    delete from bsl_luno_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslLunoQuality" >
+    insert into bsl_luno_quality (lu_id, lu_company, chemical_C, 
+      chemical_Mn, chemical_Si, chemical_S, 
+      chemical_P, chemical_Ti, chemical_Ni, 
+      chemical_Cr, chemical_Cu, chemical_Nb, 
+      mechanical_s, mechanical_b, mechanical_l, 
+      impact_T, impact_N1, impact_N2, 
+      impact_N3, bendWC, bendYB, 
+      inputUser, crt_date, upd_date, 
+      remark)
+    values (#{luId,jdbcType=VARCHAR}, #{luCompany,jdbcType=VARCHAR}, #{chemicalC,jdbcType=INTEGER}, 
+      #{chemicalMn,jdbcType=INTEGER}, #{chemicalSi,jdbcType=INTEGER}, #{chemicalS,jdbcType=INTEGER}, 
+      #{chemicalP,jdbcType=INTEGER}, #{chemicalTi,jdbcType=INTEGER}, #{chemicalNi,jdbcType=INTEGER}, 
+      #{chemicalCr,jdbcType=INTEGER}, #{chemicalCu,jdbcType=INTEGER}, #{chemicalNb,jdbcType=INTEGER}, 
+      #{mechanicalS,jdbcType=REAL}, #{mechanicalB,jdbcType=REAL}, #{mechanicalL,jdbcType=REAL}, 
+      #{impactT,jdbcType=REAL}, #{impactN1,jdbcType=VARCHAR}, #{impactN2,jdbcType=VARCHAR}, 
+      #{impactN3,jdbcType=VARCHAR}, #{bendwc,jdbcType=VARCHAR}, #{bendyb,jdbcType=VARCHAR}, 
+      #{inputuser,jdbcType=VARCHAR}, #{crtDate,jdbcType=DATE}, #{updDate,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslLunoQuality" >
+    insert into bsl_luno_quality
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="luId != null" >
+        lu_id,
+      </if>
+      <if test="luCompany != null" >
+        lu_company,
+      </if>
+      <if test="chemicalC != null" >
+        chemical_C,
+      </if>
+      <if test="chemicalMn != null" >
+        chemical_Mn,
+      </if>
+      <if test="chemicalSi != null" >
+        chemical_Si,
+      </if>
+      <if test="chemicalS != null" >
+        chemical_S,
+      </if>
+      <if test="chemicalP != null" >
+        chemical_P,
+      </if>
+      <if test="chemicalTi != null" >
+        chemical_Ti,
+      </if>
+      <if test="chemicalNi != null" >
+        chemical_Ni,
+      </if>
+      <if test="chemicalCr != null" >
+        chemical_Cr,
+      </if>
+      <if test="chemicalCu != null" >
+        chemical_Cu,
+      </if>
+      <if test="chemicalNb != null" >
+        chemical_Nb,
+      </if>
+      <if test="mechanicalS != null" >
+        mechanical_s,
+      </if>
+      <if test="mechanicalB != null" >
+        mechanical_b,
+      </if>
+      <if test="mechanicalL != null" >
+        mechanical_l,
+      </if>
+      <if test="impactT != null" >
+        impact_T,
+      </if>
+      <if test="impactN1 != null" >
+        impact_N1,
+      </if>
+      <if test="impactN2 != null" >
+        impact_N2,
+      </if>
+      <if test="impactN3 != null" >
+        impact_N3,
+      </if>
+      <if test="bendwc != null" >
+        bendWC,
+      </if>
+      <if test="bendyb != null" >
+        bendYB,
+      </if>
+      <if test="inputuser != null" >
+        inputUser,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="updDate != null" >
+        upd_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="luId != null" >
+        #{luId,jdbcType=VARCHAR},
+      </if>
+      <if test="luCompany != null" >
+        #{luCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="chemicalC != null" >
+        #{chemicalC,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalMn != null" >
+        #{chemicalMn,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalSi != null" >
+        #{chemicalSi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalS != null" >
+        #{chemicalS,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalP != null" >
+        #{chemicalP,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalTi != null" >
+        #{chemicalTi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalNi != null" >
+        #{chemicalNi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalCr != null" >
+        #{chemicalCr,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalCu != null" >
+        #{chemicalCu,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalNb != null" >
+        #{chemicalNb,jdbcType=INTEGER},
+      </if>
+      <if test="mechanicalS != null" >
+        #{mechanicalS,jdbcType=REAL},
+      </if>
+      <if test="mechanicalB != null" >
+        #{mechanicalB,jdbcType=REAL},
+      </if>
+      <if test="mechanicalL != null" >
+        #{mechanicalL,jdbcType=REAL},
+      </if>
+      <if test="impactT != null" >
+        #{impactT,jdbcType=REAL},
+      </if>
+      <if test="impactN1 != null" >
+        #{impactN1,jdbcType=VARCHAR},
+      </if>
+      <if test="impactN2 != null" >
+        #{impactN2,jdbcType=VARCHAR},
+      </if>
+      <if test="impactN3 != null" >
+        #{impactN3,jdbcType=VARCHAR},
+      </if>
+      <if test="bendwc != null" >
+        #{bendwc,jdbcType=VARCHAR},
+      </if>
+      <if test="bendyb != null" >
+        #{bendyb,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslLunoQualityExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_luno_quality
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_luno_quality
+    <set >
+      <if test="record.luId != null" >
+        lu_id = #{record.luId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.luCompany != null" >
+        lu_company = #{record.luCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chemicalC != null" >
+        chemical_C = #{record.chemicalC,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalMn != null" >
+        chemical_Mn = #{record.chemicalMn,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalSi != null" >
+        chemical_Si = #{record.chemicalSi,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalS != null" >
+        chemical_S = #{record.chemicalS,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalP != null" >
+        chemical_P = #{record.chemicalP,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalTi != null" >
+        chemical_Ti = #{record.chemicalTi,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalNi != null" >
+        chemical_Ni = #{record.chemicalNi,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalCr != null" >
+        chemical_Cr = #{record.chemicalCr,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalCu != null" >
+        chemical_Cu = #{record.chemicalCu,jdbcType=INTEGER},
+      </if>
+      <if test="record.chemicalNb != null" >
+        chemical_Nb = #{record.chemicalNb,jdbcType=INTEGER},
+      </if>
+      <if test="record.mechanicalS != null" >
+        mechanical_s = #{record.mechanicalS,jdbcType=REAL},
+      </if>
+      <if test="record.mechanicalB != null" >
+        mechanical_b = #{record.mechanicalB,jdbcType=REAL},
+      </if>
+      <if test="record.mechanicalL != null" >
+        mechanical_l = #{record.mechanicalL,jdbcType=REAL},
+      </if>
+      <if test="record.impactT != null" >
+        impact_T = #{record.impactT,jdbcType=REAL},
+      </if>
+      <if test="record.impactN1 != null" >
+        impact_N1 = #{record.impactN1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.impactN2 != null" >
+        impact_N2 = #{record.impactN2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.impactN3 != null" >
+        impact_N3 = #{record.impactN3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bendwc != null" >
+        bendWC = #{record.bendwc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bendyb != null" >
+        bendYB = #{record.bendyb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputuser != null" >
+        inputUser = #{record.inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.updDate != null" >
+        upd_date = #{record.updDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_luno_quality
+    set lu_id = #{record.luId,jdbcType=VARCHAR},
+      lu_company = #{record.luCompany,jdbcType=VARCHAR},
+      chemical_C = #{record.chemicalC,jdbcType=INTEGER},
+      chemical_Mn = #{record.chemicalMn,jdbcType=INTEGER},
+      chemical_Si = #{record.chemicalSi,jdbcType=INTEGER},
+      chemical_S = #{record.chemicalS,jdbcType=INTEGER},
+      chemical_P = #{record.chemicalP,jdbcType=INTEGER},
+      chemical_Ti = #{record.chemicalTi,jdbcType=INTEGER},
+      chemical_Ni = #{record.chemicalNi,jdbcType=INTEGER},
+      chemical_Cr = #{record.chemicalCr,jdbcType=INTEGER},
+      chemical_Cu = #{record.chemicalCu,jdbcType=INTEGER},
+      chemical_Nb = #{record.chemicalNb,jdbcType=INTEGER},
+      mechanical_s = #{record.mechanicalS,jdbcType=REAL},
+      mechanical_b = #{record.mechanicalB,jdbcType=REAL},
+      mechanical_l = #{record.mechanicalL,jdbcType=REAL},
+      impact_T = #{record.impactT,jdbcType=REAL},
+      impact_N1 = #{record.impactN1,jdbcType=VARCHAR},
+      impact_N2 = #{record.impactN2,jdbcType=VARCHAR},
+      impact_N3 = #{record.impactN3,jdbcType=VARCHAR},
+      bendWC = #{record.bendwc,jdbcType=VARCHAR},
+      bendYB = #{record.bendyb,jdbcType=VARCHAR},
+      inputUser = #{record.inputuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      upd_date = #{record.updDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslLunoQuality" >
+    update bsl_luno_quality
+    <set >
+      <if test="luCompany != null" >
+        lu_company = #{luCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="chemicalC != null" >
+        chemical_C = #{chemicalC,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalMn != null" >
+        chemical_Mn = #{chemicalMn,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalSi != null" >
+        chemical_Si = #{chemicalSi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalS != null" >
+        chemical_S = #{chemicalS,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalP != null" >
+        chemical_P = #{chemicalP,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalTi != null" >
+        chemical_Ti = #{chemicalTi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalNi != null" >
+        chemical_Ni = #{chemicalNi,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalCr != null" >
+        chemical_Cr = #{chemicalCr,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalCu != null" >
+        chemical_Cu = #{chemicalCu,jdbcType=INTEGER},
+      </if>
+      <if test="chemicalNb != null" >
+        chemical_Nb = #{chemicalNb,jdbcType=INTEGER},
+      </if>
+      <if test="mechanicalS != null" >
+        mechanical_s = #{mechanicalS,jdbcType=REAL},
+      </if>
+      <if test="mechanicalB != null" >
+        mechanical_b = #{mechanicalB,jdbcType=REAL},
+      </if>
+      <if test="mechanicalL != null" >
+        mechanical_l = #{mechanicalL,jdbcType=REAL},
+      </if>
+      <if test="impactT != null" >
+        impact_T = #{impactT,jdbcType=REAL},
+      </if>
+      <if test="impactN1 != null" >
+        impact_N1 = #{impactN1,jdbcType=VARCHAR},
+      </if>
+      <if test="impactN2 != null" >
+        impact_N2 = #{impactN2,jdbcType=VARCHAR},
+      </if>
+      <if test="impactN3 != null" >
+        impact_N3 = #{impactN3,jdbcType=VARCHAR},
+      </if>
+      <if test="bendwc != null" >
+        bendWC = #{bendwc,jdbcType=VARCHAR},
+      </if>
+      <if test="bendyb != null" >
+        bendYB = #{bendyb,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        inputUser = #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        upd_date = #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslLunoQuality" >
+    update bsl_luno_quality
+    set lu_company = #{luCompany,jdbcType=VARCHAR},
+      chemical_C = #{chemicalC,jdbcType=INTEGER},
+      chemical_Mn = #{chemicalMn,jdbcType=INTEGER},
+      chemical_Si = #{chemicalSi,jdbcType=INTEGER},
+      chemical_S = #{chemicalS,jdbcType=INTEGER},
+      chemical_P = #{chemicalP,jdbcType=INTEGER},
+      chemical_Ti = #{chemicalTi,jdbcType=INTEGER},
+      chemical_Ni = #{chemicalNi,jdbcType=INTEGER},
+      chemical_Cr = #{chemicalCr,jdbcType=INTEGER},
+      chemical_Cu = #{chemicalCu,jdbcType=INTEGER},
+      chemical_Nb = #{chemicalNb,jdbcType=INTEGER},
+      mechanical_s = #{mechanicalS,jdbcType=REAL},
+      mechanical_b = #{mechanicalB,jdbcType=REAL},
+      mechanical_l = #{mechanicalL,jdbcType=REAL},
+      impact_T = #{impactT,jdbcType=REAL},
+      impact_N1 = #{impactN1,jdbcType=VARCHAR},
+      impact_N2 = #{impactN2,jdbcType=VARCHAR},
+      impact_N3 = #{impactN3,jdbcType=VARCHAR},
+      bendWC = #{bendwc,jdbcType=VARCHAR},
+      bendYB = #{bendyb,jdbcType=VARCHAR},
+      inputUser = #{inputuser,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=DATE},
+      upd_date = #{updDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </update>
+</mapper>

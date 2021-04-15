@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslSendCheckInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslSendCheckInfo" >
+    <id column="lu_id" property="luId" jdbcType="VARCHAR" />
+    <result column="send_flag" property="sendFlag" jdbcType="VARCHAR" />
+    <result column="send_result" property="sendResult" jdbcType="VARCHAR" />
+    <result column="send_date" property="sendDate" jdbcType="DATE" />
+    <result column="upd_date" property="updDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="inputUser" property="inputuser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    lu_id, send_flag, send_result, send_date, upd_date, remark, inputUser
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslSendCheckInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_send_check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_send_check_info
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_send_check_info
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslSendCheckInfoExample" >
+    delete from bsl_send_check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslSendCheckInfo" >
+    insert into bsl_send_check_info (lu_id, send_flag, send_result, 
+      send_date, upd_date, remark, 
+      inputUser)
+    values (#{luId,jdbcType=VARCHAR}, #{sendFlag,jdbcType=VARCHAR}, #{sendResult,jdbcType=VARCHAR}, 
+      #{sendDate,jdbcType=DATE}, #{updDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
+      #{inputuser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslSendCheckInfo" >
+    insert into bsl_send_check_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="luId != null" >
+        lu_id,
+      </if>
+      <if test="sendFlag != null" >
+        send_flag,
+      </if>
+      <if test="sendResult != null" >
+        send_result,
+      </if>
+      <if test="sendDate != null" >
+        send_date,
+      </if>
+      <if test="updDate != null" >
+        upd_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="inputuser != null" >
+        inputUser,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="luId != null" >
+        #{luId,jdbcType=VARCHAR},
+      </if>
+      <if test="sendFlag != null" >
+        #{sendFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sendResult != null" >
+        #{sendResult,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        #{inputuser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslSendCheckInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_send_check_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_send_check_info
+    <set >
+      <if test="record.luId != null" >
+        lu_id = #{record.luId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendFlag != null" >
+        send_flag = #{record.sendFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendResult != null" >
+        send_result = #{record.sendResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendDate != null" >
+        send_date = #{record.sendDate,jdbcType=DATE},
+      </if>
+      <if test="record.updDate != null" >
+        upd_date = #{record.updDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputuser != null" >
+        inputUser = #{record.inputuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_send_check_info
+    set lu_id = #{record.luId,jdbcType=VARCHAR},
+      send_flag = #{record.sendFlag,jdbcType=VARCHAR},
+      send_result = #{record.sendResult,jdbcType=VARCHAR},
+      send_date = #{record.sendDate,jdbcType=DATE},
+      upd_date = #{record.updDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      inputUser = #{record.inputuser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslSendCheckInfo" >
+    update bsl_send_check_info
+    <set >
+      <if test="sendFlag != null" >
+        send_flag = #{sendFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="sendResult != null" >
+        send_result = #{sendResult,jdbcType=VARCHAR},
+      </if>
+      <if test="sendDate != null" >
+        send_date = #{sendDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        upd_date = #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        inputUser = #{inputuser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslSendCheckInfo" >
+    update bsl_send_check_info
+    set send_flag = #{sendFlag,jdbcType=VARCHAR},
+      send_result = #{sendResult,jdbcType=VARCHAR},
+      send_date = #{sendDate,jdbcType=DATE},
+      upd_date = #{updDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      inputUser = #{inputuser,jdbcType=VARCHAR}
+    where lu_id = #{luId,jdbcType=VARCHAR}
+  </update>
+</mapper>

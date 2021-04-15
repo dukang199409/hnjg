@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslMakePlanInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslMakePlanInfo" >
+    <id column="plan_id" property="planId" jdbcType="VARCHAR" />
+    <result column="plan_flag" property="planFlag" jdbcType="CHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="plan_department" property="planDepartment" jdbcType="CHAR" />
+    <result column="plan_jz" property="planJz" jdbcType="CHAR" />
+    <result column="plan_luno" property="planLuno" jdbcType="VARCHAR" />
+    <result column="plan_status" property="planStatus" jdbcType="CHAR" />
+    <result column="prod_norm" property="prodNorm" jdbcType="VARCHAR" />
+    <result column="prod_weight" property="prodWeight" jdbcType="REAL" />
+    <result column="prod_num" property="prodNum" jdbcType="INTEGER" />
+    <result column="prod_material" property="prodMaterial" jdbcType="CHAR" />
+    <result column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="make_type" property="makeType" jdbcType="CHAR" />
+    <result column="prod_order" property="prodOrder" jdbcType="VARCHAR" />
+    <result column="make_name" property="makeName" jdbcType="VARCHAR" />
+    <result column="make_prod_norm" property="makeProdNorm" jdbcType="VARCHAR" />
+    <result column="customer" property="customer" jdbcType="CHAR" />
+    <result column="already_num" property="alreadyNum" jdbcType="INTEGER" />
+    <result column="already_sum" property="alreadySum" jdbcType="REAL" />
+    <result column="inputuser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="checkuser" property="checkuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    plan_id, plan_flag, company, plan_department, plan_jz, plan_luno, plan_status, prod_norm, 
+    prod_weight, prod_num, prod_material, prod_type, make_type, prod_order, make_name, 
+    make_prod_norm, customer, already_num, already_sum, inputuser, checkuser, crt_date, 
+    remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslMakePlanInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_make_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_make_plan_info
+    where plan_id = #{planId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_make_plan_info
+    where plan_id = #{planId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslMakePlanInfoExample" >
+    delete from bsl_make_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslMakePlanInfo" >
+    insert into bsl_make_plan_info (plan_id, plan_flag, company, 
+      plan_department, plan_jz, plan_luno, 
+      plan_status, prod_norm, prod_weight, 
+      prod_num, prod_material, prod_type, 
+      make_type, prod_order, make_name, 
+      make_prod_norm, customer, already_num, 
+      already_sum, inputuser, checkuser, 
+      crt_date, remark)
+    values (#{planId,jdbcType=VARCHAR}, #{planFlag,jdbcType=CHAR}, #{company,jdbcType=VARCHAR}, 
+      #{planDepartment,jdbcType=CHAR}, #{planJz,jdbcType=CHAR}, #{planLuno,jdbcType=VARCHAR}, 
+      #{planStatus,jdbcType=CHAR}, #{prodNorm,jdbcType=VARCHAR}, #{prodWeight,jdbcType=REAL}, 
+      #{prodNum,jdbcType=INTEGER}, #{prodMaterial,jdbcType=CHAR}, #{prodType,jdbcType=CHAR}, 
+      #{makeType,jdbcType=CHAR}, #{prodOrder,jdbcType=VARCHAR}, #{makeName,jdbcType=VARCHAR}, 
+      #{makeProdNorm,jdbcType=VARCHAR}, #{customer,jdbcType=CHAR}, #{alreadyNum,jdbcType=INTEGER}, 
+      #{alreadySum,jdbcType=REAL}, #{inputuser,jdbcType=VARCHAR}, #{checkuser,jdbcType=VARCHAR}, 
+      #{crtDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslMakePlanInfo" >
+    insert into bsl_make_plan_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="planId != null" >
+        plan_id,
+      </if>
+      <if test="planFlag != null" >
+        plan_flag,
+      </if>
+      <if test="company != null" >
+        company,
+      </if>
+      <if test="planDepartment != null" >
+        plan_department,
+      </if>
+      <if test="planJz != null" >
+        plan_jz,
+      </if>
+      <if test="planLuno != null" >
+        plan_luno,
+      </if>
+      <if test="planStatus != null" >
+        plan_status,
+      </if>
+      <if test="prodNorm != null" >
+        prod_norm,
+      </if>
+      <if test="prodWeight != null" >
+        prod_weight,
+      </if>
+      <if test="prodNum != null" >
+        prod_num,
+      </if>
+      <if test="prodMaterial != null" >
+        prod_material,
+      </if>
+      <if test="prodType != null" >
+        prod_type,
+      </if>
+      <if test="makeType != null" >
+        make_type,
+      </if>
+      <if test="prodOrder != null" >
+        prod_order,
+      </if>
+      <if test="makeName != null" >
+        make_name,
+      </if>
+      <if test="makeProdNorm != null" >
+        make_prod_norm,
+      </if>
+      <if test="customer != null" >
+        customer,
+      </if>
+      <if test="alreadyNum != null" >
+        already_num,
+      </if>
+      <if test="alreadySum != null" >
+        already_sum,
+      </if>
+      <if test="inputuser != null" >
+        inputuser,
+      </if>
+      <if test="checkuser != null" >
+        checkuser,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="planId != null" >
+        #{planId,jdbcType=VARCHAR},
+      </if>
+      <if test="planFlag != null" >
+        #{planFlag,jdbcType=CHAR},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="planDepartment != null" >
+        #{planDepartment,jdbcType=CHAR},
+      </if>
+      <if test="planJz != null" >
+        #{planJz,jdbcType=CHAR},
+      </if>
+      <if test="planLuno != null" >
+        #{planLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="planStatus != null" >
+        #{planStatus,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null" >
+        #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodWeight != null" >
+        #{prodWeight,jdbcType=REAL},
+      </if>
+      <if test="prodNum != null" >
+        #{prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodMaterial != null" >
+        #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodType != null" >
+        #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="makeType != null" >
+        #{makeType,jdbcType=CHAR},
+      </if>
+      <if test="prodOrder != null" >
+        #{prodOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="makeName != null" >
+        #{makeName,jdbcType=VARCHAR},
+      </if>
+      <if test="makeProdNorm != null" >
+        #{makeProdNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        #{customer,jdbcType=CHAR},
+      </if>
+      <if test="alreadyNum != null" >
+        #{alreadyNum,jdbcType=INTEGER},
+      </if>
+      <if test="alreadySum != null" >
+        #{alreadySum,jdbcType=REAL},
+      </if>
+      <if test="inputuser != null" >
+        #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuser != null" >
+        #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslMakePlanInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_make_plan_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_make_plan_info
+    <set >
+      <if test="record.planId != null" >
+        plan_id = #{record.planId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planFlag != null" >
+        plan_flag = #{record.planFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.company != null" >
+        company = #{record.company,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planDepartment != null" >
+        plan_department = #{record.planDepartment,jdbcType=CHAR},
+      </if>
+      <if test="record.planJz != null" >
+        plan_jz = #{record.planJz,jdbcType=CHAR},
+      </if>
+      <if test="record.planLuno != null" >
+        plan_luno = #{record.planLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planStatus != null" >
+        plan_status = #{record.planStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNorm != null" >
+        prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodWeight != null" >
+        prod_weight = #{record.prodWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodNum != null" >
+        prod_num = #{record.prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodMaterial != null" >
+        prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="record.prodType != null" >
+        prod_type = #{record.prodType,jdbcType=CHAR},
+      </if>
+      <if test="record.makeType != null" >
+        make_type = #{record.makeType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodOrder != null" >
+        prod_order = #{record.prodOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makeName != null" >
+        make_name = #{record.makeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.makeProdNorm != null" >
+        make_prod_norm = #{record.makeProdNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customer != null" >
+        customer = #{record.customer,jdbcType=CHAR},
+      </if>
+      <if test="record.alreadyNum != null" >
+        already_num = #{record.alreadyNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.alreadySum != null" >
+        already_sum = #{record.alreadySum,jdbcType=REAL},
+      </if>
+      <if test="record.inputuser != null" >
+        inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkuser != null" >
+        checkuser = #{record.checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_make_plan_info
+    set plan_id = #{record.planId,jdbcType=VARCHAR},
+      plan_flag = #{record.planFlag,jdbcType=CHAR},
+      company = #{record.company,jdbcType=VARCHAR},
+      plan_department = #{record.planDepartment,jdbcType=CHAR},
+      plan_jz = #{record.planJz,jdbcType=CHAR},
+      plan_luno = #{record.planLuno,jdbcType=VARCHAR},
+      plan_status = #{record.planStatus,jdbcType=CHAR},
+      prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      prod_weight = #{record.prodWeight,jdbcType=REAL},
+      prod_num = #{record.prodNum,jdbcType=INTEGER},
+      prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      prod_type = #{record.prodType,jdbcType=CHAR},
+      make_type = #{record.makeType,jdbcType=CHAR},
+      prod_order = #{record.prodOrder,jdbcType=VARCHAR},
+      make_name = #{record.makeName,jdbcType=VARCHAR},
+      make_prod_norm = #{record.makeProdNorm,jdbcType=VARCHAR},
+      customer = #{record.customer,jdbcType=CHAR},
+      already_num = #{record.alreadyNum,jdbcType=INTEGER},
+      already_sum = #{record.alreadySum,jdbcType=REAL},
+      inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      checkuser = #{record.checkuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslMakePlanInfo" >
+    update bsl_make_plan_info
+    <set >
+      <if test="planFlag != null" >
+        plan_flag = #{planFlag,jdbcType=CHAR},
+      </if>
+      <if test="company != null" >
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="planDepartment != null" >
+        plan_department = #{planDepartment,jdbcType=CHAR},
+      </if>
+      <if test="planJz != null" >
+        plan_jz = #{planJz,jdbcType=CHAR},
+      </if>
+      <if test="planLuno != null" >
+        plan_luno = #{planLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="planStatus != null" >
+        plan_status = #{planStatus,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null" >
+        prod_norm = #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodWeight != null" >
+        prod_weight = #{prodWeight,jdbcType=REAL},
+      </if>
+      <if test="prodNum != null" >
+        prod_num = #{prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodMaterial != null" >
+        prod_material = #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodType != null" >
+        prod_type = #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="makeType != null" >
+        make_type = #{makeType,jdbcType=CHAR},
+      </if>
+      <if test="prodOrder != null" >
+        prod_order = #{prodOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="makeName != null" >
+        make_name = #{makeName,jdbcType=VARCHAR},
+      </if>
+      <if test="makeProdNorm != null" >
+        make_prod_norm = #{makeProdNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="customer != null" >
+        customer = #{customer,jdbcType=CHAR},
+      </if>
+      <if test="alreadyNum != null" >
+        already_num = #{alreadyNum,jdbcType=INTEGER},
+      </if>
+      <if test="alreadySum != null" >
+        already_sum = #{alreadySum,jdbcType=REAL},
+      </if>
+      <if test="inputuser != null" >
+        inputuser = #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuser != null" >
+        checkuser = #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where plan_id = #{planId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslMakePlanInfo" >
+    update bsl_make_plan_info
+    set plan_flag = #{planFlag,jdbcType=CHAR},
+      company = #{company,jdbcType=VARCHAR},
+      plan_department = #{planDepartment,jdbcType=CHAR},
+      plan_jz = #{planJz,jdbcType=CHAR},
+      plan_luno = #{planLuno,jdbcType=VARCHAR},
+      plan_status = #{planStatus,jdbcType=CHAR},
+      prod_norm = #{prodNorm,jdbcType=VARCHAR},
+      prod_weight = #{prodWeight,jdbcType=REAL},
+      prod_num = #{prodNum,jdbcType=INTEGER},
+      prod_material = #{prodMaterial,jdbcType=CHAR},
+      prod_type = #{prodType,jdbcType=CHAR},
+      make_type = #{makeType,jdbcType=CHAR},
+      prod_order = #{prodOrder,jdbcType=VARCHAR},
+      make_name = #{makeName,jdbcType=VARCHAR},
+      make_prod_norm = #{makeProdNorm,jdbcType=VARCHAR},
+      customer = #{customer,jdbcType=CHAR},
+      already_num = #{alreadyNum,jdbcType=INTEGER},
+      already_sum = #{alreadySum,jdbcType=REAL},
+      inputuser = #{inputuser,jdbcType=VARCHAR},
+      checkuser = #{checkuser,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where plan_id = #{planId,jdbcType=VARCHAR}
+  </update>
+   <resultMap id="BaseResultMapCCrate" type="com.bsl.reportbean.BslMakePlanInfoPro" >
+    <result column="plan_id" property="planId" jdbcType="VARCHAR" />
+    <result column="plan_flag" property="planFlag" jdbcType="CHAR" />
+    <result column="plan_jz" property="planJz" jdbcType="CHAR" />
+    <result column="company" property="company" jdbcType="VARCHAR" />
+    <result column="plan_department" property="planDepartment" jdbcType="CHAR" />
+    <result column="plan_luno" property="planLuno" jdbcType="VARCHAR" />
+    <result column="plan_status" property="planStatus" jdbcType="CHAR" />
+    <result column="prod_norm" property="prodNorm" jdbcType="VARCHAR" />
+    <result column="prod_weight" property="prodWeight" jdbcType="REAL" />
+    <result column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="prod_num" property="prodNum" jdbcType="INTEGER" />
+    <result column="prod_material" property="prodMaterial" jdbcType="CHAR" />
+    <result column="make_type" property="makeType" jdbcType="CHAR" />
+    <result column="prod_order" property="prodOrder" jdbcType="VARCHAR" />
+    <result column="make_name" property="makeName" jdbcType="VARCHAR" />
+    <result column="make_prod_norm" property="makeProdNorm" jdbcType="VARCHAR" />
+    <result column="customer" property="customer" jdbcType="CHAR" />
+    <result column="already_num" property="alreadyNum" jdbcType="INTEGER" />
+    <result column="already_sum" property="alreadySum" jdbcType="REAL" />
+    <result column="inputuser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="checkuser" property="checkuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="out_num" property="outNum" jdbcType="INTEGER" />
+    <result column="out_weight" property="outWeight" jdbcType="REAL" />
+    <result column="ccrate" property="ccrate" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectByExampleCCrate" resultMap="BaseResultMapCCrate" parameterType="com.bsl.select.QueryCriteria">
+  	  select a.*,concat(left(round(a.already_sum/a.out_weight,4)*100,5),'%') ccrate
+		from(
+			select 
+				t.plan_id, 
+				t.plan_flag, 
+				t.plan_jz,
+				t.company, 
+				t.plan_department, 
+				t.plan_luno, 
+				t.plan_status, 
+				t.prod_norm, 
+				t.prod_weight,
+				t.prod_type,  
+				t.prod_num, 
+				t.prod_material, 
+				t.make_type, 
+				t.prod_order, 
+				t.make_name, 
+				t.make_prod_norm, 
+				t.customer, 
+				t.already_num, 
+				t.already_sum, 
+				t.inputuser, 
+				t.checkuser, 
+				t.crt_date, 
+				t.remark,
+				(select count(1) from bsl_product_info 
+					where prod_type = '1'
+					and prod_out_plan = t.plan_id) out_num,
+				(select sum(prod_rel_weight) from bsl_product_info 
+					where prod_type = '1'
+					and prod_out_plan = t.plan_id) out_weight
+			 from
+				bsl_make_plan_info t
+			 where 1 = 1
+			   <if test="planFlag != null" >
+			        and plan_flag = #{planFlag,jdbcType=VARCHAR} 
+			   </if>
+			   <if test="planId != null" >
+			        and plan_id like #{planId,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="makeName != null" >
+			        and make_name like #{makeName,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="prodNorm != null" >
+			        and prod_norm like #{prodNorm,jdbcType=VARCHAR} 
+			    </if>
+			    <if test="prodMaterial != null" >
+			        and prod_material = #{prodMaterial,jdbcType=VARCHAR} 
+			   </if>
+			   <if test="prodType != null" >
+			        and prod_type = #{prodType,jdbcType=VARCHAR} 
+			   </if>
+			   <if test="planStatus != null" >
+			        and plan_status = #{planStatus,jdbcType=VARCHAR} 
+			   </if>
+			    <if test="makeProdNorm != null" >
+			        and make_prod_norm like #{makeProdNorm,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="planJz != null" >
+			        and plan_jz = #{planJz,jdbcType=VARCHAR} 
+			    </if>
+			   <if test="dateStart != null" >
+		      		and DATE_FORMAT(crt_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
+		    	</if>
+		        <if test="dateEnd != null" >
+		     		and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(crt_date,'%Y-%m-%d')
+		       </if>
+		 )a
+		 <if test="orderByClause != null" >
+		     order by ${orderByClause}
+		</if>
+  </select>
+  
+  <select id="selectByExampleCCrate2" resultMap="BaseResultMapCCrate" parameterType="com.bsl.select.QueryExample">
+  	  select a.*,concat(left(round(a.already_sum/a.out_weight,4)*100,5),'%') ccrate
+		from(
+			select 
+				t.plan_id, 
+				t.plan_flag, 
+				t.plan_jz,
+				t.company, 
+				t.plan_department, 
+				t.plan_luno, 
+				t.plan_status, 
+				t.prod_norm, 
+				t.prod_weight,
+				t.prod_type,  
+				t.prod_num, 
+				t.prod_material, 
+				t.make_type, 
+				t.prod_order, 
+				t.make_name, 
+				t.make_prod_norm, 
+				t.customer, 
+				t.already_num, 
+				t.already_sum, 
+				t.inputuser, 
+				t.checkuser, 
+				t.crt_date, 
+				t.remark,
+				(select count(1) from bsl_product_info 
+					where prod_type = '0'
+					and prod_out_plan = t.plan_id) out_num,
+				(select sum(prod_print_weight) from bsl_product_info 
+					where prod_type = '0'
+					and prod_out_plan = t.plan_id) out_weight
+			 from
+				bsl_make_plan_info t
+			 where 1 = 1
+			   <if test="planFlag != null" >
+			        and plan_flag = #{planFlag,jdbcType=VARCHAR} 
+			   </if>
+			   <if test="planId != null" >
+			        and plan_id like #{planId,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="makeName != null" >
+			        and make_name like #{makeName,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="prodNorm != null" >
+			        and prod_norm like #{prodNorm,jdbcType=VARCHAR} 
+			    </if>
+			    <if test="prodMaterial != null" >
+			        and prod_material = #{prodMaterial,jdbcType=VARCHAR} 
+			   </if>
+			    <if test="prodType != null" >
+			        and prod_type = #{prodType,jdbcType=VARCHAR} 
+			   </if>
+			   <if test="planStatus != null" >
+			        and plan_status = #{planStatus,jdbcType=VARCHAR} 
+			   </if>
+			    <if test="makeProdNorm != null" >
+			        and make_prod_norm like #{makeProdNorm,jdbcType=VARCHAR} 
+			    </if>
+			     <if test="planJz != null" >
+			        and plan_jz = #{planJz,jdbcType=VARCHAR} 
+			    </if>
+			   <if test="dateStart != null" >
+		      		and DATE_FORMAT(crt_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
+		    	</if>
+		        <if test="dateEnd != null" >
+		     		and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(crt_date,'%Y-%m-%d')
+		       </if>
+		 )a
+		 <if test="orderByClause != null" >
+		     order by ${orderByClause}
+		</if>
+  </select>
+  
+</mapper>

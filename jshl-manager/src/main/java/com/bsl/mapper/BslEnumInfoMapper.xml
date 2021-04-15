@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslEnumInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslEnumInfo" >
+    <id column="enum_english_name" property="enumEnglishName" jdbcType="VARCHAR" />
+    <id column="enum_key" property="enumKey" jdbcType="VARCHAR" />
+    <result column="enum_chinese_name" property="enumChineseName" jdbcType="VARCHAR" />
+    <result column="enum_value" property="enumValue" jdbcType="VARCHAR" />
+    <result column="enum_order" property="enumOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    enum_english_name, enum_key, enum_chinese_name, enum_value, enum_order
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslEnumInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_enum_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslEnumInfoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_enum_info
+    where enum_english_name = #{enumEnglishName,jdbcType=VARCHAR}
+      and enum_key = #{enumKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.bsl.pojo.BslEnumInfoKey" >
+    delete from bsl_enum_info
+    where enum_english_name = #{enumEnglishName,jdbcType=VARCHAR}
+      and enum_key = #{enumKey,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslEnumInfoExample" >
+    delete from bsl_enum_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslEnumInfo" >
+    insert into bsl_enum_info (enum_english_name, enum_key, enum_chinese_name, 
+      enum_value, enum_order)
+    values (#{enumEnglishName,jdbcType=VARCHAR}, #{enumKey,jdbcType=VARCHAR}, #{enumChineseName,jdbcType=VARCHAR}, 
+      #{enumValue,jdbcType=VARCHAR}, #{enumOrder,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslEnumInfo" >
+    insert into bsl_enum_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enumEnglishName != null" >
+        enum_english_name,
+      </if>
+      <if test="enumKey != null" >
+        enum_key,
+      </if>
+      <if test="enumChineseName != null" >
+        enum_chinese_name,
+      </if>
+      <if test="enumValue != null" >
+        enum_value,
+      </if>
+      <if test="enumOrder != null" >
+        enum_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enumEnglishName != null" >
+        #{enumEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="enumKey != null" >
+        #{enumKey,jdbcType=VARCHAR},
+      </if>
+      <if test="enumChineseName != null" >
+        #{enumChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enumValue != null" >
+        #{enumValue,jdbcType=VARCHAR},
+      </if>
+      <if test="enumOrder != null" >
+        #{enumOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslEnumInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_enum_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_enum_info
+    <set >
+      <if test="record.enumEnglishName != null" >
+        enum_english_name = #{record.enumEnglishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enumKey != null" >
+        enum_key = #{record.enumKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enumChineseName != null" >
+        enum_chinese_name = #{record.enumChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enumValue != null" >
+        enum_value = #{record.enumValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enumOrder != null" >
+        enum_order = #{record.enumOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_enum_info
+    set enum_english_name = #{record.enumEnglishName,jdbcType=VARCHAR},
+      enum_key = #{record.enumKey,jdbcType=VARCHAR},
+      enum_chinese_name = #{record.enumChineseName,jdbcType=VARCHAR},
+      enum_value = #{record.enumValue,jdbcType=VARCHAR},
+      enum_order = #{record.enumOrder,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslEnumInfo" >
+    update bsl_enum_info
+    <set >
+      <if test="enumChineseName != null" >
+        enum_chinese_name = #{enumChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="enumValue != null" >
+        enum_value = #{enumValue,jdbcType=VARCHAR},
+      </if>
+      <if test="enumOrder != null" >
+        enum_order = #{enumOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where enum_english_name = #{enumEnglishName,jdbcType=VARCHAR}
+      and enum_key = #{enumKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslEnumInfo" >
+    update bsl_enum_info
+    set enum_chinese_name = #{enumChineseName,jdbcType=VARCHAR},
+      enum_value = #{enumValue,jdbcType=VARCHAR},
+      enum_order = #{enumOrder,jdbcType=INTEGER}
+    where enum_english_name = #{enumEnglishName,jdbcType=VARCHAR}
+      and enum_key = #{enumKey,jdbcType=VARCHAR}
+  </update>
+  
+  <resultMap id="ChiEngNameResultMap" type="com.bsl.pojo.BslEnumInfo" >
+    <id column="enum_english_name" property="enumEnglishName" jdbcType="VARCHAR" />
+    <result column="enum_chinese_name" property="enumChineseName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getEnumChiEngNames" resultMap="ChiEngNameResultMap">
+  	select DISTINCT(enum_chinese_name),enum_english_name from bsl_enum_info order by enum_chinese_name
+  </select>
+</mapper>

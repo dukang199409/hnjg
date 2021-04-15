@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslStockChangePhotoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslStockChangePhoto" >
+    <id column="trans_date" property="transDate" jdbcType="DATE" />
+    <id column="trans_code" property="transCode" jdbcType="CHAR" />
+    <id column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="change_weight" property="changeWeight" jdbcType="REAL" />
+  </resultMap>
+  <resultMap id="BaseResultMapNew" type="com.bsl.reportbean.BslStockChangeSumReport" >
+    <id column="trans_code" property="transCode" jdbcType="CHAR" />
+    <id column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="sum_weight" property="sumWeight" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trans_date, trans_code, prod_type, change_weight
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslStockChangePhotoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_stock_change_photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslStockChangePhotoKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_stock_change_photo
+    where trans_date = #{transDate,jdbcType=DATE}
+      and trans_code = #{transCode,jdbcType=CHAR}
+      and prod_type = #{prodType,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.bsl.pojo.BslStockChangePhotoKey" >
+    delete from bsl_stock_change_photo
+    where trans_date = #{transDate,jdbcType=DATE}
+      and trans_code = #{transCode,jdbcType=CHAR}
+      and prod_type = #{prodType,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslStockChangePhotoExample" >
+    delete from bsl_stock_change_photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslStockChangePhoto" >
+    insert into bsl_stock_change_photo (trans_date, trans_code, prod_type, 
+      change_weight)
+    values (#{transDate,jdbcType=DATE}, #{transCode,jdbcType=CHAR}, #{prodType,jdbcType=CHAR}, 
+      #{changeWeight,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslStockChangePhoto" >
+    insert into bsl_stock_change_photo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transDate != null" >
+        trans_date,
+      </if>
+      <if test="transCode != null" >
+        trans_code,
+      </if>
+      <if test="prodType != null" >
+        prod_type,
+      </if>
+      <if test="changeWeight != null" >
+        change_weight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transDate != null" >
+        #{transDate,jdbcType=DATE},
+      </if>
+      <if test="transCode != null" >
+        #{transCode,jdbcType=CHAR},
+      </if>
+      <if test="prodType != null" >
+        #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="changeWeight != null" >
+        #{changeWeight,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslStockChangePhotoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_stock_change_photo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_stock_change_photo
+    <set >
+      <if test="record.transDate != null" >
+        trans_date = #{record.transDate,jdbcType=DATE},
+      </if>
+      <if test="record.transCode != null" >
+        trans_code = #{record.transCode,jdbcType=CHAR},
+      </if>
+      <if test="record.prodType != null" >
+        prod_type = #{record.prodType,jdbcType=CHAR},
+      </if>
+      <if test="record.changeWeight != null" >
+        change_weight = #{record.changeWeight,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_stock_change_photo
+    set trans_date = #{record.transDate,jdbcType=DATE},
+      trans_code = #{record.transCode,jdbcType=CHAR},
+      prod_type = #{record.prodType,jdbcType=CHAR},
+      change_weight = #{record.changeWeight,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslStockChangePhoto" >
+    update bsl_stock_change_photo
+    <set >
+      <if test="changeWeight != null" >
+        change_weight = #{changeWeight,jdbcType=REAL},
+      </if>
+    </set>
+    where trans_date = #{transDate,jdbcType=DATE}
+      and trans_code = #{transCode,jdbcType=CHAR}
+      and prod_type = #{prodType,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslStockChangePhoto" >
+    update bsl_stock_change_photo
+    set change_weight = #{changeWeight,jdbcType=REAL}
+    where trans_date = #{transDate,jdbcType=DATE}
+      and trans_code = #{transCode,jdbcType=CHAR}
+      and prod_type = #{prodType,jdbcType=CHAR}
+  </update>
+  <select id="selectStockChangeSumInfo" resultMap="BaseResultMap">
+  	select date_format(now(),'%Y-%m-%d') trans_date,trans_code,prod_type,sum(rubbish_weight)as change_weight FROM bsl_stock_change_detail
+	where prod_type != '3' and crt_date = date_format(now(),'%Y-%m-%d')
+	group by prod_type,trans_code
+  </select>
+  <select id="selectStockChangeSumAllInfo" parameterType="com.bsl.select.QueryCriteria" resultMap="BaseResultMapNew">
+  	select trans_code,prod_type,sum(change_weight) sum_weight
+	from bsl_stock_change_photo
+	where 1=1
+    <if test="dateStart != null" >
+      and trans_date >= #{dateStart,jdbcType=DATE}
+    </if>
+     <if test="dateEnd != null" >
+      and #{dateEnd,jdbcType=DATE} >= trans_date 
+    </if>
+     <if test="prodType != null" >
+      and prod_type = #{prodType,jdbcType=VARCHAR}
+    </if>
+    <if test="transCode != null" >
+      and trans_code = #{transCode,jdbcType=VARCHAR}
+    </if>
+	group by trans_code,prod_type
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

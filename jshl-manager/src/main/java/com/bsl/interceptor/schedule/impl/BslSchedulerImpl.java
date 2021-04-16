@@ -1,6 +1,7 @@
 package com.bsl.interceptor.schedule.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,8 @@ public class BslSchedulerImpl implements BslSchedulerService{
          insertBslStockChangeInfo();
          //删除一年之前的库存日照
          deleteProductPhoto();
+         //将一年前的已分剪、已发货、处理完成的数据历史化
+         insertHistoryProductInfo();
     }
     
     /**
@@ -209,23 +212,32 @@ public class BslSchedulerImpl implements BslSchedulerService{
      * 删除一年之前的库存日照
      */
     public void deleteProductPhoto(){
-    	 DictItemOperation.log.info("===========删除一年之前的库存日照");
+    	 DictItemOperation.log.info("===========删除一年之前的库存日照开始");
     	 bslProductPhotoInfoMapper.deleteProductPhotoInfoOnyears();
-    	 DictItemOperation.log.info("===========删除一年之前的库存日照");
+    	 DictItemOperation.log.info("===========删除一年之前的库存日照结束");
     }
-   
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /**
+     * 将一年前的已分剪、已发货、处理完成的数据历史化
+     */
+    public void insertHistoryProductInfo(){
+		 DictItemOperation.log.info("===========历史化一年前的历史数据开始");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		 
+		 Calendar c = Calendar.getInstance();
+		 c.setTime(new Date());
+		 c.add(Calendar.YEAR, -1);
+		 Date y = c.getTime();
+		 String dateStr = sdf.format(y);
+		 
+		 int insertHistoryProductInfo = bslProductInfoMapper.insertHistoryProductInfo(dateStr);
+		 if(insertHistoryProductInfo > 0){
+			 DictItemOperation.log.info("===========删除一年前的历史数据开始");
+			 bslProductInfoMapper.deleteHistoryProductInfo(dateStr);
+		 }
+		 
+		 DictItemOperation.log.info("===========历史化一年前的历史数据结束");
+    }
     
     
 }  

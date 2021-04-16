@@ -52,6 +52,9 @@ public interface BslProductInfoMapper {
     
     List<BslProductInfo> getRawCanOutProds(QueryExample queryExample);
     List<BslProductInfo> getProdCanOutProds(QueryCriteria queryExample);
+	
+	int insertHistoryProductInfo(String dateString);
+    int deleteHistoryProductInfo(String dateString);
     
     
 }

@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bsl.mapper.BslProductInfoHMapper">
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslProductInfoH">
+    <result column="prod_id" jdbcType="VARCHAR" property="prodId" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="prod_type" jdbcType="CHAR" property="prodType" />
+    <result column="prod_norm" jdbcType="VARCHAR" property="prodNorm" />
+    <result column="prod_material" jdbcType="CHAR" property="prodMaterial" />
+    <result column="prod_length" jdbcType="REAL" property="prodLength" />
+    <result column="prod_level" jdbcType="CHAR" property="prodLevel" />
+    <result column="prod_num" jdbcType="INTEGER" property="prodNum" />
+    <result column="prod_record_weight" jdbcType="REAL" property="prodRecordWeight" />
+    <result column="prod_rel_weight" jdbcType="REAL" property="prodRelWeight" />
+    <result column="prod_print_weight" jdbcType="REAL" property="prodPrintWeight" />
+    <result column="prod_out_weight" jdbcType="REAL" property="prodOutWeight" />
+    <result column="prod_source_company" jdbcType="VARCHAR" property="prodSourceCompany" />
+    <result column="prod_status" jdbcType="CHAR" property="prodStatus" />
+    <result column="prod_user_type" jdbcType="CHAR" property="prodUserType" />
+    <result column="prod_source" jdbcType="CHAR" property="prodSource" />
+    <result column="prod_luno" jdbcType="VARCHAR" property="prodLuno" />
+    <result column="prod_orirawid" jdbcType="VARCHAR" property="prodOrirawid" />
+    <result column="prod_dcl_flag" jdbcType="CHAR" property="prodDclFlag" />
+    <result column="prod_plan_no" jdbcType="VARCHAR" property="prodPlanNo" />
+    <result column="prod_make_jz" jdbcType="CHAR" property="prodMakeJz" />
+    <result column="prod_ori_id" jdbcType="VARCHAR" property="prodOriId" />
+    <result column="prod_parent_no" jdbcType="VARCHAR" property="prodParentNo" />
+    <result column="prod_out_plan" jdbcType="VARCHAR" property="prodOutPlan" />
+    <result column="prod_sale_serno" jdbcType="VARCHAR" property="prodSaleSerno" />
+    <result column="prod_out_carno" jdbcType="VARCHAR" property="prodOutCarno" />
+    <result column="prod_out_date" jdbcType="TIMESTAMP" property="prodOutDate" />
+    <result column="prod_company" jdbcType="VARCHAR" property="prodCompany" />
+    <result column="prod_customer" jdbcType="VARCHAR" property="prodCustomer" />
+    <result column="prod_bc" jdbcType="CHAR" property="prodBc" />
+    <result column="prod_fhck" jdbcType="VARCHAR" property="prodFhck" />
+    <result column="prod_ruc" jdbcType="CHAR" property="prodRuc" />
+    <result column="prod_wccply" jdbcType="CHAR" property="prodWccply" />
+    <result column="prod_inputuser" jdbcType="VARCHAR" property="prodInputuser" />
+    <result column="prod_checkuser" jdbcType="VARCHAR" property="prodCheckuser" />
+    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+    <result column="upd_date" jdbcType="TIMESTAMP" property="updDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    prod_id, prod_name, prod_type, prod_norm, prod_material, prod_length, prod_level, 
+    prod_num, prod_record_weight, prod_rel_weight, prod_print_weight, prod_out_weight, 
+    prod_source_company, prod_status, prod_user_type, prod_source, prod_luno, prod_orirawid, 
+    prod_dcl_flag, prod_plan_no, prod_make_jz, prod_ori_id, prod_parent_no, prod_out_plan, 
+    prod_sale_serno, prod_out_carno, prod_out_date, prod_company, prod_customer, prod_bc, 
+    prod_fhck, prod_ruc, prod_wccply, prod_inputuser, prod_checkuser, crt_date, upd_date, 
+    remark
+  </sql>
+  <select id="selectByExample" parameterType="com.bsl.pojo.BslProductInfoHExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslProductInfoHExample">
+    delete from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslProductInfoH">
+    insert into bsl_product_info_h (prod_id, prod_name, prod_type, 
+      prod_norm, prod_material, prod_length, 
+      prod_level, prod_num, prod_record_weight, 
+      prod_rel_weight, prod_print_weight, prod_out_weight, 
+      prod_source_company, prod_status, prod_user_type, 
+      prod_source, prod_luno, prod_orirawid, 
+      prod_dcl_flag, prod_plan_no, prod_make_jz, 
+      prod_ori_id, prod_parent_no, prod_out_plan, 
+      prod_sale_serno, prod_out_carno, prod_out_date, 
+      prod_company, prod_customer, prod_bc, 
+      prod_fhck, prod_ruc, prod_wccply, 
+      prod_inputuser, prod_checkuser, crt_date, 
+      upd_date, remark)
+    values (#{prodId,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=CHAR}, 
+      #{prodNorm,jdbcType=VARCHAR}, #{prodMaterial,jdbcType=CHAR}, #{prodLength,jdbcType=REAL}, 
+      #{prodLevel,jdbcType=CHAR}, #{prodNum,jdbcType=INTEGER}, #{prodRecordWeight,jdbcType=REAL}, 
+      #{prodRelWeight,jdbcType=REAL}, #{prodPrintWeight,jdbcType=REAL}, #{prodOutWeight,jdbcType=REAL}, 
+      #{prodSourceCompany,jdbcType=VARCHAR}, #{prodStatus,jdbcType=CHAR}, #{prodUserType,jdbcType=CHAR}, 
+      #{prodSource,jdbcType=CHAR}, #{prodLuno,jdbcType=VARCHAR}, #{prodOrirawid,jdbcType=VARCHAR}, 
+      #{prodDclFlag,jdbcType=CHAR}, #{prodPlanNo,jdbcType=VARCHAR}, #{prodMakeJz,jdbcType=CHAR}, 
+      #{prodOriId,jdbcType=VARCHAR}, #{prodParentNo,jdbcType=VARCHAR}, #{prodOutPlan,jdbcType=VARCHAR}, 
+      #{prodSaleSerno,jdbcType=VARCHAR}, #{prodOutCarno,jdbcType=VARCHAR}, #{prodOutDate,jdbcType=TIMESTAMP}, 
+      #{prodCompany,jdbcType=VARCHAR}, #{prodCustomer,jdbcType=VARCHAR}, #{prodBc,jdbcType=CHAR}, 
+      #{prodFhck,jdbcType=VARCHAR}, #{prodRuc,jdbcType=CHAR}, #{prodWccply,jdbcType=CHAR}, 
+      #{prodInputuser,jdbcType=VARCHAR}, #{prodCheckuser,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, 
+      #{updDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslProductInfoH">
+    insert into bsl_product_info_h
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="prodName != null">
+        prod_name,
+      </if>
+      <if test="prodType != null">
+        prod_type,
+      </if>
+      <if test="prodNorm != null">
+        prod_norm,
+      </if>
+      <if test="prodMaterial != null">
+        prod_material,
+      </if>
+      <if test="prodLength != null">
+        prod_length,
+      </if>
+      <if test="prodLevel != null">
+        prod_level,
+      </if>
+      <if test="prodNum != null">
+        prod_num,
+      </if>
+      <if test="prodRecordWeight != null">
+        prod_record_weight,
+      </if>
+      <if test="prodRelWeight != null">
+        prod_rel_weight,
+      </if>
+      <if test="prodPrintWeight != null">
+        prod_print_weight,
+      </if>
+      <if test="prodOutWeight != null">
+        prod_out_weight,
+      </if>
+      <if test="prodSourceCompany != null">
+        prod_source_company,
+      </if>
+      <if test="prodStatus != null">
+        prod_status,
+      </if>
+      <if test="prodUserType != null">
+        prod_user_type,
+      </if>
+      <if test="prodSource != null">
+        prod_source,
+      </if>
+      <if test="prodLuno != null">
+        prod_luno,
+      </if>
+      <if test="prodOrirawid != null">
+        prod_orirawid,
+      </if>
+      <if test="prodDclFlag != null">
+        prod_dcl_flag,
+      </if>
+      <if test="prodPlanNo != null">
+        prod_plan_no,
+      </if>
+      <if test="prodMakeJz != null">
+        prod_make_jz,
+      </if>
+      <if test="prodOriId != null">
+        prod_ori_id,
+      </if>
+      <if test="prodParentNo != null">
+        prod_parent_no,
+      </if>
+      <if test="prodOutPlan != null">
+        prod_out_plan,
+      </if>
+      <if test="prodSaleSerno != null">
+        prod_sale_serno,
+      </if>
+      <if test="prodOutCarno != null">
+        prod_out_carno,
+      </if>
+      <if test="prodOutDate != null">
+        prod_out_date,
+      </if>
+      <if test="prodCompany != null">
+        prod_company,
+      </if>
+      <if test="prodCustomer != null">
+        prod_customer,
+      </if>
+      <if test="prodBc != null">
+        prod_bc,
+      </if>
+      <if test="prodFhck != null">
+        prod_fhck,
+      </if>
+      <if test="prodRuc != null">
+        prod_ruc,
+      </if>
+      <if test="prodWccply != null">
+        prod_wccply,
+      </if>
+      <if test="prodInputuser != null">
+        prod_inputuser,
+      </if>
+      <if test="prodCheckuser != null">
+        prod_checkuser,
+      </if>
+      <if test="crtDate != null">
+        crt_date,
+      </if>
+      <if test="updDate != null">
+        upd_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null">
+        #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null">
+        #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMaterial != null">
+        #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodLength != null">
+        #{prodLength,jdbcType=REAL},
+      </if>
+      <if test="prodLevel != null">
+        #{prodLevel,jdbcType=CHAR},
+      </if>
+      <if test="prodNum != null">
+        #{prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodRecordWeight != null">
+        #{prodRecordWeight,jdbcType=REAL},
+      </if>
+      <if test="prodRelWeight != null">
+        #{prodRelWeight,jdbcType=REAL},
+      </if>
+      <if test="prodPrintWeight != null">
+        #{prodPrintWeight,jdbcType=REAL},
+      </if>
+      <if test="prodOutWeight != null">
+        #{prodOutWeight,jdbcType=REAL},
+      </if>
+      <if test="prodSourceCompany != null">
+        #{prodSourceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="prodStatus != null">
+        #{prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="prodUserType != null">
+        #{prodUserType,jdbcType=CHAR},
+      </if>
+      <if test="prodSource != null">
+        #{prodSource,jdbcType=CHAR},
+      </if>
+      <if test="prodLuno != null">
+        #{prodLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOrirawid != null">
+        #{prodOrirawid,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDclFlag != null">
+        #{prodDclFlag,jdbcType=CHAR},
+      </if>
+      <if test="prodPlanNo != null">
+        #{prodPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMakeJz != null">
+        #{prodMakeJz,jdbcType=CHAR},
+      </if>
+      <if test="prodOriId != null">
+        #{prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodParentNo != null">
+        #{prodParentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutPlan != null">
+        #{prodOutPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="prodSaleSerno != null">
+        #{prodSaleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutCarno != null">
+        #{prodOutCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutDate != null">
+        #{prodOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prodCompany != null">
+        #{prodCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCustomer != null">
+        #{prodCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBc != null">
+        #{prodBc,jdbcType=CHAR},
+      </if>
+      <if test="prodFhck != null">
+        #{prodFhck,jdbcType=VARCHAR},
+      </if>
+      <if test="prodRuc != null">
+        #{prodRuc,jdbcType=CHAR},
+      </if>
+      <if test="prodWccply != null">
+        #{prodWccply,jdbcType=CHAR},
+      </if>
+      <if test="prodInputuser != null">
+        #{prodInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCheckuser != null">
+        #{prodCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updDate != null">
+        #{updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslProductInfoHExample" resultType="java.lang.Integer">
+    select count(*) from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bsl_product_info_h
+    <set>
+      <if test="record.prodId != null">
+        prod_id = #{record.prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodName != null">
+        prod_name = #{record.prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodType != null">
+        prod_type = #{record.prodType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNorm != null">
+        prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodMaterial != null">
+        prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="record.prodLength != null">
+        prod_length = #{record.prodLength,jdbcType=REAL},
+      </if>
+      <if test="record.prodLevel != null">
+        prod_level = #{record.prodLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNum != null">
+        prod_num = #{record.prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodRecordWeight != null">
+        prod_record_weight = #{record.prodRecordWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodRelWeight != null">
+        prod_rel_weight = #{record.prodRelWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodPrintWeight != null">
+        prod_print_weight = #{record.prodPrintWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodOutWeight != null">
+        prod_out_weight = #{record.prodOutWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodSourceCompany != null">
+        prod_source_company = #{record.prodSourceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodStatus != null">
+        prod_status = #{record.prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.prodUserType != null">
+        prod_user_type = #{record.prodUserType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodSource != null">
+        prod_source = #{record.prodSource,jdbcType=CHAR},
+      </if>
+      <if test="record.prodLuno != null">
+        prod_luno = #{record.prodLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOrirawid != null">
+        prod_orirawid = #{record.prodOrirawid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodDclFlag != null">
+        prod_dcl_flag = #{record.prodDclFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.prodPlanNo != null">
+        prod_plan_no = #{record.prodPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodMakeJz != null">
+        prod_make_jz = #{record.prodMakeJz,jdbcType=CHAR},
+      </if>
+      <if test="record.prodOriId != null">
+        prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodParentNo != null">
+        prod_parent_no = #{record.prodParentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutPlan != null">
+        prod_out_plan = #{record.prodOutPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodSaleSerno != null">
+        prod_sale_serno = #{record.prodSaleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutCarno != null">
+        prod_out_carno = #{record.prodOutCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutDate != null">
+        prod_out_date = #{record.prodOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prodCompany != null">
+        prod_company = #{record.prodCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCustomer != null">
+        prod_customer = #{record.prodCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBc != null">
+        prod_bc = #{record.prodBc,jdbcType=CHAR},
+      </if>
+      <if test="record.prodFhck != null">
+        prod_fhck = #{record.prodFhck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodRuc != null">
+        prod_ruc = #{record.prodRuc,jdbcType=CHAR},
+      </if>
+      <if test="record.prodWccply != null">
+        prod_wccply = #{record.prodWccply,jdbcType=CHAR},
+      </if>
+      <if test="record.prodInputuser != null">
+        prod_inputuser = #{record.prodInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCheckuser != null">
+        prod_checkuser = #{record.prodCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null">
+        crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updDate != null">
+        upd_date = #{record.updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bsl_product_info_h
+    set prod_id = #{record.prodId,jdbcType=VARCHAR},
+      prod_name = #{record.prodName,jdbcType=VARCHAR},
+      prod_type = #{record.prodType,jdbcType=CHAR},
+      prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      prod_length = #{record.prodLength,jdbcType=REAL},
+      prod_level = #{record.prodLevel,jdbcType=CHAR},
+      prod_num = #{record.prodNum,jdbcType=INTEGER},
+      prod_record_weight = #{record.prodRecordWeight,jdbcType=REAL},
+      prod_rel_weight = #{record.prodRelWeight,jdbcType=REAL},
+      prod_print_weight = #{record.prodPrintWeight,jdbcType=REAL},
+      prod_out_weight = #{record.prodOutWeight,jdbcType=REAL},
+      prod_source_company = #{record.prodSourceCompany,jdbcType=VARCHAR},
+      prod_status = #{record.prodStatus,jdbcType=CHAR},
+      prod_user_type = #{record.prodUserType,jdbcType=CHAR},
+      prod_source = #{record.prodSource,jdbcType=CHAR},
+      prod_luno = #{record.prodLuno,jdbcType=VARCHAR},
+      prod_orirawid = #{record.prodOrirawid,jdbcType=VARCHAR},
+      prod_dcl_flag = #{record.prodDclFlag,jdbcType=CHAR},
+      prod_plan_no = #{record.prodPlanNo,jdbcType=VARCHAR},
+      prod_make_jz = #{record.prodMakeJz,jdbcType=CHAR},
+      prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      prod_parent_no = #{record.prodParentNo,jdbcType=VARCHAR},
+      prod_out_plan = #{record.prodOutPlan,jdbcType=VARCHAR},
+      prod_sale_serno = #{record.prodSaleSerno,jdbcType=VARCHAR},
+      prod_out_carno = #{record.prodOutCarno,jdbcType=VARCHAR},
+      prod_out_date = #{record.prodOutDate,jdbcType=TIMESTAMP},
+      prod_company = #{record.prodCompany,jdbcType=VARCHAR},
+      prod_customer = #{record.prodCustomer,jdbcType=VARCHAR},
+      prod_bc = #{record.prodBc,jdbcType=CHAR},
+      prod_fhck = #{record.prodFhck,jdbcType=VARCHAR},
+      prod_ruc = #{record.prodRuc,jdbcType=CHAR},
+      prod_wccply = #{record.prodWccply,jdbcType=CHAR},
+      prod_inputuser = #{record.prodInputuser,jdbcType=VARCHAR},
+      prod_checkuser = #{record.prodCheckuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      upd_date = #{record.updDate,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslProductInfoH">
+    <result column="prod_id" jdbcType="VARCHAR" property="prodId" />
+    <result column="prod_name" jdbcType="VARCHAR" property="prodName" />
+    <result column="prod_type" jdbcType="CHAR" property="prodType" />
+    <result column="prod_norm" jdbcType="VARCHAR" property="prodNorm" />
+    <result column="prod_material" jdbcType="CHAR" property="prodMaterial" />
+    <result column="prod_length" jdbcType="REAL" property="prodLength" />
+    <result column="prod_level" jdbcType="CHAR" property="prodLevel" />
+    <result column="prod_num" jdbcType="INTEGER" property="prodNum" />
+    <result column="prod_record_weight" jdbcType="REAL" property="prodRecordWeight" />
+    <result column="prod_rel_weight" jdbcType="REAL" property="prodRelWeight" />
+    <result column="prod_print_weight" jdbcType="REAL" property="prodPrintWeight" />
+    <result column="prod_out_weight" jdbcType="REAL" property="prodOutWeight" />
+    <result column="prod_source_company" jdbcType="VARCHAR" property="prodSourceCompany" />
+    <result column="prod_status" jdbcType="CHAR" property="prodStatus" />
+    <result column="prod_user_type" jdbcType="CHAR" property="prodUserType" />
+    <result column="prod_source" jdbcType="CHAR" property="prodSource" />
+    <result column="prod_luno" jdbcType="VARCHAR" property="prodLuno" />
+    <result column="prod_dcl_flag" jdbcType="CHAR" property="prodDclFlag" />
+    <result column="prod_plan_no" jdbcType="VARCHAR" property="prodPlanNo" />
+    <result column="prod_make_jz" jdbcType="CHAR" property="prodMakeJz" />
+    <result column="prod_ori_id" jdbcType="VARCHAR" property="prodOriId" />
+    <result column="prod_parent_no" jdbcType="VARCHAR" property="prodParentNo" />
+    <result column="prod_out_plan" jdbcType="VARCHAR" property="prodOutPlan" />
+    <result column="prod_sale_serno" jdbcType="VARCHAR" property="prodSaleSerno" />
+    <result column="prod_out_carno" jdbcType="VARCHAR" property="prodOutCarno" />
+    <result column="prod_out_date" jdbcType="TIMESTAMP" property="prodOutDate" />
+    <result column="prod_company" jdbcType="VARCHAR" property="prodCompany" />
+    <result column="prod_customer" jdbcType="VARCHAR" property="prodCustomer" />
+    <result column="prod_bc" jdbcType="CHAR" property="prodBc" />
+    <result column="prod_fhck" jdbcType="VARCHAR" property="prodFhck" />
+    <result column="prod_ruc" jdbcType="CHAR" property="prodRuc" />
+    <result column="prod_wccply" jdbcType="CHAR" property="prodWccply" />
+    <result column="prod_inputuser" jdbcType="VARCHAR" property="prodInputuser" />
+    <result column="prod_checkuser" jdbcType="VARCHAR" property="prodCheckuser" />
+    <result column="crt_date" jdbcType="TIMESTAMP" property="crtDate" />
+    <result column="upd_date" jdbcType="TIMESTAMP" property="updDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    prod_id, prod_name, prod_type, prod_norm, prod_material, prod_length, prod_level, 
+    prod_num, prod_record_weight, prod_rel_weight, prod_print_weight, prod_out_weight, 
+    prod_source_company, prod_status, prod_user_type, prod_source, prod_luno, prod_dcl_flag, 
+    prod_plan_no, prod_make_jz, prod_ori_id, prod_parent_no, prod_out_plan, prod_sale_serno, 
+    prod_out_carno, prod_out_date, prod_company, prod_customer, prod_bc, prod_fhck, prod_ruc, 
+    prod_wccply, prod_inputuser, prod_checkuser, crt_date, upd_date, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.bsl.pojo.BslProductInfoHExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslProductInfoHExample">
+    delete from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslProductInfoH">
+    insert into bsl_product_info_h (prod_id, prod_name, prod_type, 
+      prod_norm, prod_material, prod_length, 
+      prod_level, prod_num, prod_record_weight, 
+      prod_rel_weight, prod_print_weight, prod_out_weight, 
+      prod_source_company, prod_status, prod_user_type, 
+      prod_source, prod_luno, prod_dcl_flag, 
+      prod_plan_no, prod_make_jz, prod_ori_id, 
+      prod_parent_no, prod_out_plan, prod_sale_serno, 
+      prod_out_carno, prod_out_date, prod_company, 
+      prod_customer, prod_bc, prod_fhck, 
+      prod_ruc, prod_wccply, prod_inputuser, 
+      prod_checkuser, crt_date, upd_date, 
+      remark)
+    values (#{prodId,jdbcType=VARCHAR}, #{prodName,jdbcType=VARCHAR}, #{prodType,jdbcType=CHAR}, 
+      #{prodNorm,jdbcType=VARCHAR}, #{prodMaterial,jdbcType=CHAR}, #{prodLength,jdbcType=REAL}, 
+      #{prodLevel,jdbcType=CHAR}, #{prodNum,jdbcType=INTEGER}, #{prodRecordWeight,jdbcType=REAL}, 
+      #{prodRelWeight,jdbcType=REAL}, #{prodPrintWeight,jdbcType=REAL}, #{prodOutWeight,jdbcType=REAL}, 
+      #{prodSourceCompany,jdbcType=VARCHAR}, #{prodStatus,jdbcType=CHAR}, #{prodUserType,jdbcType=CHAR}, 
+      #{prodSource,jdbcType=CHAR}, #{prodLuno,jdbcType=VARCHAR}, #{prodDclFlag,jdbcType=CHAR}, 
+      #{prodPlanNo,jdbcType=VARCHAR}, #{prodMakeJz,jdbcType=CHAR}, #{prodOriId,jdbcType=VARCHAR}, 
+      #{prodParentNo,jdbcType=VARCHAR}, #{prodOutPlan,jdbcType=VARCHAR}, #{prodSaleSerno,jdbcType=VARCHAR}, 
+      #{prodOutCarno,jdbcType=VARCHAR}, #{prodOutDate,jdbcType=TIMESTAMP}, #{prodCompany,jdbcType=VARCHAR}, 
+      #{prodCustomer,jdbcType=VARCHAR}, #{prodBc,jdbcType=CHAR}, #{prodFhck,jdbcType=VARCHAR}, 
+      #{prodRuc,jdbcType=CHAR}, #{prodWccply,jdbcType=CHAR}, #{prodInputuser,jdbcType=VARCHAR}, 
+      #{prodCheckuser,jdbcType=VARCHAR}, #{crtDate,jdbcType=TIMESTAMP}, #{updDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslProductInfoH">
+    insert into bsl_product_info_h
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        prod_id,
+      </if>
+      <if test="prodName != null">
+        prod_name,
+      </if>
+      <if test="prodType != null">
+        prod_type,
+      </if>
+      <if test="prodNorm != null">
+        prod_norm,
+      </if>
+      <if test="prodMaterial != null">
+        prod_material,
+      </if>
+      <if test="prodLength != null">
+        prod_length,
+      </if>
+      <if test="prodLevel != null">
+        prod_level,
+      </if>
+      <if test="prodNum != null">
+        prod_num,
+      </if>
+      <if test="prodRecordWeight != null">
+        prod_record_weight,
+      </if>
+      <if test="prodRelWeight != null">
+        prod_rel_weight,
+      </if>
+      <if test="prodPrintWeight != null">
+        prod_print_weight,
+      </if>
+      <if test="prodOutWeight != null">
+        prod_out_weight,
+      </if>
+      <if test="prodSourceCompany != null">
+        prod_source_company,
+      </if>
+      <if test="prodStatus != null">
+        prod_status,
+      </if>
+      <if test="prodUserType != null">
+        prod_user_type,
+      </if>
+      <if test="prodSource != null">
+        prod_source,
+      </if>
+      <if test="prodLuno != null">
+        prod_luno,
+      </if>
+      <if test="prodDclFlag != null">
+        prod_dcl_flag,
+      </if>
+      <if test="prodPlanNo != null">
+        prod_plan_no,
+      </if>
+      <if test="prodMakeJz != null">
+        prod_make_jz,
+      </if>
+      <if test="prodOriId != null">
+        prod_ori_id,
+      </if>
+      <if test="prodParentNo != null">
+        prod_parent_no,
+      </if>
+      <if test="prodOutPlan != null">
+        prod_out_plan,
+      </if>
+      <if test="prodSaleSerno != null">
+        prod_sale_serno,
+      </if>
+      <if test="prodOutCarno != null">
+        prod_out_carno,
+      </if>
+      <if test="prodOutDate != null">
+        prod_out_date,
+      </if>
+      <if test="prodCompany != null">
+        prod_company,
+      </if>
+      <if test="prodCustomer != null">
+        prod_customer,
+      </if>
+      <if test="prodBc != null">
+        prod_bc,
+      </if>
+      <if test="prodFhck != null">
+        prod_fhck,
+      </if>
+      <if test="prodRuc != null">
+        prod_ruc,
+      </if>
+      <if test="prodWccply != null">
+        prod_wccply,
+      </if>
+      <if test="prodInputuser != null">
+        prod_inputuser,
+      </if>
+      <if test="prodCheckuser != null">
+        prod_checkuser,
+      </if>
+      <if test="crtDate != null">
+        crt_date,
+      </if>
+      <if test="updDate != null">
+        upd_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prodId != null">
+        #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodName != null">
+        #{prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="prodType != null">
+        #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null">
+        #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMaterial != null">
+        #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodLength != null">
+        #{prodLength,jdbcType=REAL},
+      </if>
+      <if test="prodLevel != null">
+        #{prodLevel,jdbcType=CHAR},
+      </if>
+      <if test="prodNum != null">
+        #{prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodRecordWeight != null">
+        #{prodRecordWeight,jdbcType=REAL},
+      </if>
+      <if test="prodRelWeight != null">
+        #{prodRelWeight,jdbcType=REAL},
+      </if>
+      <if test="prodPrintWeight != null">
+        #{prodPrintWeight,jdbcType=REAL},
+      </if>
+      <if test="prodOutWeight != null">
+        #{prodOutWeight,jdbcType=REAL},
+      </if>
+      <if test="prodSourceCompany != null">
+        #{prodSourceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="prodStatus != null">
+        #{prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="prodUserType != null">
+        #{prodUserType,jdbcType=CHAR},
+      </if>
+      <if test="prodSource != null">
+        #{prodSource,jdbcType=CHAR},
+      </if>
+      <if test="prodLuno != null">
+        #{prodLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodDclFlag != null">
+        #{prodDclFlag,jdbcType=CHAR},
+      </if>
+      <if test="prodPlanNo != null">
+        #{prodPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMakeJz != null">
+        #{prodMakeJz,jdbcType=CHAR},
+      </if>
+      <if test="prodOriId != null">
+        #{prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodParentNo != null">
+        #{prodParentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutPlan != null">
+        #{prodOutPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="prodSaleSerno != null">
+        #{prodSaleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutCarno != null">
+        #{prodOutCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodOutDate != null">
+        #{prodOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prodCompany != null">
+        #{prodCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCustomer != null">
+        #{prodCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="prodBc != null">
+        #{prodBc,jdbcType=CHAR},
+      </if>
+      <if test="prodFhck != null">
+        #{prodFhck,jdbcType=VARCHAR},
+      </if>
+      <if test="prodRuc != null">
+        #{prodRuc,jdbcType=CHAR},
+      </if>
+      <if test="prodWccply != null">
+        #{prodWccply,jdbcType=CHAR},
+      </if>
+      <if test="prodInputuser != null">
+        #{prodInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="prodCheckuser != null">
+        #{prodCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null">
+        #{crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updDate != null">
+        #{updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslProductInfoHExample" resultType="java.lang.Integer">
+    select count(*) from bsl_product_info_h
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bsl_product_info_h
+    <set>
+      <if test="record.prodId != null">
+        prod_id = #{record.prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodName != null">
+        prod_name = #{record.prodName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodType != null">
+        prod_type = #{record.prodType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNorm != null">
+        prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodMaterial != null">
+        prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="record.prodLength != null">
+        prod_length = #{record.prodLength,jdbcType=REAL},
+      </if>
+      <if test="record.prodLevel != null">
+        prod_level = #{record.prodLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNum != null">
+        prod_num = #{record.prodNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodRecordWeight != null">
+        prod_record_weight = #{record.prodRecordWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodRelWeight != null">
+        prod_rel_weight = #{record.prodRelWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodPrintWeight != null">
+        prod_print_weight = #{record.prodPrintWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodOutWeight != null">
+        prod_out_weight = #{record.prodOutWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodSourceCompany != null">
+        prod_source_company = #{record.prodSourceCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodStatus != null">
+        prod_status = #{record.prodStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.prodUserType != null">
+        prod_user_type = #{record.prodUserType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodSource != null">
+        prod_source = #{record.prodSource,jdbcType=CHAR},
+      </if>
+      <if test="record.prodLuno != null">
+        prod_luno = #{record.prodLuno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodDclFlag != null">
+        prod_dcl_flag = #{record.prodDclFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.prodPlanNo != null">
+        prod_plan_no = #{record.prodPlanNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodMakeJz != null">
+        prod_make_jz = #{record.prodMakeJz,jdbcType=CHAR},
+      </if>
+      <if test="record.prodOriId != null">
+        prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodParentNo != null">
+        prod_parent_no = #{record.prodParentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutPlan != null">
+        prod_out_plan = #{record.prodOutPlan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodSaleSerno != null">
+        prod_sale_serno = #{record.prodSaleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutCarno != null">
+        prod_out_carno = #{record.prodOutCarno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodOutDate != null">
+        prod_out_date = #{record.prodOutDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prodCompany != null">
+        prod_company = #{record.prodCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCustomer != null">
+        prod_customer = #{record.prodCustomer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodBc != null">
+        prod_bc = #{record.prodBc,jdbcType=CHAR},
+      </if>
+      <if test="record.prodFhck != null">
+        prod_fhck = #{record.prodFhck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodRuc != null">
+        prod_ruc = #{record.prodRuc,jdbcType=CHAR},
+      </if>
+      <if test="record.prodWccply != null">
+        prod_wccply = #{record.prodWccply,jdbcType=CHAR},
+      </if>
+      <if test="record.prodInputuser != null">
+        prod_inputuser = #{record.prodInputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodCheckuser != null">
+        prod_checkuser = #{record.prodCheckuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null">
+        crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updDate != null">
+        upd_date = #{record.updDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bsl_product_info_h
+    set prod_id = #{record.prodId,jdbcType=VARCHAR},
+      prod_name = #{record.prodName,jdbcType=VARCHAR},
+      prod_type = #{record.prodType,jdbcType=CHAR},
+      prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      prod_length = #{record.prodLength,jdbcType=REAL},
+      prod_level = #{record.prodLevel,jdbcType=CHAR},
+      prod_num = #{record.prodNum,jdbcType=INTEGER},
+      prod_record_weight = #{record.prodRecordWeight,jdbcType=REAL},
+      prod_rel_weight = #{record.prodRelWeight,jdbcType=REAL},
+      prod_print_weight = #{record.prodPrintWeight,jdbcType=REAL},
+      prod_out_weight = #{record.prodOutWeight,jdbcType=REAL},
+      prod_source_company = #{record.prodSourceCompany,jdbcType=VARCHAR},
+      prod_status = #{record.prodStatus,jdbcType=CHAR},
+      prod_user_type = #{record.prodUserType,jdbcType=CHAR},
+      prod_source = #{record.prodSource,jdbcType=CHAR},
+      prod_luno = #{record.prodLuno,jdbcType=VARCHAR},
+      prod_dcl_flag = #{record.prodDclFlag,jdbcType=CHAR},
+      prod_plan_no = #{record.prodPlanNo,jdbcType=VARCHAR},
+      prod_make_jz = #{record.prodMakeJz,jdbcType=CHAR},
+      prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      prod_parent_no = #{record.prodParentNo,jdbcType=VARCHAR},
+      prod_out_plan = #{record.prodOutPlan,jdbcType=VARCHAR},
+      prod_sale_serno = #{record.prodSaleSerno,jdbcType=VARCHAR},
+      prod_out_carno = #{record.prodOutCarno,jdbcType=VARCHAR},
+      prod_out_date = #{record.prodOutDate,jdbcType=TIMESTAMP},
+      prod_company = #{record.prodCompany,jdbcType=VARCHAR},
+      prod_customer = #{record.prodCustomer,jdbcType=VARCHAR},
+      prod_bc = #{record.prodBc,jdbcType=CHAR},
+      prod_fhck = #{record.prodFhck,jdbcType=VARCHAR},
+      prod_ruc = #{record.prodRuc,jdbcType=CHAR},
+      prod_wccply = #{record.prodWccply,jdbcType=CHAR},
+      prod_inputuser = #{record.prodInputuser,jdbcType=VARCHAR},
+      prod_checkuser = #{record.prodCheckuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=TIMESTAMP},
+      upd_date = #{record.updDate,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

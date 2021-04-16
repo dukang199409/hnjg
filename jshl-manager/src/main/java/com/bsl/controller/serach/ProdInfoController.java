@@ -54,6 +54,26 @@ public class ProdInfoController {
 	}
 	
 	/**
+	 * 根据条件查询历史产品信息
+	 * @param 
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("/listH")
+	@ResponseBody
+	public BSLResult getProdInfoHList(QueryCriteria queryCriteria){
+		BSLResult result = null;
+		if(StringUtils.isBlank(queryCriteria.getPage())) {
+			result =  BSLResult.build(400, "页码不能为空");
+		}else if(StringUtils.isBlank(queryCriteria.getRows())) {
+			result =  BSLResult.build(400, "每页记录数不能为空");
+		}else{
+			result =prodInfoSerachService.getProdInfoHList(queryCriteria);
+		}
+		return result;
+	}
+	
+	/**
 	 * 查询信息
 	 * @param page
 	 * @param rows

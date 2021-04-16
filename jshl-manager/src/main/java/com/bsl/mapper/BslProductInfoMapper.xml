@@ -1193,4 +1193,19 @@
 		    </if>
   </select>
   
+   <update id="insertHistoryProductInfo" parameterType="java.lang.String" >
+   		insert into bsl_product_info_h 
+   		select * from bsl_product_info t 
+   		where t.upd_date is true 
+   		and #{dateString,jdbcType=VARCHAR} >= DATE_FORMAT(t.upd_date,'%Y%m%d') 
+   		and  t.prod_status in ('3','4','6')
+   </update>
+   
+   <update id="deleteHistoryProductInfo" parameterType="java.lang.String" >
+   		delete from bsl_product_info 
+   		where upd_date is true 
+   		and #{dateString,jdbcType=VARCHAR} >= DATE_FORMAT(upd_date,'%Y%m%d')
+   		and  prod_status in ('3','4','6')
+   </update>
+  
 </mapper>

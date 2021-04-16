@@ -257,6 +257,9 @@ public class ProdController {
 		if(bslProductInfo.getProdNum() == null || bslProductInfo.getProdNum() == 0){
 			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "产品件数不能为空");
 		}
+		if(StringUtils.isBlank(bslProductInfo.getProdMakeJz())){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "生产机组不能为空");
+		}
 		try {
 			return prodService.addProdFromDclinfo(bslProductInfo,sumNumInt);
 		} catch (Exception e) {

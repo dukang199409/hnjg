@@ -6,7 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <groupId>com.jshl</groupId>
-  <artifactId>jshl-manager</artifactId>
+  <artifactId>ROOT</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <dependencies>

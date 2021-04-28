@@ -499,7 +499,7 @@ public class RawServiceImpl implements RawService {
 			throw new BSLException(ErrorCodeInfo.错误类型_查询无记录,"删除失败");
 		}
 		//删除之后修改原通知单状态
-		receiptService.updateBsInfoStatus(oldBslProductInfo.getProdPlanNo());
+		//receiptService.updateBsInfoStatus(oldBslProductInfo.getProdPlanNo());
 		//记录删除信息
 		BslStockChangeDetail bslStockChangeDetailRaw = new BslStockChangeDetail();
 		bslStockChangeDetailRaw.setTransSerno(createStockChangeId());//流水

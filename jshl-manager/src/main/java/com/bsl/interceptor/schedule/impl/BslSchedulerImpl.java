@@ -92,7 +92,7 @@ public class BslSchedulerImpl implements BslSchedulerService{
          //删除一年之前的库存日照
          deleteProductPhoto();
          //将一年前的已分剪、已发货、处理完成的数据历史化
-         insertHistoryProductInfo();
+         //insertHistoryProductInfo();
     }
     
     /**

@@ -128,7 +128,7 @@
 	        	<th data-options="field:'prodOrirawid',width:100,sortable:true">来源钢卷号</th>
 	            <th data-options="field:'prodRelWeight',width:105,sortable:true">复磅重量/吨</th>
 	            <th data-options="field:'prodPrintWeight',width:105,sortable:true">入库重量/吨</th>
-	            <th data-options="field:'prodNum',width:125,sortable:true">件数</th>
+	            <th data-options="field:'prodNum',width:125,sortable:true">单包支数</th>
 	        	<th data-options="field:'prodOutPlan',width:100,sortable:true">出库指令号</th>
 	        	<th data-options="field:'prodLength',width:80,sortable:true">定尺/米</th>
 	            <th data-options="field:'prodLevel',width:110,formatter:BSL.formatProdLevel,sortable:true">质量等级</th>

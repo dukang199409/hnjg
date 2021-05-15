@@ -84,7 +84,7 @@
 	        	<td width="210" align="right">
 	            	<input name="sumNum" id="sumNumM3101" class="easyui-numberbox" type="text" data-options="required:true,min:1,precision:0,validType:'length[0,10]'" value="1" style="width:200px;"></input>
 	            </td>
-	            <td width="120" align="right">单包件数:</td>
+	            <td width="120" align="right">单包支数:</td>
 	        	<td width="210" align="right">
 	            	<input name="prodNum" id="prodNumM3101" class="easyui-numberbox" type="text" data-options="required:true,min:1,precision:0,validType:'length[0,10]'" value="1" style="width:200px;"></input>
 	            </td>

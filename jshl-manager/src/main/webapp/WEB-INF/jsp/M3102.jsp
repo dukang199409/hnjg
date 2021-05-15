@@ -117,7 +117,7 @@
 	        	<th data-options="field:'prodLuno',width:120,sortable:true">炉(批)号</th>
 	        	<th data-options="field:'prodOrirawid',width:100,sortable:true">来源钢卷号</th>
 	            <th data-options="field:'prodRelWeight',width:105,sortable:true">重量/吨</th>
-	            <th data-options="field:'prodNum',width:125,sortable:true">件数</th>
+	            <th data-options="field:'prodNum',width:125,sortable:true">单包支数</th>
 	        	<th data-options="field:'prodLength',width:80,sortable:true">定尺/米</th>
 	        	<th data-options="field:'prodFhck',width:120,sortable:true">接收通知单号</th>
 	            <th data-options="field:'prodLevel',width:110,formatter:BSL.formatProdLevel,sortable:true">质量等级</th>

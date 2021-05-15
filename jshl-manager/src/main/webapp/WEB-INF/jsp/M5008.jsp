@@ -46,7 +46,7 @@
 		            <td width="210" align="right">
 		            	<input name="prodLength" id="prodLengthM5008" class="easyui-numberbox" type="text" data-options="required:false,min:0,precision:3,validType:'length[0,10]'" style="width:200px;"></input>
 		            </td>
-		            <td width="120" align="right">产品件数:</td>
+		            <td width="120" align="right">单包支数:</td>
 		            <td width="210" align="right">
 		            	<input name="prodNum" id="prodNumM5008" class="easyui-numberbox" type="text" data-options="required:true,min:0,precision:0,validType:'length[0,10]'" value="1" style="width:200px;"></input>
 		            </td> 

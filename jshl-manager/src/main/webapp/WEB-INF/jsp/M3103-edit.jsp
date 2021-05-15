@@ -34,7 +34,7 @@
 	            </td>      
 	        </tr>
 	        <tr> 
-	           <td width="120" align="right">单包件数:</td>
+	           <td width="120" align="right">单包支数:</td>
 	            <td width="210" align="right">
 	            	<input name="prodNum" class="easyui-numberbox" type="text" data-options="required:true,min:0,precision:0,validType:'length[0,10]'" style="width:200px;"></input>
 	            </td>

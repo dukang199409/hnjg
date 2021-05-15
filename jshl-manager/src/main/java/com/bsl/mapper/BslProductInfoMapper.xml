@@ -803,7 +803,7 @@
     <result column="prod_ruc" property="prodRuc" jdbcType="VARCHAR" />
     <result column="prod_out_plan" property="prodOutPlan" jdbcType="VARCHAR" />
     <result column="prod_sale_serno" property="prodSaleSerno" jdbcType="VARCHAR" />
-    <result column="upd_date" property="outDate" jdbcType="TIMESTAMP" />
+    <result column="prod_out_date" property="outDate" jdbcType="TIMESTAMP" />
     <result column="prod_dcl_flag" property="prodDclFlag" jdbcType="VARCHAR" />
     <result column="bs_gettype" property="bsGettype" jdbcType="VARCHAR" />
     <result column="prod_name" property="prodName" jdbcType="VARCHAR" />
@@ -834,7 +834,7 @@
 		p.prod_ruc,
 		p.prod_out_plan,
 		p.prod_sale_serno,
-		p.upd_date,	
+		p.prod_out_date,	
 		p.prod_name,
 		p.prod_norm,
 		p.prod_dcl_flag,
@@ -901,14 +901,14 @@
         and p.prod_length = #{prodLengthF,jdbcType=REAL} 
     </if>
      <if test="dateStart != null" >
-      and DATE_FORMAT(p.upd_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
+      and DATE_FORMAT(p.prod_out_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
     </if>
      <if test="dateEnd != null" >
-      and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(p.upd_date,'%Y-%m-%d')
+      and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(p.prod_out_date,'%Y-%m-%d')
     </if>
 	group by b.bs_customer,b.bs_order_no,b.bs_inputuser,b.bs_flag,e.bs_gettype,p.prod_out_carno,p.prod_ruc,p.prod_out_plan,p.prod_sale_serno,
-	p.upd_date,p.prod_name,p.prod_dcl_flag,p.prod_norm,p.prod_material,p.prod_length,b.sale_price
-	order by p.prod_out_carno desc,p.prod_out_plan desc,p.upd_date desc
+	p.prod_out_date,p.prod_name,p.prod_dcl_flag,p.prod_norm,p.prod_material,p.prod_length,b.sale_price
+	order by p.prod_out_carno desc,p.prod_out_plan desc,p.prod_out_date desc
   </select>
   
    <resultMap id="ProdQualityResultMap" type="com.bsl.reportbean.BslProductQualityInfo" >

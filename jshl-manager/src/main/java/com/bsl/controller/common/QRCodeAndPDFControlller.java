@@ -149,7 +149,7 @@ public class QRCodeAndPDFControlller {
 			paramMap.put("prod_plan_no", StringUtil.castToString(productInfo.getProdPlanNo()));//生产批号 
 			paramMap.put("prod_level", jedisClient.get("prodLevel:"+productInfo.getProdLevel()));
 			paramMap.put("prod_source_company", "湖南巨工机械制造有限公司");// 制造厂商
-			paramMap.put("telphone", "13918249223");// 电话
+			paramMap.put("telphone", "13907481234");// 电话
 			paramMap.put("crtDate", DateUtil.getFormatText(productInfo.getCrtDate(), "yyyy-MM-dd HH:mm"));// DateUtil.getFormatText(productInfo.getCrtDate(),"yyyy/MM/dd")
 			paramMap.put("prod_check_user", StringUtil.castToString(productInfo.getProdCheckuser()));
 			paramMap.put("prod_num", StringUtil.castToString(productInfo.getProdNum()));
@@ -198,7 +198,7 @@ public class QRCodeAndPDFControlller {
 			paramMap.put("prod_plan_no", StringUtil.castToString(productInfo.getProdPlanNo()));//生产批号 
 			paramMap.put("prod_level", jedisClient.get("prodLevel:"+productInfo.getProdLevel()));
 			paramMap.put("prod_source_company", "湖南巨工机械制造有限公司");// 制造厂商
-			paramMap.put("telphone", "13918249223");// 电话
+			paramMap.put("telphone", "13907481234");// 电话
 			paramMap.put("crtDate", DateUtil.getFormatText(productInfo.getCrtDate(), "yyyy-MM-dd HH:mm"));// DateUtil.getFormatText(productInfo.getCrtDate(),"yyyy/MM/dd")
 			paramMap.put("prod_check_user", StringUtil.castToString(productInfo.getProdCheckuser()));
 			BslMakePlanInfo prodPlanInfo = prodPlanService.getProdPlanInfo(productInfo.getProdPlanNo());

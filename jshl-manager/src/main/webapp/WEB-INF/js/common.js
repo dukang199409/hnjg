@@ -239,9 +239,9 @@ var TT = BSL = {
         } else if(val == '2'){
         	return '纵剪2组';
         } else if(val == '3'){
-        	return '800机组A';
+        	return '1号线';
         } else if(val == '4'){
-        	return '800机组B';
+        	return '2号线';
         } else {
         	return val;
         }
@@ -326,13 +326,13 @@ var TT = BSL = {
         } else if(val == '1'){
         	return '半成品仓库';
         } else if(val == '2'){
-        	return '800机组A-仓库';
+        	return '1号线-仓库';
         } else if(val == '3'){
-        	return '880机组B-仓库';
+        	return '2号线-仓库';
         } else if(val == '4'){
-        	return '800机组A-待处理仓';
+        	return '1号线-待处理仓';
         } else if(val == '5'){
-        	return '800机组B-待处理仓';
+        	return '2号线-待处理仓';
         } else if(val == '6'){
         	return '委外仓';
         } else {
@@ -364,13 +364,13 @@ var TT = BSL = {
         } else if(val == '1'){
         	return '纵剪2班';
         } else if(val == '2'){
-        	return '800生产A-1班';
+        	return '1号线-1班';
         } else if(val == '3'){
-        	return '800生产A-2班';
+        	return '1号线-2班';
         } else if(val == '4'){
-        	return '800生产B-1班';
+        	return '2号线-1班';
         } else if(val == '5'){
-        	return '800生产B-2班';
+        	return '2号线-2班';
         } else if(val == '6'){
         	return '外协厂';
         } else {
@@ -692,9 +692,9 @@ var TT = BSL = {
         if (val == '0'){
             return '纵剪机组';
         } else if(val == '1'){
-        	return '800机组A';
+        	return '1号线';
         } else if(val == '2'){
-        	return '800机组B';
+        	return '2号线';
         } else {
         	return val;
         }

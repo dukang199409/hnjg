@@ -78,7 +78,70 @@ public class QueryCriteria {
 	private String paramId;
 	private String paramName;
 	private String prodOrirawid;
+	private String prodNum1;
+	private String prodNum2;
+	private String prodNum3;
+	private String prodNum4;
+	private String prodRelWeight1;
+	private String prodRelWeight2;
+	private String prodRelWeight3;
+	private String prodRelWeight4;
+	private String prodInputuser;
 	
+	public String getProdInputuser() {
+		return prodInputuser;
+	}
+	public void setProdInputuser(String prodInputuser) {
+		this.prodInputuser = prodInputuser;
+	}
+	public String getProdNum1() {
+		return prodNum1;
+	}
+	public void setProdNum1(String prodNum1) {
+		this.prodNum1 = prodNum1;
+	}
+	public String getProdNum2() {
+		return prodNum2;
+	}
+	public void setProdNum2(String prodNum2) {
+		this.prodNum2 = prodNum2;
+	}
+	public String getProdNum3() {
+		return prodNum3;
+	}
+	public void setProdNum3(String prodNum3) {
+		this.prodNum3 = prodNum3;
+	}
+	public String getProdNum4() {
+		return prodNum4;
+	}
+	public void setProdNum4(String prodNum4) {
+		this.prodNum4 = prodNum4;
+	}
+	public String getProdRelWeight1() {
+		return prodRelWeight1;
+	}
+	public void setProdRelWeight1(String prodRelWeight1) {
+		this.prodRelWeight1 = prodRelWeight1;
+	}
+	public String getProdRelWeight2() {
+		return prodRelWeight2;
+	}
+	public void setProdRelWeight2(String prodRelWeight2) {
+		this.prodRelWeight2 = prodRelWeight2;
+	}
+	public String getProdRelWeight3() {
+		return prodRelWeight3;
+	}
+	public void setProdRelWeight3(String prodRelWeight3) {
+		this.prodRelWeight3 = prodRelWeight3;
+	}
+	public String getProdRelWeight4() {
+		return prodRelWeight4;
+	}
+	public void setProdRelWeight4(String prodRelWeight4) {
+		this.prodRelWeight4 = prodRelWeight4;
+	}
 	public String getProdOrirawid() {
 		return prodOrirawid;
 	}

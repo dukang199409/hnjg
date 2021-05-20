@@ -162,6 +162,8 @@
 	</div>
 	<div id="prodEditWindow" class="easyui-window" title="编辑产品信息" data-options="modal:true,closed:true,iconCls:'receipt-edit',href:'/prodManager/M3005-edit'" style="width:780px;height:370px;padding:10px;">
 	</div>
+	<div id="prodCutWindow" class="easyui-window" title="拆分产品信息" data-options="modal:true,closed:true,iconCls:'receipt-edit',href:'/prodManager/M3005-cut'" style="width:780px;height:300px;padding:10px;">
+	</div>
 	<div id="prodAddWindowB" class="easyui-window" title="产品补录入库" data-options="modal:true,closed:true,iconCls:'edit_add',href:'/prodManager/M3005-addb'" style="width:780px;height:400px;padding:10px;">
 	</div>
 </div>
@@ -286,6 +288,31 @@
         		onLoad :function(){
         			//回显数据
         			$("#prodInfoEditForm").form("load",data);
+        		}
+        	}).window("open");
+        }
+    },{
+        text:'拆分',
+        iconCls:'icon-edit',
+        handler:function(){
+        	var ids = getM3005SelectionsIds();
+        	if(ids.length == 0){
+        		$.messager.alert('提示','必须选择一条记录拆分!');
+        		return ;
+        	}
+        	if(ids.indexOf(',') > 0){
+        		$.messager.alert('提示','只能选择一条记录拆分!');
+        		return ;
+        	}
+        	var data = $("#prodInfoList").datagrid("getSelections")[0];
+        	if(data.prodStatus != "1"){
+        		$.messager.alert('提示','只有入库的产品才能拆分!');
+        		return ;
+        	} 
+        	$("#prodCutWindow").window({
+        		onLoad :function(){
+        			//回显数据
+        			$("#prodInfoCutForm").form("load",data);
         		}
         	}).window("open");
         }

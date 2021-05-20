@@ -57,4 +57,7 @@ public interface ProdService {
 	BSLResult updateProdWxInfo(BslProductInfo bslProductInfo);
 	//已入库产品信息删除
 	BSLResult deleteWxProd(String prodId,String user);
+	
+	//已入库产品信息拆分
+	BSLResult updateProdInfoCut(QueryCriteria queryCriteria);
 }

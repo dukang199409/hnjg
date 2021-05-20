@@ -1086,4 +1086,127 @@ public class ProdServiceImpl implements ProdService {
 		return BSLResult.ok(prodId);
 	}
 
+	/**
+	 * 入库产品拆分
+	 */
+	@Override
+	public BSLResult updateProdInfoCut(QueryCriteria queryCriteria) {
+		String prodId = queryCriteria.getProdId();
+		if(StringUtils.isBlank(prodId)){
+			throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "产品编号不能为空！");
+		}
+		//获取原产品信息进行校验
+		BslProductInfo oldBslProductInfo = bslProductInfoMapper.selectByPrimaryKey(prodId);
+		if(oldBslProductInfo == null){
+			throw new BSLException(ErrorCodeInfo.错误类型_查询无记录, "根据产品编号查询记录为空！");
+		}
+		//校验产品状态是在库
+		if(!DictItemOperation.产品状态_已入库.equals(oldBslProductInfo.getProdStatus())){
+			throw new BSLException(ErrorCodeInfo.错误类型_状态校验错误, "只有在库产品允许拆分！");
+		}
+		//开始拆分
+		if(queryCriteria.getProdNum1() == null || Integer.valueOf(queryCriteria.getProdNum1()) == 0){
+			throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包1支数不能为空");
+		}
+		if(queryCriteria.getProdNum2() == null || Integer.valueOf(queryCriteria.getProdNum2()) == 0){
+			throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包2支数不能为空");
+		}
+		if(queryCriteria.getProdRelWeight1() == null || Float.valueOf(queryCriteria.getProdRelWeight1()) == 0){
+			throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包1重量不能为空");
+		}
+		if(queryCriteria.getProdRelWeight2() == null || Float.valueOf(queryCriteria.getProdRelWeight2()) == 0){
+			throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包2重量不能为空");
+		}
+		int prodNum1 = Integer.valueOf(queryCriteria.getProdNum1());//支数1
+		Float prodWeight1 = Float.valueOf(queryCriteria.getProdRelWeight1());//重量1
+		
+		int prodNum2 = Integer.valueOf(queryCriteria.getProdNum2());//支数2
+		Float prodWeight2 = Float.valueOf(queryCriteria.getProdRelWeight2());//重量2
+		
+		int prodNum3 = 0;
+		Float prodWeight3 = 0f;
+		
+		int prodNum4 = 0;
+		Float prodWeight4 = 0f;
+		
+		if(!StringUtils.isBlank(queryCriteria.getProdNum3()) && Integer.valueOf(queryCriteria.getProdNum3()) != 0){
+			prodNum3 = Integer.valueOf(queryCriteria.getProdNum3());
+			if(StringUtils.isBlank(queryCriteria.getProdRelWeight3()) || Float.valueOf(queryCriteria.getProdRelWeight3()) == 0){
+				throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包3有支数时重量不能为空");
+			}else{
+				prodWeight3 = Float.valueOf(queryCriteria.getProdRelWeight3());
+			}
+		}
+		
+		if(!StringUtils.isBlank(queryCriteria.getProdNum4()) && Integer.valueOf(queryCriteria.getProdNum4()) != 0){
+			prodNum4 = Integer.valueOf(queryCriteria.getProdNum4());
+			if(StringUtils.isBlank(queryCriteria.getProdRelWeight4()) || Float.valueOf(queryCriteria.getProdRelWeight4()) == 0){
+				throw new BSLException(ErrorCodeInfo.错误类型_参数为空, "包4有支数时重量不能为空");
+			}else{
+				prodWeight4 = Float.valueOf(queryCriteria.getProdRelWeight3());
+			}
+		}
+		
+		//校验总支数、总重量
+		if(oldBslProductInfo.getProdNum() != (prodNum1+prodNum2+prodNum3+prodNum4)){
+			throw new BSLException(ErrorCodeInfo.错误类型_状态校验错误, "拆分后总支数应等于原产品支数");
+		}
+		if(oldBslProductInfo.getProdRelWeight() < (prodWeight1+prodWeight2+prodWeight3+prodWeight4)){
+			throw new BSLException(ErrorCodeInfo.错误类型_状态校验错误, "拆分后总重量不能大于原产品重量");
+		}
+		
+		//开始拆分
+		oldBslProductInfo.setCrtDate(new Date());
+		oldBslProductInfo.setProdInputuser(queryCriteria.getProdInputuser());
+		//第一包入库
+		oldBslProductInfo.setProdId(prodId+"-1");
+		oldBslProductInfo.setProdRelWeight(prodWeight1);
+		oldBslProductInfo.setProdPrintWeight(prodWeight1);
+		oldBslProductInfo.setProdNum(prodNum1);
+		bslProductInfoMapper.insert(oldBslProductInfo);
+		//第二包入库
+		oldBslProductInfo.setProdId(prodId+"-2");
+		oldBslProductInfo.setProdRelWeight(prodWeight2);
+		oldBslProductInfo.setProdPrintWeight(prodWeight2);
+		oldBslProductInfo.setProdNum(prodNum2);
+		bslProductInfoMapper.insert(oldBslProductInfo);
+		//第三包入库
+		if(prodNum3 > 0){
+			oldBslProductInfo.setProdId(prodId+"-3");
+			oldBslProductInfo.setProdRelWeight(prodWeight3);
+			oldBslProductInfo.setProdPrintWeight(prodWeight3);
+			oldBslProductInfo.setProdNum(prodNum3);
+			bslProductInfoMapper.insert(oldBslProductInfo);
+		}
+		//第四包入库
+		if(prodNum4 > 0){
+			oldBslProductInfo.setProdId(prodId+"-4");
+			oldBslProductInfo.setProdRelWeight(prodWeight4);
+			oldBslProductInfo.setProdPrintWeight(prodWeight4);
+			oldBslProductInfo.setProdNum(prodNum4);
+			bslProductInfoMapper.insert(oldBslProductInfo);
+		}
+		//删除原产品
+		bslProductInfoMapper.deleteByPrimaryKey(prodId);
+		
+		//记录删除信息
+		BslStockChangeDetail bslStockChangeDetailRaw = new BslStockChangeDetail();
+		bslStockChangeDetailRaw.setTransSerno(createStockChangeId());//流水
+		bslStockChangeDetailRaw.setProdId(prodId);//产品编号
+		bslStockChangeDetailRaw.setTransCode(DictItemOperation.库存变动交易码_删除);//交易码
+		bslStockChangeDetailRaw.setProdType(DictItemOperation.产品类型_成品);//产品类型
+		bslStockChangeDetailRaw.setRubbishWeight(oldBslProductInfo.getProdRelWeight());//重量
+		bslStockChangeDetailRaw.setInputuser(queryCriteria.getProdInputuser());//录入人
+		bslStockChangeDetailRaw.setRemark("拆分删除");
+		bslStockChangeDetailRaw.setCrtDate(new Date());
+		int resultStockRaw = bslStockChangeDetailMapper.insert(bslStockChangeDetailRaw);
+		if(resultStockRaw<0){
+			throw new BSLException(ErrorCodeInfo.错误类型_数据库错误,"sql执行异常！");
+		}else if(resultStockRaw==0){
+			throw new BSLException(ErrorCodeInfo.错误类型_查询无记录,"新增库存变动表失败");
+		}
+		
+		return BSLResult.ok(prodId+"-1");
+	}
+
 }

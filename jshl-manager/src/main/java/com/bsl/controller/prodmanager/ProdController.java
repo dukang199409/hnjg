@@ -227,6 +227,38 @@ public class ProdController {
 	}
 	
 	/**
+	 * 拆分入库
+	 * @param 
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("/cut")
+	@ResponseBody
+	public BSLResult cutProdinfo(QueryCriteria queryCriteria){
+		if(StringUtils.isBlank(queryCriteria.getProdId())){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "产品生产指令不能为空");
+		}
+		if(queryCriteria.getProdNum1() == null || Integer.valueOf(queryCriteria.getProdNum1()) == 0){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "包1支数不能为空");
+		}
+		if(queryCriteria.getProdNum2() == null || Integer.valueOf(queryCriteria.getProdNum2()) == 0){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "包2支数不能为空");
+		}
+		if(queryCriteria.getProdRelWeight1() == null || Float.valueOf(queryCriteria.getProdRelWeight1()) == 0){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "包1重量不能为空");
+		}
+		if(queryCriteria.getProdRelWeight2() == null || Float.valueOf(queryCriteria.getProdRelWeight2()) == 0){
+			return BSLResult.build(ErrorCodeInfo.错误类型_参数为空, "包2重量不能为空");
+		}
+		try {
+			return prodService.updateProdInfoCut(queryCriteria);
+		} catch (Exception e) {
+			DictItemOperation.log.info("===========异常:"+e.getMessage());
+			return BSLResult.build(ErrorCodeInfo.错误类型_交易异常,e.getMessage());
+		}
+	}
+	
+	/**
 	 * 待处理品处理入库
 	 * @param 
 	 * @param 

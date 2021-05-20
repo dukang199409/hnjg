@@ -14,6 +14,7 @@ import com.bsl.dao.JedisClient;
 import com.bsl.mapper.BslLuStockInfoMapper;
 import com.bsl.mapper.BslProductInfoMapper;
 import com.bsl.mapper.BslProductPhotoInfoMapper;
+import com.bsl.mapper.BslStockChangeDetailHMapper;
 import com.bsl.mapper.BslStockChangePhotoMapper;
 import com.bsl.pojo.BslLuStockInfo;
 import com.bsl.pojo.BslProductInfo;
@@ -74,9 +75,11 @@ public class BslSchedulerImpl implements BslSchedulerService{
 	BslLuStockInfoMapper bslLuStockInfoMapper;
 	@Autowired	 
 	BslStockChangePhotoMapper bslStockChangePhotoMapper;
+	@Autowired	 
+	BslStockChangeDetailHMapper bslStockChangeDetailHMapper;
 	
 	
-    @Scheduled(cron="0 50 23 * * ? ")   //每天晚上11点55跑批
+    @Scheduled(cron="0 40 23 * * ? ")   //每天晚上11点55跑批
     @Override
     public void addBslScheduler(){
     	 DictItemOperation.log.info("===========批量开始："+new Date());
@@ -93,6 +96,8 @@ public class BslSchedulerImpl implements BslSchedulerService{
          deleteProductPhoto();
          //将一年前的已分剪、已发货、处理完成的数据历史化
          //insertHistoryProductInfo();
+         //将一年前的库存变动数据历史化
+         insertHistoryStockChangeInfo();
     }
     
     /**
@@ -221,7 +226,7 @@ public class BslSchedulerImpl implements BslSchedulerService{
      * 将一年前的已分剪、已发货、处理完成的数据历史化
      */
     public void insertHistoryProductInfo(){
-		 DictItemOperation.log.info("===========历史化一年前的历史数据开始");
+		 DictItemOperation.log.info("===========历史化一年前的产品数据开始");
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		 
 		 Calendar c = Calendar.getInstance();
@@ -232,12 +237,35 @@ public class BslSchedulerImpl implements BslSchedulerService{
 		 
 		 int insertHistoryProductInfo = bslProductInfoMapper.insertHistoryProductInfo(dateStr);
 		 if(insertHistoryProductInfo > 0){
-			 DictItemOperation.log.info("===========删除一年前的历史数据开始");
+			 DictItemOperation.log.info("===========删除一年前的产品数据开始");
 			 bslProductInfoMapper.deleteHistoryProductInfo(dateStr);
 		 }
 		 
-		 DictItemOperation.log.info("===========历史化一年前的历史数据结束");
+		 DictItemOperation.log.info("===========历史化一年前的产品数据结束");
     }
+    
+    /**
+     * 将一年前的库存变动数据数据历史化
+     */
+    public void insertHistoryStockChangeInfo(){
+		 DictItemOperation.log.info("===========历史化一年前的库存变动数据开始");
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		 
+		 Calendar c = Calendar.getInstance();
+		 c.setTime(new Date());
+		 c.add(Calendar.YEAR, -1);
+		 Date y = c.getTime();
+		 String dateStr = sdf.format(y);
+		 
+		 int insertHistoryStockChangeInfo = bslStockChangeDetailHMapper.insertHistoryChangeInfo(dateStr);
+		 if(insertHistoryStockChangeInfo > 0){
+			 DictItemOperation.log.info("===========删除一年前的库存变动数据开始");
+			 bslStockChangeDetailHMapper.deleteHistoryChangeInfo(dateStr);
+		 }
+		 
+		 DictItemOperation.log.info("===========历史化一年前的库存变动数据结束");
+    }
+    
     
     
 }  

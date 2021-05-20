@@ -54,6 +54,26 @@ public class ChangeInfoController {
 	}
 	
 	/**
+	 * 根据条件查询库存变动历史信息
+	 * @param 
+	 * @param 
+	 * @return
+	 */
+	@RequestMapping("/listH")
+	@ResponseBody
+	public BSLResult getProdInfoHList(QueryCriteria queryCriteria){
+		BSLResult result = null;
+		if(StringUtils.isBlank(queryCriteria.getPage())) {
+			result =  BSLResult.build(400, "页码不能为空");
+		}else if(StringUtils.isBlank(queryCriteria.getRows())) {
+			result =  BSLResult.build(400, "每页记录数不能为空");
+		}else{
+			result =changeInfoSerachService.getInfoByCriteriaHService(queryCriteria);
+		}
+		return result;
+	}
+	
+	/**
 	 * 查询状态变动信息
 	 * @param page
 	 * @param rows

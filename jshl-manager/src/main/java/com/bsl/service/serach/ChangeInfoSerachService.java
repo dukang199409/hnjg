@@ -14,6 +14,8 @@ public interface ChangeInfoSerachService {
 	EasyUIDataGridResult getAllInfoService(Integer page, Integer rows);
 	//根据条件查询所有库存变动信息
 	BSLResult getInfoByCriteriaService(QueryCriteria queryCriteria);
+	//根据条件查询所有库存变动历史信息
+	BSLResult getInfoByCriteriaHService(QueryCriteria queryCriteria);
 	
 	//初始化查询所有状态变动信息
 	EasyUIDataGridResult getAllStatusChangeInfoService(Integer page, Integer rows);

@@ -9,12 +9,15 @@ import org.springframework.stereotype.Service;
 import com.bsl.common.pojo.EasyUIDataGridResult;
 import com.bsl.common.utils.BSLResult;
 import com.bsl.mapper.BslChangeStatusRecordMapper;
+import com.bsl.mapper.BslStockChangeDetailHMapper;
 import com.bsl.mapper.BslStockChangeDetailMapper;
 import com.bsl.pojo.BslChangeStatusRecord;
 import com.bsl.pojo.BslChangeStatusRecordExample;
 import com.bsl.pojo.BslStockChangeDetail;
 import com.bsl.pojo.BslStockChangeDetailExample;
 import com.bsl.pojo.BslStockChangeDetailExample.Criteria;
+import com.bsl.pojo.BslStockChangeDetailH;
+import com.bsl.pojo.BslStockChangeDetailHExample;
 import com.bsl.select.DictItemOperation;
 import com.bsl.select.QueryCriteria;
 import com.bsl.service.serach.ChangeInfoSerachService;
@@ -31,6 +34,9 @@ public class ChangeInfoSerachServiceImpl implements ChangeInfoSerachService {
 
 	@Autowired	 
 	BslStockChangeDetailMapper bslStockChangeDetailMapper;
+	
+	@Autowired	 
+	BslStockChangeDetailHMapper bslStockChangeDetailHMapper;
 	
 	@Autowired	 
 	BslChangeStatusRecordMapper bslChangeStatusRecordMapper;
@@ -129,6 +135,79 @@ public class ChangeInfoSerachServiceImpl implements ChangeInfoSerachService {
 		PageInfo<BslStockChangeDetail> pageInfo = new PageInfo<BslStockChangeDetail>(bslStockChangeDetails);
 		return BSLResult.ok(bslStockChangeDetails,"changeInfoSerachServiceImpl","getInfoByCriteriaService",pageInfo.getTotal(),bslStockChangeDetails);
 	}
+	
+	/**
+	 *根据条件查询库存变动历史信息 
+	 */
+	@Override
+	public BSLResult getInfoByCriteriaHService(QueryCriteria queryCriteria) {
+		//创建查询的实例，并赋值
+		BslStockChangeDetailHExample bslStockChangeDetailExample  = new BslStockChangeDetailHExample();
+		com.bsl.pojo.BslStockChangeDetailHExample.Criteria criteria = bslStockChangeDetailExample.createCriteria();
+		
+		if(!StringUtils.isBlank(queryCriteria.getTransSerno())){
+			criteria.andTransSernoLike("%"+ queryCriteria.getTransSerno()+"%");
+		}
+		if(!StringUtils.isBlank(queryCriteria.getProdId())){
+			criteria.andProdIdLike("%"+ queryCriteria.getProdId()+"%");
+		}
+		if(!StringUtils.isBlank(queryCriteria.getProdType())){
+			criteria.andProdTypeEqualTo(queryCriteria.getProdType());
+		}
+		if(!StringUtils.isBlank(queryCriteria.getPlanSerno())){
+			criteria.andPlanSernoLike("%"+queryCriteria.getPlanSerno()+"%");
+		}
+		if(!StringUtils.isBlank(queryCriteria.getProdOriId())){
+			criteria.andProdOriIdLike("%"+queryCriteria.getProdOriId()+"%");
+		}
+		if(!StringUtils.isBlank(queryCriteria.getTransCode())){
+			criteria.andTransCodeEqualTo(queryCriteria.getTransCode());
+		}
+		if(!StringUtils.isBlank(queryCriteria.getRubbishType())){
+			criteria.andRubbishTypeEqualTo(queryCriteria.getRubbishType());
+		}
+		//开始日期结束日期
+		Date dateStart = new Date();
+		Date dateEnd = new Date();
+		if(!StringUtils.isBlank(queryCriteria.getStartDate())){
+			try {
+				dateStart = DictItemOperation.日期转换实例.parse(queryCriteria.getStartDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				dateStart = DictItemOperation.日期转换实例.parse("2018-01-01");
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}
+		if(!StringUtils.isBlank(queryCriteria.getEndDate())){
+			try {
+				dateEnd = DictItemOperation.日期转换实例.parse(queryCriteria.getEndDate());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		}else{
+			dateEnd = new Date();
+		}
+		criteria.andCrtDateBetween(dateStart,dateEnd);
+		//分页处理
+		PageHelper.startPage(Integer.parseInt(queryCriteria.getPage()), Integer.parseInt(queryCriteria.getRows()));
+		//调用sql查询
+		if(StringUtils.isBlank(queryCriteria.getSort()) || StringUtils.isBlank(queryCriteria.getOrder())){
+			bslStockChangeDetailExample.setOrderByClause("`trans_serno` desc,`prod_id` desc,`plan_serno` desc");
+		}else{
+			String sortSql = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, queryCriteria.getSort());
+			if(!StringUtils.isBlank(sortSql)){
+				bslStockChangeDetailExample.setOrderByClause("`"+sortSql+"` "+ queryCriteria.getOrder());
+			}
+		}
+		List<BslStockChangeDetailH> bslStockChangeDetails = bslStockChangeDetailHMapper.selectByExample(bslStockChangeDetailExample);
+		PageInfo<BslStockChangeDetailH> pageInfo = new PageInfo<BslStockChangeDetailH>(bslStockChangeDetails);
+		return BSLResult.ok(bslStockChangeDetails,"changeInfoSerachServiceImpl","getInfoByCriteriaHService",pageInfo.getTotal(),bslStockChangeDetails);
+	}
+
 
 	/**
 	 * 初始化查询所有状态变动信息 

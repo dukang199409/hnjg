@@ -692,9 +692,9 @@ var TT = BSL = {
         if (val == '0'){
             return '纵剪机组';
         } else if(val == '1'){
-        	return '1号线';
+        	return '生产机组';
         } else if(val == '2'){
-        	return '2号线';
+        	return '生产机组2';
         } else {
         	return val;
         }

@@ -56,5 +56,7 @@ public interface BslProductInfoMapper {
 	int insertHistoryProductInfo(String dateString);
     int deleteHistoryProductInfo(String dateString);
     
+    int updateProdOriRawId(QueryExample queryExample);
+    
     
 }

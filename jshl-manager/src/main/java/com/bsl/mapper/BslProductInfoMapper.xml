@@ -1207,5 +1207,10 @@
    		and #{dateString,jdbcType=VARCHAR} >= DATE_FORMAT(upd_date,'%Y%m%d')
    		and  prod_status in ('3','4','6')
    </update>
+   
+   <update id="updateProdOriRawId" parameterType="com.bsl.select.QueryExample" >
+   		update bsl_product_info set prod_orirawid = #{rawIdNew,jdbcType=VARCHAR}
+   		where prod_orirawid = #{rawIdOld,jdbcType=VARCHAR}
+   </update>
   
 </mapper>

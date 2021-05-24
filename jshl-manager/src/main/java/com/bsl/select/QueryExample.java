@@ -64,7 +64,21 @@ public class QueryExample {
 	private String prodMakeJz;
 	private String prodOrirawid;
 	private String prodLength;
+	private String rawIdNew;
+	private String rawIdOld;
 
+	public String getRawIdNew() {
+		return rawIdNew;
+	}
+	public void setRawIdNew(String rawIdNew) {
+		this.rawIdNew = rawIdNew;
+	}
+	public String getRawIdOld() {
+		return rawIdOld;
+	}
+	public void setRawIdOld(String rawIdOld) {
+		this.rawIdOld = rawIdOld;
+	}
 	public String getProdLength() {
 		return prodLength;
 	}

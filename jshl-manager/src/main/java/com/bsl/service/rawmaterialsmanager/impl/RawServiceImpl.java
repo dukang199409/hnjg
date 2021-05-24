@@ -23,6 +23,7 @@ import com.bsl.pojo.BslStockChangeDetail;
 import com.bsl.select.DictItemOperation;
 import com.bsl.select.ErrorCodeInfo;
 import com.bsl.select.QueryCriteria;
+import com.bsl.select.QueryExample;
 import com.bsl.service.rawmaterialsmanager.RawService;
 import com.bsl.service.rawmaterialsmanager.ReceiptService;
 import com.github.pagehelper.PageHelper;
@@ -319,6 +320,16 @@ public class RawServiceImpl implements RawService {
 		}else if(result==0){
 			throw new BSLException(ErrorCodeInfo.错误类型_查询无记录,"根据条件没有符合的修改记录");
 		}
+		
+		//判断如果修改了厂家钢卷号，则全部修改
+		String prodOriRawIdNew = bslProductInfo.getProdOrirawid();
+		if(!prodOriRawIdNew.equals(oldBslProductInfo.getProdOrirawid())){
+			QueryExample queryExample = new QueryExample();
+			queryExample.setRawIdNew(prodOriRawIdNew);
+			queryExample.setRawIdOld(oldBslProductInfo.getProdOrirawid());
+			bslProductInfoMapper.updateProdOriRawId(queryExample);
+		}
+		
 		return BSLResult.ok(bslProductInfo.getProdId());
 	}
 

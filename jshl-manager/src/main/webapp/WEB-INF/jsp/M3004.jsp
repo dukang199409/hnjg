@@ -35,6 +35,12 @@
 						</select>
 		            </td>
 		        </tr>
+		        <tr>
+		        	<td width="120" align="right">来源钢卷号:</td>
+		            <td width="210" align="right">
+		            	<input name="prodOrirawid" id="prodOrirawidM3004" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+		            </td>
+		        </tr>
 		        <tr hidden="true">
 		            <td width="120" align="right">页码:</td>
 		            <td width="210" align="right">
@@ -103,6 +109,7 @@
 		queryParams.prodId = $('#prodIdM3004').val();
 		queryParams.prodStatus = $('#prodStatusM3004').combobox("getValue");
 		queryParams.planJz = $('#planJzM3004').combobox("getValue");
+		queryParams.prodOrirawid = $('#prodOrirawidM3004').val();
 	}
 
 	//排序查询

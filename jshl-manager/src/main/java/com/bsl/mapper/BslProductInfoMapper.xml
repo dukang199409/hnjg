@@ -1191,6 +1191,9 @@
 		     <if test="prodStatus != null" >
 		        and t.prod_status = #{prodStatus,jdbcType=VARCHAR} 
 		    </if>
+		    <if test="prodOrirawid != null" >
+		        and t.prod_orirawid like #{prodOrirawid,jdbcType=VARCHAR} 
+		    </if>
   </select>
   
    <update id="insertHistoryProductInfo" parameterType="java.lang.String" >

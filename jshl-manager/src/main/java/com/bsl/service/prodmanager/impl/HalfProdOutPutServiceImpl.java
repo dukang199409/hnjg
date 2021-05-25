@@ -100,7 +100,11 @@ public class HalfProdOutPutServiceImpl implements HalfProdOutPutService {
 		}else{
 			queryCriteria.setProdStatus(null);
 		}
-		
+		if (!StringUtils.isBlank(queryCriteria.getProdOrirawid())) {
+			queryCriteria.setProdOrirawid("%"+ queryCriteria.getProdOrirawid()+"%");
+		}else{
+			queryCriteria.setProdOrirawid(null);
+		}
 		//分页处理
 		PageHelper.startPage(Integer.parseInt(queryCriteria.getPage()), Integer.parseInt(queryCriteria.getRows()));
 		//调用sql查询

@@ -1145,6 +1145,9 @@
 		    <if test="prodStatus != null" >
 		        and t.prod_status like #{prodStatus,jdbcType=VARCHAR} 
 		    </if>
+		    <if test="prodOrirawid != null" >
+		        and t.prod_orirawid like #{prodOrirawid,jdbcType=VARCHAR} 
+		    </if>
 		 ) t1
 		 order by t1.prod_ru_weight asc,t1.prod_id asc
   </select>
@@ -1167,6 +1170,9 @@
 		    </if>
 		     <if test="prodStatus != null" >
 		        and t.prod_status = #{prodStatus,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="prodOrirawid != null" >
+		        and t.prod_orirawid like #{prodOrirawid,jdbcType=VARCHAR} 
 		    </if>
   </select>
   

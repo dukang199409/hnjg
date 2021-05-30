@@ -118,13 +118,13 @@
 	        	<th data-options="field:'prodNum',width:100,sortable:true">用料数量/卷</th>    
 	        	<th data-options="field:'makeName',width:120,sortable:true">制造产品名称</th> 
 	        	<th data-options="field:'makeType',width:120,formatter:BSL.formatMakeType,sortable:true">制造纵剪带用途</th>    
-	            <th data-options="field:'prodOrder',width:120,sortable:true">销售订单号</th>
-	            <th data-options="field:'company',width:120,sortable:true">工厂</th>
 	            <th data-options="field:'alreadyNum',width:120,sortable:true">已生产数量</th>          
 	        	<th data-options="field:'alreadySum',width:120,sortable:true">已生产重量/吨</th>  
 	        	<th data-options="field:'outNum',width:100,sortable:true">投料数量</th>  
 	        	<th data-options="field:'outWeight',width:100,sortable:true">投料重量</th>                  
 	        	<th data-options="field:'ccrate',width:100,sortable:true">成材率</th>  
+	            <th data-options="field:'prodOrder',width:120,sortable:true">销售订单号</th>
+	            <th data-options="field:'company',width:120,sortable:true">工厂</th>
 	            <th data-options="field:'customer',width:200,sortable:true,formatter:BSL.formatCustomer">来料客户</th>
 	            <th data-options="field:'planDepartment',width:100,sortable:true,formatter:BSL.formatMakeDept">生产部门</th>
 	            <th data-options="field:'crtDate',width:120,formatter:BSL.formatDateTime,sortable:true">日期</th>

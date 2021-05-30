@@ -148,6 +148,10 @@ public class ProdServiceImpl implements ProdService {
 		if (!StringUtils.isBlank(queryCriteria.getProdMakeJz())) {
 			criteria.andProdMakeJzEqualTo(queryCriteria.getProdMakeJz());
 		}
+		//来源钢卷号
+		if(!StringUtils.isBlank(queryCriteria.getProdOrirawid())){
+			criteria.andProdOrirawidLike("%"+queryCriteria.getProdOrirawid()+"%");
+		}
 		
 		//开始日期结束日期
 		//起始日期 结束日期

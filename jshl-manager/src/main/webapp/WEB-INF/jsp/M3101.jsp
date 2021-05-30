@@ -60,6 +60,10 @@
 					</select>
 		        </tr>
 		        <tr>
+		        	<td width="120" align="right">来源钢卷号:</td>
+		            <td width="210" align="right">
+		            	<input name="prodOrirawid" id="prodOrirawidM3101" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+		            </td>
 		        	<td width="120" align="right">生产机组:</td>
 		            	<td width="210" align="right">
 		            	<select name="prodMakeJz" id="prodMakeJzM3101" class="easyui-combobox" panelHeight="auto" data-options="editable:true" style="width:200px;">
@@ -169,6 +173,7 @@
 		queryParams.prodMaterial = $('#prodMaterialM3101').combobox("getValue");
 		queryParams.prodNorm = $('#prodNormM3101').val();
 		queryParams.prodMakeJz = $('#prodMakeJzM3101').combobox("getValue");
+		queryParams.prodOrirawid = $('#prodOrirawidM3101').val();
 		queryParams.startDate = $('#startDateM3101').datebox("getValue");
 		queryParams.endDate = $('#endDateM3101').datebox("getValue");
 	}
@@ -452,6 +457,7 @@
 			mapParam.set("prodMaterial",$('#prodMaterialM3101').combobox("getValue"));
 			mapParam.set("prodNorm",$('#prodNormM3101').val());
 			mapParam.set("prodMakeJz",$('#prodMakeJzM3101').combobox("getValue"));
+			mapParam.set("prodOrirawid",$('#prodOrirawidM3101').val());
 			mapParam.set("startDate",$('#startDateM3101').datebox("getValue"));
 			mapParam.set("endDate",$('#endDateM3101').datebox("getValue"));
 			

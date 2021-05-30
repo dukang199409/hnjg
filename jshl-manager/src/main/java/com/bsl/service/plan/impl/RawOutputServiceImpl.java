@@ -91,6 +91,11 @@ public class RawOutputServiceImpl implements RawOutputService {
 			}else{
 				queryCriteria.setProdStatus(null);
 			}
+			if (!StringUtils.isBlank(queryCriteria.getProdOrirawid())) {
+				queryCriteria.setProdOrirawid("%"+ queryCriteria.getProdOrirawid()+"%");
+			}else{
+				queryCriteria.setProdOrirawid(null);
+			}
 			
 			if(!StringUtils.isBlank(queryCriteria.getPage()) && !StringUtils.isBlank(queryCriteria.getRows())) {
 				//分页处理

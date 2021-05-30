@@ -25,7 +25,13 @@
 			          	  </c:forEach>
 						</select>
 		            </td>
-		             <td width="120"  align="right">生产机组:</td>
+		            <td width="120" align="right">来源钢卷号:</td>
+		            <td width="210" align="right">
+		            	<input name="prodOrirawid" id="prodOrirawidM2004" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+		            </td>
+		        </tr>
+		         <tr>
+		            <td width="120"  align="right">生产机组:</td>
 		            <td width="210"  align="right">
 		            	<select name="planJz" id="planJzM2004"  panelHeight="auto" class="easyui-combobox" data-options="editable:true,required:true" style="width:200px;">
 				          <option value="">请选择...</option>
@@ -113,6 +119,7 @@
 		queryParams.prodId = $('#prodIdM2004').val();
 		queryParams.prodStatus = $('#prodStatusM2004').combobox("getValue");
 		queryParams.planJz = $('#planJzM2004').combobox("getValue");
+		queryParams.prodOrirawid = $('#prodOrirawidM2004').val();
 	}
 
 	//排序查询

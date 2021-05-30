@@ -83,6 +83,130 @@ public class SemiFinishedProdServiceImpl implements SemiFinishedProdService {
 	}
 	
 	/**
+	 * 初始化查询所有半成品信息
+	 */
+	@Override
+	public EasyUIDataGridResult getBslProductInfoList(int page, int rows) {
+		BslProductInfoExample example = new BslProductInfoExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
+		// 分页处理
+		PageHelper.startPage(page, rows);
+		example.setOrderByClause("`crt_date` desc,`prod_id` desc,`prod_plan_no`");
+		List<BslProductInfo> list = bslProductInfoMapper.selectByExample(example);
+		// 创建一个返回值对象
+		EasyUIDataGridResult result = new EasyUIDataGridResult();
+		result.setRows(list);
+		// 取记录总条数
+		PageInfo<BslProductInfo> pageInfo = new PageInfo<BslProductInfo>(list);
+		result.setTotal(pageInfo.getTotal());
+		result.setClassName("semiFinishedProdServiceImpl");
+		result.setMethodName("queryBslProductInfoList");
+		return result;
+	}
+
+	/**
+	 *根据条件查询半成品信息 
+	 */
+	@Override
+	public BSLResult queryBslProductInfoList(QueryExample queryCriteria) {
+		BslProductInfoExample example = new BslProductInfoExample();
+		if (queryCriteria != null) {
+			Criteria criteria = example.createCriteria();
+			criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
+			//盘号
+			if (!StringUtils.isBlank(queryCriteria.getProdId())) {
+				criteria.andProdIdLike(StringUtil.likeStr(queryCriteria.getProdId()));
+			}
+			//半成品生产批号
+			if (!StringUtils.isBlank(queryCriteria.getProdPlanNo())) {
+				criteria.andProdPlanNoLike(StringUtil.likeStr(queryCriteria.getProdPlanNo()));
+			}
+			//炉号
+			if (!StringUtils.isBlank(queryCriteria.getProdLuno())) {
+				criteria.andProdLunoLike(StringUtil.likeStr(queryCriteria.getProdLuno()));
+			}
+			//父级钢卷号
+			if (!StringUtils.isBlank(queryCriteria.getProdParentNo())) {
+				criteria.andProdParentNoLike(StringUtil.likeStr(queryCriteria.getProdParentNo()));
+			}
+			//出库指令号
+			if (!StringUtils.isBlank(queryCriteria.getProdOutPlan())) {
+				criteria.andProdOutPlanLike(StringUtil.likeStr(queryCriteria.getProdOutPlan()));
+			}
+			//产品规格
+			if(!StringUtils.isBlank(queryCriteria.getProdNorm())){
+				criteria.andProdNormLike("%"+queryCriteria.getProdNorm()+"%");
+			}
+			//钢种
+			if (!StringUtils.isBlank(queryCriteria.getProdMaterial())) {
+				criteria.andProdMaterialEqualTo(queryCriteria.getProdMaterial());
+			}
+			//班次
+			if (!StringUtils.isBlank(queryCriteria.getProdBc())) {
+				criteria.andProdBcEqualTo(queryCriteria.getProdBc());
+			}
+			//来源钢卷号
+			if(!StringUtils.isBlank(queryCriteria.getProdOrirawid())){
+				criteria.andProdOrirawidLike("%"+queryCriteria.getProdOrirawid()+"%");
+			}
+			//生产机组
+			if (!StringUtils.isBlank(queryCriteria.getProdMakeJz())) {
+				criteria.andProdMakeJzEqualTo(queryCriteria.getProdMakeJz());
+			}
+			//用途
+			if (!StringUtils.isBlank(queryCriteria.getProdUserType())) {
+				criteria.andProdUserTypeEqualTo(queryCriteria.getProdUserType());
+			}
+			//产品状态
+			if (!StringUtils.isBlank(queryCriteria.getProdStatus())) {
+				criteria.andProdStatusEqualTo(queryCriteria.getProdStatus());
+			}
+			//起始日期 结束日期
+			Date dateStart = new Date();
+			Date dateEnd = new Date();
+			if(!StringUtils.isBlank(queryCriteria.getStartDate())){
+				try {
+					dateStart = DictItemOperation.日期转换实例.parse(queryCriteria.getStartDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}else{
+				try {
+					dateStart = DictItemOperation.日期转换实例.parse("2018-01-01");
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			if(!StringUtils.isBlank(queryCriteria.getEndDate())){
+				try {
+					dateEnd = DictItemOperation.日期转换实例.parse(queryCriteria.getEndDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}else{
+				dateEnd = new Date();
+			}
+			criteria.andCrtDateBetween(dateStart,dateEnd);
+			if(!StringUtils.isBlank(queryCriteria.getPage()) && !StringUtils.isBlank(queryCriteria.getRows())) {
+				//分页处理
+				PageHelper.startPage(Integer.parseInt(queryCriteria.getPage()), Integer.parseInt(queryCriteria.getRows()));
+			}
+			if(!StringUtils.isBlank(queryCriteria.getSort()) && !StringUtils.isBlank(queryCriteria.getOrder())) {
+				String sortSql = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, queryCriteria.getSort());
+				if(!StringUtils.isBlank(sortSql)){
+					example.setOrderByClause("`"+sortSql+"` "+ queryCriteria.getOrder());
+				}
+			}else{
+				example.setOrderByClause("`crt_date` desc,`prod_id` desc,`prod_plan_no`");
+			}
+		}
+		List<BslProductInfo> list = bslProductInfoMapper.selectByExample(example);
+		PageInfo<BslProductInfo> pageInfo = new PageInfo<BslProductInfo>(list);
+		return BSLResult.ok(list,"semiFinishedProdServiceImpl","queryBslProductInfoList",pageInfo.getTotal(),list);
+	}
+	
+	/**
 	 *根据生产出库单查询出库的半成品信息
 	 */
 	@Override
@@ -99,6 +223,11 @@ public class SemiFinishedProdServiceImpl implements SemiFinishedProdService {
 		}
 		if(StringUtils.isBlank(queryCriteria.getProdStatus())){
 			queryCriteria.setProdStatus(null);
+		}
+		if(StringUtils.isBlank(queryCriteria.getProdOrirawid())) {
+			queryCriteria.setProdOrirawid(null);
+		}else{
+			queryCriteria.setProdOrirawid("%"+ queryCriteria.getProdOrirawid()+"%");
 		}
 		//分页处理
 		if(!StringUtils.isBlank(queryCriteria.getPage()) && !StringUtils.isBlank(queryCriteria.getRows())) {
@@ -438,126 +567,6 @@ public class SemiFinishedProdServiceImpl implements SemiFinishedProdService {
 		}
 		
 		return BSLResult.ok(bslProductInfo.getProdId());
-	}
-	
-	/**
-	 * 初始化查询所有半成品信息
-	 */
-	@Override
-	public EasyUIDataGridResult getBslProductInfoList(int page, int rows) {
-		BslProductInfoExample example = new BslProductInfoExample();
-		Criteria criteria = example.createCriteria();
-		criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
-		// 分页处理
-		PageHelper.startPage(page, rows);
-		example.setOrderByClause("`crt_date` desc,`prod_id` desc,`prod_plan_no`");
-		List<BslProductInfo> list = bslProductInfoMapper.selectByExample(example);
-		// 创建一个返回值对象
-		EasyUIDataGridResult result = new EasyUIDataGridResult();
-		result.setRows(list);
-		// 取记录总条数
-		PageInfo<BslProductInfo> pageInfo = new PageInfo<BslProductInfo>(list);
-		result.setTotal(pageInfo.getTotal());
-		result.setClassName("semiFinishedProdServiceImpl");
-		result.setMethodName("queryBslProductInfoList");
-		return result;
-	}
-
-	/**
-	 *根据条件查询半成品信息 
-	 */
-	@Override
-	public BSLResult queryBslProductInfoList(QueryExample queryCriteria) {
-		BslProductInfoExample example = new BslProductInfoExample();
-		if (queryCriteria != null) {
-			Criteria criteria = example.createCriteria();
-			criteria.andProdTypeEqualTo(DictItemOperation.产品类型_半成品);
-			//盘号
-			if (!StringUtils.isBlank(queryCriteria.getProdId())) {
-				criteria.andProdIdLike(StringUtil.likeStr(queryCriteria.getProdId()));
-			}
-			//半成品生产批号
-			if (!StringUtils.isBlank(queryCriteria.getProdPlanNo())) {
-				criteria.andProdPlanNoLike(StringUtil.likeStr(queryCriteria.getProdPlanNo()));
-			}
-			//炉号
-			if (!StringUtils.isBlank(queryCriteria.getProdLuno())) {
-				criteria.andProdLunoLike(StringUtil.likeStr(queryCriteria.getProdLuno()));
-			}
-			//父级钢卷号
-			if (!StringUtils.isBlank(queryCriteria.getProdParentNo())) {
-				criteria.andProdParentNoLike(StringUtil.likeStr(queryCriteria.getProdParentNo()));
-			}
-			//出库指令号
-			if (!StringUtils.isBlank(queryCriteria.getProdOutPlan())) {
-				criteria.andProdOutPlanLike(StringUtil.likeStr(queryCriteria.getProdOutPlan()));
-			}
-			//产品规格
-			if(!StringUtils.isBlank(queryCriteria.getProdNorm())){
-				criteria.andProdNormLike("%"+queryCriteria.getProdNorm()+"%");
-			}
-			//钢种
-			if (!StringUtils.isBlank(queryCriteria.getProdMaterial())) {
-				criteria.andProdMaterialEqualTo(queryCriteria.getProdMaterial());
-			}
-			//班次
-			if (!StringUtils.isBlank(queryCriteria.getProdBc())) {
-				criteria.andProdBcEqualTo(queryCriteria.getProdBc());
-			}
-			//生产机组
-			if (!StringUtils.isBlank(queryCriteria.getProdMakeJz())) {
-				criteria.andProdMakeJzEqualTo(queryCriteria.getProdMakeJz());
-			}
-			//用途
-			if (!StringUtils.isBlank(queryCriteria.getProdUserType())) {
-				criteria.andProdUserTypeEqualTo(queryCriteria.getProdUserType());
-			}
-			//产品状态
-			if (!StringUtils.isBlank(queryCriteria.getProdStatus())) {
-				criteria.andProdStatusEqualTo(queryCriteria.getProdStatus());
-			}
-			//起始日期 结束日期
-			Date dateStart = new Date();
-			Date dateEnd = new Date();
-			if(!StringUtils.isBlank(queryCriteria.getStartDate())){
-				try {
-					dateStart = DictItemOperation.日期转换实例.parse(queryCriteria.getStartDate());
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}else{
-				try {
-					dateStart = DictItemOperation.日期转换实例.parse("2018-01-01");
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}
-			if(!StringUtils.isBlank(queryCriteria.getEndDate())){
-				try {
-					dateEnd = DictItemOperation.日期转换实例.parse(queryCriteria.getEndDate());
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-			}else{
-				dateEnd = new Date();
-			}
-			criteria.andCrtDateBetween(dateStart,dateEnd);
-			if(!StringUtils.isBlank(queryCriteria.getPage()) && !StringUtils.isBlank(queryCriteria.getRows())) {
-				//分页处理
-				PageHelper.startPage(Integer.parseInt(queryCriteria.getPage()), Integer.parseInt(queryCriteria.getRows()));
-			}
-			if(!StringUtils.isBlank(queryCriteria.getSort()) && !StringUtils.isBlank(queryCriteria.getOrder())) {
-				String sortSql = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, queryCriteria.getSort());
-				if(!StringUtils.isBlank(sortSql)){
-					example.setOrderByClause("`"+sortSql+"` "+ queryCriteria.getOrder());
-				}
-			}else{
-				example.setOrderByClause("`crt_date` desc,`prod_id` desc,`prod_plan_no`");
-			}
-		}
-		List<BslProductInfo> list = bslProductInfoMapper.selectByExample(example);
-		PageInfo<BslProductInfo> pageInfo = new PageInfo<BslProductInfo>(list);
-		return BSLResult.ok(list,"semiFinishedProdServiceImpl","queryBslProductInfoList",pageInfo.getTotal(),list);
 	}
 
 	/**

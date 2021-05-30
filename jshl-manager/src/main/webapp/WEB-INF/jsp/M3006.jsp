@@ -16,6 +16,10 @@
 		            </td>
 		        </tr>
 		       <tr>
+		        	<td width="120" align="right">来源钢卷号:</td>
+		            <td width="210" align="right">
+		            	<input name="prodOrirawid" id="prodOrirawidM3006" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+		            </td>
 		       		<td width="120" align="right">产品状态:</td>
 		            <td width="210" align="right">
 		            	<select name="prodStatus" id="prodStatusM3006"  class="easyui-combobox" panelHeight="auto" data-options="editable:true" style="width:200px;">
@@ -105,6 +109,7 @@
 		queryParams.prodOutPlan = $('#prodOutPlanM3006').val();
 		queryParams.prodId = $('#prodIdM3006').val();
 		queryParams.prodStatus = $('#prodStatusM3006').combobox("getValue");
+		queryParams.prodOrirawid = $('#prodOrirawidM3006').val();
 	}
 	
 	//查询按钮
@@ -185,6 +190,7 @@
 					mapParam.set("prodOutPlan",$('#prodOutPlanM3006').val());
 					mapParam.set("prodId",$('#prodIdM3006').val());
 					mapParam.set("prodStatus",$('#prodStatusM3006').combobox("getValue"));
+					mapParam.set("prodOrirawid",$('#prodOrirawidM3006').val());
 					
 					BSL.toExcel(mapParam);
 		        }

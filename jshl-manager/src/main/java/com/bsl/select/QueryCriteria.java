@@ -87,7 +87,14 @@ public class QueryCriteria {
 	private String prodRelWeight3;
 	private String prodRelWeight4;
 	private String prodInputuser;
+	private String prodName;
 	
+	public String getProdName() {
+		return prodName;
+	}
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
 	public String getProdInputuser() {
 		return prodInputuser;
 	}

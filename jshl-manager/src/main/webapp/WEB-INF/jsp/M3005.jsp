@@ -80,6 +80,10 @@
 			            <td width="210" align="right">
 			            	<input name="prodOrirawid" id="prodOrirawidM3005" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
 			            </td>
+			            <td width="120" align="right">产品名称:</td>
+			            <td width="210" align="right">
+			            	<input name="prodName" id="prodNameM3005" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+			            </td>
 				 </tr>
 		         <tr>
 		            <td width="120" align="right">开始日期:</td>
@@ -136,7 +140,7 @@
 	        	<th data-options="field:'ck',checkbox:true"></th>
 	            <th data-options="field:'prodId',width:180,sortable:true">件号</th>
 	        	<th data-options="field:'prodPlanNo',width:120,sortable:true">生产指令号</th>
-	        	<th data-options="field:'prodName',width:100,sortable:true">物料名称</th>
+	        	<th data-options="field:'prodName',width:100,sortable:true">产品名称</th>
 	            <th data-options="field:'prodStatus',width:100,formatter:BSL.formatProdStatus,sortable:true">状态</th>
 	        	<th data-options="field:'prodNorm',sortable:true,width:100">规格</th>
 	        	<th data-options="field:'prodLuno',width:120,sortable:true">炉(批)号</th>
@@ -187,6 +191,7 @@
 		queryParams.prodNorm = $('#prodNormM3005').val();
 		queryParams.prodOutPlan = $('#prodOutPlanM3005').val();
 		queryParams.prodOrirawid = $('#prodOrirawidM3005').val();
+		queryParams.prodName = $('#prodNameM3005').val();
 		queryParams.prodMakeJz = $('#prodMakeJzM3005').combobox("getValue");
 		queryParams.startDate = $('#startDateM3005').datebox("getValue");
 		queryParams.endDate = $('#endDateM3005').datebox("getValue");
@@ -444,6 +449,7 @@
 			mapParam.set("prodNorm",$('#prodNormM3005').val());
 			mapParam.set("prodOrirawid",$('#prodOrirawidM3005').val());
 			mapParam.set("prodOutPlan",$('#prodOutPlanM3005').val());
+			mapParam.set("prodName",$('#prodNameM3005').val());
 			mapParam.set("startDate",$('#startDateM3005').datebox("getValue"));
 			mapParam.set("endDate",$('#endDateM3005').datebox("getValue"));
 			

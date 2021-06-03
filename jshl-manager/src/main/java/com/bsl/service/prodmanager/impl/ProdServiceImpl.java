@@ -152,6 +152,10 @@ public class ProdServiceImpl implements ProdService {
 		if(!StringUtils.isBlank(queryCriteria.getProdOrirawid())){
 			criteria.andProdOrirawidLike("%"+queryCriteria.getProdOrirawid()+"%");
 		}
+		//产品名称
+		if(!StringUtils.isBlank(queryCriteria.getProdName())){
+			criteria.andProdNameLike("%"+queryCriteria.getProdName()+"%");
+		}
 		
 		//开始日期结束日期
 		//起始日期 结束日期

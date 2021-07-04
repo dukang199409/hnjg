@@ -30,6 +30,12 @@
 						</select>
 		            </td>
 		        </tr>
+		        <tr>
+		        	<td width="120" align="right">厂家钢卷号:</td>
+		            <td width="210" align="right">
+		            	<input name="prodOrirawid" id="prodOrirawidM5004" class="easyui-textbox" type="text" data-options="required:false,validType:'length[0,20]'" style="width:200px;"></input>
+		            </td>
+		        </tr>
 		        <tr hidden="true">
 		        	<td width="120" align="right">页码:</td>
 		            <td width="210" align="right">
@@ -152,6 +158,7 @@
 		queryParams.salePlanId = $('#salePlanIdM5004').val();
 		queryParams.saleSerno = $('#saleSernoM5004').val();
 		queryParams.prodId = $('#prodIdM5004').val();
+		queryParams.prodOrirawid = $('#prodOrirawidM5004').val();
 		queryParams.prodStatus = $('#prodStatusM5004').combobox("getValue");
 		
 	}

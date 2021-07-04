@@ -131,6 +131,9 @@ public class SaleProdServiceImpl implements SaleProdService {
 		Criteria criteria = selectExample.createCriteria();
 		if(prodIds.size()>0){
 			criteria.andProdIdIn(prodIds);
+			if(!StringUtils.isBlank(queryCriteria.getProdOrirawid())){
+				criteria.andProdOrirawidEqualTo(queryCriteria.getProdOrirawid());
+			}
 			if(StringUtils.isBlank(queryCriteria.getSort()) || StringUtils.isBlank(queryCriteria.getOrder())){
 				selectExample.setOrderByClause("`prod_id` desc");
 			}else{
@@ -306,6 +309,9 @@ public class SaleProdServiceImpl implements SaleProdService {
 		Criteria criteria = selectExample.createCriteria();
 		if(prods.size()>0){
 			criteria.andProdIdIn(prods);
+			if(!StringUtils.isBlank(queryCriteria.getProdOrirawid())){
+				criteria.andProdOrirawidEqualTo(queryCriteria.getProdOrirawid());
+			}
 			if(!StringUtils.isBlank(queryCriteria.getProdStatus())){
 				criteria.andProdStatusEqualTo(queryCriteria.getProdStatus());
 			}

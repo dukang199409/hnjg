@@ -58,5 +58,8 @@ public interface BslProductInfoMapper {
     
     int updateProdOriRawId(QueryExample queryExample);
     
+    int updateOutProdsByPlanId(String planId);
+    int deleteMakeProdsByPlanId(String planId);
+    
     
 }

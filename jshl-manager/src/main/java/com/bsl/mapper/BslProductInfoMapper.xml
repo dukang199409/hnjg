@@ -1221,5 +1221,17 @@
    		update bsl_product_info set prod_orirawid = #{rawIdNew,jdbcType=VARCHAR}
    		where prod_orirawid = #{rawIdOld,jdbcType=VARCHAR}
    </update>
+   
+   <update id="updateOutProdsByPlanId" parameterType="java.lang.String" >
+   		update bsl_product_info 
+   		set prod_out_plan = null,
+   			prod_status='1',
+   			prod_out_date = null 
+   		where prod_out_plan = #{planId,jdbcType=VARCHAR}
+   </update>
+   
+   <update id="deleteMakeProdsByPlanId" parameterType="java.lang.String" >
+   		delete from bsl_product_info where prod_plan_no = #{planId,jdbcType=VARCHAR}
+   </update>
   
 </mapper>

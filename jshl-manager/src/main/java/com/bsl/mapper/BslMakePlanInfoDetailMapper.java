@@ -35,4 +35,6 @@ public interface BslMakePlanInfoDetailMapper {
     int updateByPrimaryKey(BslMakePlanInfoDetail record);
     
     List<BslMakePlanInfoDetailPro> selectMakePlanDetailPro(QueryCriteria example);
+    
+    int deleteDetailByPlanId(String planId);
 }

@@ -475,4 +475,8 @@
       order by a.crt_date desc
   </select>
   
+   <update id="deleteDetailByPlanId" parameterType="java.lang.String" >
+   		delete from bsl_make_plan_info_detail where plan_id = #{planId,jdbcType=VARCHAR}
+   </update>
+  
 </mapper>

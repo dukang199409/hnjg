@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslSaleInfoDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslSaleInfoDetail" >
+    <id column="sale_serno" property="saleSerno" jdbcType="VARCHAR" />
+    <result column="sale_plan_id" property="salePlanId" jdbcType="VARCHAR" />
+    <result column="sale_flag" property="saleFlag" jdbcType="CHAR" />
+    <result column="sale_num" property="saleNum" jdbcType="INTEGER" />
+    <result column="sale_weight" property="saleWeight" jdbcType="REAL" />
+    <result column="prod_id" property="prodId" jdbcType="VARCHAR" />
+    <result column="prod_material" property="prodMaterial" jdbcType="CHAR" />
+    <result column="prod_norm" property="prodNorm" jdbcType="VARCHAR" />
+    <result column="prod_length" property="prodLength" jdbcType="REAL" />
+    <result column="prod_sumnum" property="prodSumnum" jdbcType="INTEGER" />
+    <result column="prod_sumweight" property="prodSumweight" jdbcType="REAL" />
+    <result column="sale_price" property="salePrice" jdbcType="REAL" />
+    <result column="sale_status" property="saleStatus" jdbcType="CHAR" />
+    <result column="inputuser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="upd_date" property="updDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="prod_jsnum" property="prodJsnum" jdbcType="INTEGER" />
+    <result column="prod_jsweight" property="prodJsweight" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sale_serno, sale_plan_id, sale_flag, sale_num, sale_weight, prod_id, prod_material, 
+    prod_norm, prod_length, prod_sumnum, prod_sumweight, sale_price, sale_status, inputuser, 
+    crt_date, upd_date, remark, prod_jsnum, prod_jsweight
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslSaleInfoDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_sale_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_sale_info_detail
+    where sale_serno = #{saleSerno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_sale_info_detail
+    where sale_serno = #{saleSerno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslSaleInfoDetailExample" >
+    delete from bsl_sale_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslSaleInfoDetail" >
+    insert into bsl_sale_info_detail (sale_serno, sale_plan_id, sale_flag, 
+      sale_num, sale_weight, prod_id, 
+      prod_material, prod_norm, prod_length, 
+      prod_sumnum, prod_sumweight, sale_price, 
+      sale_status, inputuser, crt_date, 
+      upd_date, remark, prod_jsnum, 
+      prod_jsweight)
+    values (#{saleSerno,jdbcType=VARCHAR}, #{salePlanId,jdbcType=VARCHAR}, #{saleFlag,jdbcType=CHAR}, 
+      #{saleNum,jdbcType=INTEGER}, #{saleWeight,jdbcType=REAL}, #{prodId,jdbcType=VARCHAR}, 
+      #{prodMaterial,jdbcType=CHAR}, #{prodNorm,jdbcType=VARCHAR}, #{prodLength,jdbcType=REAL}, 
+      #{prodSumnum,jdbcType=INTEGER}, #{prodSumweight,jdbcType=REAL}, #{salePrice,jdbcType=REAL}, 
+      #{saleStatus,jdbcType=CHAR}, #{inputuser,jdbcType=VARCHAR}, #{crtDate,jdbcType=DATE}, 
+      #{updDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{prodJsnum,jdbcType=INTEGER}, 
+      #{prodJsweight,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslSaleInfoDetail" >
+    insert into bsl_sale_info_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="saleSerno != null" >
+        sale_serno,
+      </if>
+      <if test="salePlanId != null" >
+        sale_plan_id,
+      </if>
+      <if test="saleFlag != null" >
+        sale_flag,
+      </if>
+      <if test="saleNum != null" >
+        sale_num,
+      </if>
+      <if test="saleWeight != null" >
+        sale_weight,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="prodMaterial != null" >
+        prod_material,
+      </if>
+      <if test="prodNorm != null" >
+        prod_norm,
+      </if>
+      <if test="prodLength != null" >
+        prod_length,
+      </if>
+      <if test="prodSumnum != null" >
+        prod_sumnum,
+      </if>
+      <if test="prodSumweight != null" >
+        prod_sumweight,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="saleStatus != null" >
+        sale_status,
+      </if>
+      <if test="inputuser != null" >
+        inputuser,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="updDate != null" >
+        upd_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="prodJsnum != null" >
+        prod_jsnum,
+      </if>
+      <if test="prodJsweight != null" >
+        prod_jsweight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="saleSerno != null" >
+        #{saleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="salePlanId != null" >
+        #{salePlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleFlag != null" >
+        #{saleFlag,jdbcType=CHAR},
+      </if>
+      <if test="saleNum != null" >
+        #{saleNum,jdbcType=INTEGER},
+      </if>
+      <if test="saleWeight != null" >
+        #{saleWeight,jdbcType=REAL},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMaterial != null" >
+        #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null" >
+        #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodLength != null" >
+        #{prodLength,jdbcType=REAL},
+      </if>
+      <if test="prodSumnum != null" >
+        #{prodSumnum,jdbcType=INTEGER},
+      </if>
+      <if test="prodSumweight != null" >
+        #{prodSumweight,jdbcType=REAL},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=REAL},
+      </if>
+      <if test="saleStatus != null" >
+        #{saleStatus,jdbcType=CHAR},
+      </if>
+      <if test="inputuser != null" >
+        #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prodJsnum != null" >
+        #{prodJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="prodJsweight != null" >
+        #{prodJsweight,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslSaleInfoDetailExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_sale_info_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_sale_info_detail
+    <set >
+      <if test="record.saleSerno != null" >
+        sale_serno = #{record.saleSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salePlanId != null" >
+        sale_plan_id = #{record.salePlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleFlag != null" >
+        sale_flag = #{record.saleFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.saleNum != null" >
+        sale_num = #{record.saleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleWeight != null" >
+        sale_weight = #{record.saleWeight,jdbcType=REAL},
+      </if>
+      <if test="record.prodId != null" >
+        prod_id = #{record.prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodMaterial != null" >
+        prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="record.prodNorm != null" >
+        prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodLength != null" >
+        prod_length = #{record.prodLength,jdbcType=REAL},
+      </if>
+      <if test="record.prodSumnum != null" >
+        prod_sumnum = #{record.prodSumnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodSumweight != null" >
+        prod_sumweight = #{record.prodSumweight,jdbcType=REAL},
+      </if>
+      <if test="record.salePrice != null" >
+        sale_price = #{record.salePrice,jdbcType=REAL},
+      </if>
+      <if test="record.saleStatus != null" >
+        sale_status = #{record.saleStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.inputuser != null" >
+        inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.updDate != null" >
+        upd_date = #{record.updDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodJsnum != null" >
+        prod_jsnum = #{record.prodJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.prodJsweight != null" >
+        prod_jsweight = #{record.prodJsweight,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_sale_info_detail
+    set sale_serno = #{record.saleSerno,jdbcType=VARCHAR},
+      sale_plan_id = #{record.salePlanId,jdbcType=VARCHAR},
+      sale_flag = #{record.saleFlag,jdbcType=CHAR},
+      sale_num = #{record.saleNum,jdbcType=INTEGER},
+      sale_weight = #{record.saleWeight,jdbcType=REAL},
+      prod_id = #{record.prodId,jdbcType=VARCHAR},
+      prod_material = #{record.prodMaterial,jdbcType=CHAR},
+      prod_norm = #{record.prodNorm,jdbcType=VARCHAR},
+      prod_length = #{record.prodLength,jdbcType=REAL},
+      prod_sumnum = #{record.prodSumnum,jdbcType=INTEGER},
+      prod_sumweight = #{record.prodSumweight,jdbcType=REAL},
+      sale_price = #{record.salePrice,jdbcType=REAL},
+      sale_status = #{record.saleStatus,jdbcType=CHAR},
+      inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      upd_date = #{record.updDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      prod_jsnum = #{record.prodJsnum,jdbcType=INTEGER},
+      prod_jsweight = #{record.prodJsweight,jdbcType=REAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslSaleInfoDetail" >
+    update bsl_sale_info_detail
+    <set >
+      <if test="salePlanId != null" >
+        sale_plan_id = #{salePlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="saleFlag != null" >
+        sale_flag = #{saleFlag,jdbcType=CHAR},
+      </if>
+      <if test="saleNum != null" >
+        sale_num = #{saleNum,jdbcType=INTEGER},
+      </if>
+      <if test="saleWeight != null" >
+        sale_weight = #{saleWeight,jdbcType=REAL},
+      </if>
+      <if test="prodId != null" >
+        prod_id = #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="prodMaterial != null" >
+        prod_material = #{prodMaterial,jdbcType=CHAR},
+      </if>
+      <if test="prodNorm != null" >
+        prod_norm = #{prodNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="prodLength != null" >
+        prod_length = #{prodLength,jdbcType=REAL},
+      </if>
+      <if test="prodSumnum != null" >
+        prod_sumnum = #{prodSumnum,jdbcType=INTEGER},
+      </if>
+      <if test="prodSumweight != null" >
+        prod_sumweight = #{prodSumweight,jdbcType=REAL},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=REAL},
+      </if>
+      <if test="saleStatus != null" >
+        sale_status = #{saleStatus,jdbcType=CHAR},
+      </if>
+      <if test="inputuser != null" >
+        inputuser = #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="updDate != null" >
+        upd_date = #{updDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="prodJsnum != null" >
+        prod_jsnum = #{prodJsnum,jdbcType=INTEGER},
+      </if>
+      <if test="prodJsweight != null" >
+        prod_jsweight = #{prodJsweight,jdbcType=REAL},
+      </if>
+    </set>
+    where sale_serno = #{saleSerno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslSaleInfoDetail" >
+    update bsl_sale_info_detail
+    set sale_plan_id = #{salePlanId,jdbcType=VARCHAR},
+      sale_flag = #{saleFlag,jdbcType=CHAR},
+      sale_num = #{saleNum,jdbcType=INTEGER},
+      sale_weight = #{saleWeight,jdbcType=REAL},
+      prod_id = #{prodId,jdbcType=VARCHAR},
+      prod_material = #{prodMaterial,jdbcType=CHAR},
+      prod_norm = #{prodNorm,jdbcType=VARCHAR},
+      prod_length = #{prodLength,jdbcType=REAL},
+      prod_sumnum = #{prodSumnum,jdbcType=INTEGER},
+      prod_sumweight = #{prodSumweight,jdbcType=REAL},
+      sale_price = #{salePrice,jdbcType=REAL},
+      sale_status = #{saleStatus,jdbcType=CHAR},
+      inputuser = #{inputuser,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=DATE},
+      upd_date = #{updDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      prod_jsnum = #{prodJsnum,jdbcType=INTEGER},
+      prod_jsweight = #{prodJsweight,jdbcType=REAL}
+    where sale_serno = #{saleSerno,jdbcType=VARCHAR}
+  </update>
+  <select id="getAllJsWastes" resultMap="BaseResultMap" parameterType="com.bsl.select.QueryCriteria">
+  		select 
+			t.sale_plan_id,
+			t.sale_serno,
+			t.prod_id,
+			t.prod_sumweight,
+			t.prod_jsweight,
+			t.sale_status,
+			t.inputuser,
+			t.crt_date,
+			t.upd_date,
+			t.remark
+		from 
+			bsl_sale_info_detail t
+		where t.sale_plan_id in (select bs_id from bsl_bs_plan_info where bs_flag = '11')
+			<if test="salePlanId != null" >
+		        and t.sale_plan_id like #{salePlanId,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="saleSerno != null" >
+		        and t.sale_serno like #{saleSerno,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="prodId != null" >
+		        and t.prod_id = #{prodId,jdbcType=VARCHAR} 
+		    </if>
+	  		<if test="dateStart != null" >
+		      	and DATE_FORMAT(t.crt_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
+	    	</if>
+	        <if test="dateEnd != null" >
+	     		and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(t.crt_date,'%Y-%m-%d')
+	       </if>
+  </select>
+  
+   <resultMap id="WasteDetailMap" type="com.bsl.reportbean.BslWasteSaleDetailInfo" >
+    <result column="sale_serno" property="saleSerno" jdbcType="VARCHAR" />
+    <result column="sale_plan_id" property="salePlanId" jdbcType="VARCHAR" />
+    <result column="sale_flag" property="saleFlag" jdbcType="CHAR" />
+    <result column="sale_num" property="saleNum" jdbcType="INTEGER" />
+    <result column="sale_weight" property="saleWeight" jdbcType="REAL" />
+    <result column="prod_id" property="prodId" jdbcType="VARCHAR" />
+    <result column="prod_material" property="prodMaterial" jdbcType="CHAR" />
+    <result column="prod_norm" property="prodNorm" jdbcType="VARCHAR" />
+    <result column="prod_length" property="prodLength" jdbcType="REAL" />
+    <result column="prod_sumnum" property="prodSumnum" jdbcType="INTEGER" />
+    <result column="prod_sumweight" property="prodSumweight" jdbcType="REAL" />
+    <result column="sale_price" property="salePrice" jdbcType="REAL" />
+    <result column="sale_status" property="saleStatus" jdbcType="CHAR" />
+    <result column="inputuser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="upd_date" property="updDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="prod_jsnum" property="prodJsnum" jdbcType="INTEGER" />
+    <result column="prod_jsweight" property="prodJsweight" jdbcType="REAL" />
+    <result column="bs_customer" property="bsCustomer" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="getAllWasteSaleInfo" resultMap="WasteDetailMap" parameterType="com.bsl.select.QueryCriteria">
+  		select 
+			t.sale_plan_id,
+			t.sale_serno,
+			t.prod_id,
+			t.sale_weight,
+			t.prod_sumweight,
+			t.sale_status,
+			t.inputuser,
+			t.crt_date,
+			t.upd_date,
+			t.sale_price,
+			p.bs_customer,
+			t.remark
+		from 
+			bsl_sale_info_detail t
+		left join bsl_bs_plan_info p
+		on t.sale_plan_id = p.bs_id
+		where ((#{wxFlag,jdbcType=VARCHAR} = '1' and p.bs_flag in ('4','11'))
+				or (#{wxFlag,jdbcType=VARCHAR} = '2' and p.bs_flag = '9'))
+			<if test="salePlanId != null" >
+		        and t.sale_plan_id like #{salePlanId,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="saleSerno != null" >
+		        and t.sale_serno like #{saleSerno,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="saleStatus != null" >
+		        and t.sale_status = #{saleStatus,jdbcType=VARCHAR} 
+		    </if>
+		    <if test="prodId != null" >
+		        and t.prod_id = #{prodId,jdbcType=VARCHAR} 
+		    </if>
+	  		<if test="dateStart != null" >
+		      	and DATE_FORMAT(t.crt_date,'%Y-%m-%d') >= #{dateStart,jdbcType=DATE}
+	    	</if>
+	        <if test="dateEnd != null" >
+	     		and #{dateEnd,jdbcType=DATE} >= DATE_FORMAT(t.crt_date,'%Y-%m-%d')
+	       </if>
+	    <if test="orderByClause != null" >
+		     order by ${orderByClause}
+		</if>
+  </select>
+</mapper>

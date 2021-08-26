@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslWasteWeightInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslWasteWeightInfo" >
+    <id column="waste_type" property="wasteType" jdbcType="CHAR" />
+    <result column="waste_weight" property="wasteWeight" jdbcType="REAL" />
+    <result column="waste_in_weight" property="wasteInWeight" jdbcType="REAL" />
+    <result column="waste_out_weight" property="wasteOutWeight" jdbcType="REAL" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    waste_type, waste_weight, waste_in_weight, waste_out_weight, crt_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslWasteWeightInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_waste_weight_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_waste_weight_info
+    where waste_type = #{wasteType,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_waste_weight_info
+    where waste_type = #{wasteType,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslWasteWeightInfoExample" >
+    delete from bsl_waste_weight_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslWasteWeightInfo" >
+    insert into bsl_waste_weight_info (waste_type, waste_weight, waste_in_weight, 
+      waste_out_weight, crt_date, remark
+      )
+    values (#{wasteType,jdbcType=CHAR}, #{wasteWeight,jdbcType=REAL}, #{wasteInWeight,jdbcType=REAL}, 
+      #{wasteOutWeight,jdbcType=REAL}, #{crtDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslWasteWeightInfo" >
+    insert into bsl_waste_weight_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="wasteType != null" >
+        waste_type,
+      </if>
+      <if test="wasteWeight != null" >
+        waste_weight,
+      </if>
+      <if test="wasteInWeight != null" >
+        waste_in_weight,
+      </if>
+      <if test="wasteOutWeight != null" >
+        waste_out_weight,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="wasteType != null" >
+        #{wasteType,jdbcType=CHAR},
+      </if>
+      <if test="wasteWeight != null" >
+        #{wasteWeight,jdbcType=REAL},
+      </if>
+      <if test="wasteInWeight != null" >
+        #{wasteInWeight,jdbcType=REAL},
+      </if>
+      <if test="wasteOutWeight != null" >
+        #{wasteOutWeight,jdbcType=REAL},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslWasteWeightInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_waste_weight_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_waste_weight_info
+    <set >
+      <if test="record.wasteType != null" >
+        waste_type = #{record.wasteType,jdbcType=CHAR},
+      </if>
+      <if test="record.wasteWeight != null" >
+        waste_weight = #{record.wasteWeight,jdbcType=REAL},
+      </if>
+      <if test="record.wasteInWeight != null" >
+        waste_in_weight = #{record.wasteInWeight,jdbcType=REAL},
+      </if>
+      <if test="record.wasteOutWeight != null" >
+        waste_out_weight = #{record.wasteOutWeight,jdbcType=REAL},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_waste_weight_info
+    set waste_type = #{record.wasteType,jdbcType=CHAR},
+      waste_weight = #{record.wasteWeight,jdbcType=REAL},
+      waste_in_weight = #{record.wasteInWeight,jdbcType=REAL},
+      waste_out_weight = #{record.wasteOutWeight,jdbcType=REAL},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslWasteWeightInfo" >
+    update bsl_waste_weight_info
+    <set >
+      <if test="wasteWeight != null" >
+        waste_weight = #{wasteWeight,jdbcType=REAL},
+      </if>
+      <if test="wasteInWeight != null" >
+        waste_in_weight = #{wasteInWeight,jdbcType=REAL},
+      </if>
+      <if test="wasteOutWeight != null" >
+        waste_out_weight = #{wasteOutWeight,jdbcType=REAL},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where waste_type = #{wasteType,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslWasteWeightInfo" >
+    update bsl_waste_weight_info
+    set waste_weight = #{wasteWeight,jdbcType=REAL},
+      waste_in_weight = #{wasteInWeight,jdbcType=REAL},
+      waste_out_weight = #{wasteOutWeight,jdbcType=REAL},
+      crt_date = #{crtDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where waste_type = #{wasteType,jdbcType=CHAR}
+  </update>
+</mapper>

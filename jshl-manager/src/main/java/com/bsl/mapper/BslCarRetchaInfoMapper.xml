@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslCarRetchaInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslCarRetchaInfo" >
+    <id column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="ret_weight" property="retWeight" jdbcType="REAL" />
+    <result column="print_num" property="printNum" jdbcType="INTEGER" />
+    <result column="cha_weight" property="chaWeight" jdbcType="REAL" />
+    <result column="bs_gettype" property="bsGettype" jdbcType="CHAR" />
+    <result column="wx_flag" property="wxFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    car_no, ret_weight, print_num, cha_weight, bs_gettype, wx_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslCarRetchaInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_car_retcha_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_car_retcha_info
+    where car_no = #{carNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_car_retcha_info
+    where car_no = #{carNo,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslCarRetchaInfoExample" >
+    delete from bsl_car_retcha_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslCarRetchaInfo" >
+    insert into bsl_car_retcha_info (car_no, ret_weight, print_num, 
+      cha_weight, bs_gettype, wx_flag
+      )
+    values (#{carNo,jdbcType=VARCHAR}, #{retWeight,jdbcType=REAL}, #{printNum,jdbcType=INTEGER}, 
+      #{chaWeight,jdbcType=REAL}, #{bsGettype,jdbcType=CHAR}, #{wxFlag,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslCarRetchaInfo" >
+    insert into bsl_car_retcha_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carNo != null" >
+        car_no,
+      </if>
+      <if test="retWeight != null" >
+        ret_weight,
+      </if>
+      <if test="printNum != null" >
+        print_num,
+      </if>
+      <if test="chaWeight != null" >
+        cha_weight,
+      </if>
+      <if test="bsGettype != null" >
+        bs_gettype,
+      </if>
+      <if test="wxFlag != null" >
+        wx_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carNo != null" >
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="retWeight != null" >
+        #{retWeight,jdbcType=REAL},
+      </if>
+      <if test="printNum != null" >
+        #{printNum,jdbcType=INTEGER},
+      </if>
+      <if test="chaWeight != null" >
+        #{chaWeight,jdbcType=REAL},
+      </if>
+      <if test="bsGettype != null" >
+        #{bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="wxFlag != null" >
+        #{wxFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslCarRetchaInfoExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_car_retcha_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_car_retcha_info
+    <set >
+      <if test="record.carNo != null" >
+        car_no = #{record.carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.retWeight != null" >
+        ret_weight = #{record.retWeight,jdbcType=REAL},
+      </if>
+      <if test="record.printNum != null" >
+        print_num = #{record.printNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.chaWeight != null" >
+        cha_weight = #{record.chaWeight,jdbcType=REAL},
+      </if>
+      <if test="record.bsGettype != null" >
+        bs_gettype = #{record.bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="record.wxFlag != null" >
+        wx_flag = #{record.wxFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_car_retcha_info
+    set car_no = #{record.carNo,jdbcType=VARCHAR},
+      ret_weight = #{record.retWeight,jdbcType=REAL},
+      print_num = #{record.printNum,jdbcType=INTEGER},
+      cha_weight = #{record.chaWeight,jdbcType=REAL},
+      bs_gettype = #{record.bsGettype,jdbcType=CHAR},
+      wx_flag = #{record.wxFlag,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslCarRetchaInfo" >
+    update bsl_car_retcha_info
+    <set >
+      <if test="retWeight != null" >
+        ret_weight = #{retWeight,jdbcType=REAL},
+      </if>
+      <if test="printNum != null" >
+        print_num = #{printNum,jdbcType=INTEGER},
+      </if>
+      <if test="chaWeight != null" >
+        cha_weight = #{chaWeight,jdbcType=REAL},
+      </if>
+      <if test="bsGettype != null" >
+        bs_gettype = #{bsGettype,jdbcType=CHAR},
+      </if>
+      <if test="wxFlag != null" >
+        wx_flag = #{wxFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where car_no = #{carNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslCarRetchaInfo" >
+    update bsl_car_retcha_info
+    set ret_weight = #{retWeight,jdbcType=REAL},
+      print_num = #{printNum,jdbcType=INTEGER},
+      cha_weight = #{chaWeight,jdbcType=REAL},
+      bs_gettype = #{bsGettype,jdbcType=CHAR},
+      wx_flag = #{wxFlag,jdbcType=CHAR}
+    where car_no = #{carNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

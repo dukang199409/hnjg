@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsl.mapper.BslStockChangeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.bsl.pojo.BslStockChangeDetail" >
+    <id column="trans_serno" property="transSerno" jdbcType="VARCHAR" />
+    <result column="prod_id" property="prodId" jdbcType="VARCHAR" />
+    <result column="plan_serno" property="planSerno" jdbcType="VARCHAR" />
+    <result column="trans_code" property="transCode" jdbcType="CHAR" />
+    <result column="prod_type" property="prodType" jdbcType="CHAR" />
+    <result column="rubbish_type" property="rubbishType" jdbcType="CHAR" />
+    <result column="prod_ori_id" property="prodOriId" jdbcType="VARCHAR" />
+    <result column="rubbish_weight" property="rubbishWeight" jdbcType="REAL" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="target_place" property="targetPlace" jdbcType="VARCHAR" />
+    <result column="inputuser" property="inputuser" jdbcType="VARCHAR" />
+    <result column="crt_date" property="crtDate" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trans_serno, prod_id, plan_serno, trans_code, prod_type, rubbish_type, prod_ori_id, 
+    rubbish_weight, price, target_place, inputuser, crt_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.bsl.pojo.BslStockChangeDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bsl_stock_change_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from bsl_stock_change_detail
+    where trans_serno = #{transSerno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from bsl_stock_change_detail
+    where trans_serno = #{transSerno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bsl.pojo.BslStockChangeDetailExample" >
+    delete from bsl_stock_change_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bsl.pojo.BslStockChangeDetail" >
+    insert into bsl_stock_change_detail (trans_serno, prod_id, plan_serno, 
+      trans_code, prod_type, rubbish_type, 
+      prod_ori_id, rubbish_weight, price, 
+      target_place, inputuser, crt_date, 
+      remark)
+    values (#{transSerno,jdbcType=VARCHAR}, #{prodId,jdbcType=VARCHAR}, #{planSerno,jdbcType=VARCHAR}, 
+      #{transCode,jdbcType=CHAR}, #{prodType,jdbcType=CHAR}, #{rubbishType,jdbcType=CHAR}, 
+      #{prodOriId,jdbcType=VARCHAR}, #{rubbishWeight,jdbcType=REAL}, #{price,jdbcType=REAL}, 
+      #{targetPlace,jdbcType=VARCHAR}, #{inputuser,jdbcType=VARCHAR}, #{crtDate,jdbcType=DATE}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bsl.pojo.BslStockChangeDetail" >
+    insert into bsl_stock_change_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="transSerno != null" >
+        trans_serno,
+      </if>
+      <if test="prodId != null" >
+        prod_id,
+      </if>
+      <if test="planSerno != null" >
+        plan_serno,
+      </if>
+      <if test="transCode != null" >
+        trans_code,
+      </if>
+      <if test="prodType != null" >
+        prod_type,
+      </if>
+      <if test="rubbishType != null" >
+        rubbish_type,
+      </if>
+      <if test="prodOriId != null" >
+        prod_ori_id,
+      </if>
+      <if test="rubbishWeight != null" >
+        rubbish_weight,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="targetPlace != null" >
+        target_place,
+      </if>
+      <if test="inputuser != null" >
+        inputuser,
+      </if>
+      <if test="crtDate != null" >
+        crt_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="transSerno != null" >
+        #{transSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="planSerno != null" >
+        #{planSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null" >
+        #{transCode,jdbcType=CHAR},
+      </if>
+      <if test="prodType != null" >
+        #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="rubbishType != null" >
+        #{rubbishType,jdbcType=CHAR},
+      </if>
+      <if test="prodOriId != null" >
+        #{prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="rubbishWeight != null" >
+        #{rubbishWeight,jdbcType=REAL},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="targetPlace != null" >
+        #{targetPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bsl.pojo.BslStockChangeDetailExample" resultType="java.lang.Integer" >
+    select count(*) from bsl_stock_change_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bsl_stock_change_detail
+    <set >
+      <if test="record.transSerno != null" >
+        trans_serno = #{record.transSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodId != null" >
+        prod_id = #{record.prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.planSerno != null" >
+        plan_serno = #{record.planSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transCode != null" >
+        trans_code = #{record.transCode,jdbcType=CHAR},
+      </if>
+      <if test="record.prodType != null" >
+        prod_type = #{record.prodType,jdbcType=CHAR},
+      </if>
+      <if test="record.rubbishType != null" >
+        rubbish_type = #{record.rubbishType,jdbcType=CHAR},
+      </if>
+      <if test="record.prodOriId != null" >
+        prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rubbishWeight != null" >
+        rubbish_weight = #{record.rubbishWeight,jdbcType=REAL},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.targetPlace != null" >
+        target_place = #{record.targetPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputuser != null" >
+        inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDate != null" >
+        crt_date = #{record.crtDate,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bsl_stock_change_detail
+    set trans_serno = #{record.transSerno,jdbcType=VARCHAR},
+      prod_id = #{record.prodId,jdbcType=VARCHAR},
+      plan_serno = #{record.planSerno,jdbcType=VARCHAR},
+      trans_code = #{record.transCode,jdbcType=CHAR},
+      prod_type = #{record.prodType,jdbcType=CHAR},
+      rubbish_type = #{record.rubbishType,jdbcType=CHAR},
+      prod_ori_id = #{record.prodOriId,jdbcType=VARCHAR},
+      rubbish_weight = #{record.rubbishWeight,jdbcType=REAL},
+      price = #{record.price,jdbcType=REAL},
+      target_place = #{record.targetPlace,jdbcType=VARCHAR},
+      inputuser = #{record.inputuser,jdbcType=VARCHAR},
+      crt_date = #{record.crtDate,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bsl.pojo.BslStockChangeDetail" >
+    update bsl_stock_change_detail
+    <set >
+      <if test="prodId != null" >
+        prod_id = #{prodId,jdbcType=VARCHAR},
+      </if>
+      <if test="planSerno != null" >
+        plan_serno = #{planSerno,jdbcType=VARCHAR},
+      </if>
+      <if test="transCode != null" >
+        trans_code = #{transCode,jdbcType=CHAR},
+      </if>
+      <if test="prodType != null" >
+        prod_type = #{prodType,jdbcType=CHAR},
+      </if>
+      <if test="rubbishType != null" >
+        rubbish_type = #{rubbishType,jdbcType=CHAR},
+      </if>
+      <if test="prodOriId != null" >
+        prod_ori_id = #{prodOriId,jdbcType=VARCHAR},
+      </if>
+      <if test="rubbishWeight != null" >
+        rubbish_weight = #{rubbishWeight,jdbcType=REAL},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="targetPlace != null" >
+        target_place = #{targetPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="inputuser != null" >
+        inputuser = #{inputuser,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDate != null" >
+        crt_date = #{crtDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where trans_serno = #{transSerno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bsl.pojo.BslStockChangeDetail" >
+    update bsl_stock_change_detail
+    set prod_id = #{prodId,jdbcType=VARCHAR},
+      plan_serno = #{planSerno,jdbcType=VARCHAR},
+      trans_code = #{transCode,jdbcType=CHAR},
+      prod_type = #{prodType,jdbcType=CHAR},
+      rubbish_type = #{rubbishType,jdbcType=CHAR},
+      prod_ori_id = #{prodOriId,jdbcType=VARCHAR},
+      rubbish_weight = #{rubbishWeight,jdbcType=REAL},
+      price = #{price,jdbcType=REAL},
+      target_place = #{targetPlace,jdbcType=VARCHAR},
+      inputuser = #{inputuser,jdbcType=VARCHAR},
+      crt_date = #{crtDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where trans_serno = #{transSerno,jdbcType=VARCHAR}
+  </update>
+</mapper>

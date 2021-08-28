@@ -364,8 +364,8 @@ public class PrintPdfController {
 				headList.add(new PDFCell("出库类别：", CreatePdfUtil.keyfont, Element.ALIGN_CENTER, 2, true));
 				headList.add(new PDFCell(jedisClient.get("bsFlagS:"+bslBsPlanInfo.getBsFlag()), CreatePdfUtil.textfont, Element.ALIGN_LEFT, 3, true));
 				
-				String [] fields = {"makeName","prodNorm","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
-				String [] titles = {"生产批号","炉号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
+				String [] fields = {"makeName","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
+				String [] titles = {"生产批号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
 				List inList = new ArrayList<>();
 				
 				Integer prodNumSum = 0;
@@ -374,7 +374,6 @@ public class PrintPdfController {
 					inList.add(
 							new BslMakePlanInfoDetailExtra(
 									bslProductInfo.getProdPlanNo(),
-									bslProductInfo.getProdLuno(),
 									bslProductInfo.getProdOrirawid(),
 									bslProductInfo.getProdName(),
 									bslProductInfo.getProdNorm(),
@@ -478,8 +477,8 @@ public class PrintPdfController {
 				headList.add(new PDFCell("出库类别：", CreatePdfUtil.keyfont, Element.ALIGN_CENTER, 2, true));
 				headList.add(new PDFCell(jedisClient.get("bsFlagS:"+bsFlag), CreatePdfUtil.textfont, Element.ALIGN_LEFT, 3, true));
 				
-				String [] fields = {"makeName","prodNorm","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
-				String [] titles = {"生产批号","炉号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
+				String [] fields = {"makeName","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
+				String [] titles = {"生产批号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
 				List inList = new ArrayList<>();
 				
 				Integer prodNumSum = 0;
@@ -488,7 +487,6 @@ public class PrintPdfController {
 					inList.add(
 							new BslMakePlanInfoDetailExtra(
 									bslProductInfo.getProdPlanNo(),
-									bslProductInfo.getProdLuno(),
 									bslProductInfo.getProdOrirawid(),
 									bslProductInfo.getProdName(),
 									bslProductInfo.getProdNorm(),
@@ -586,8 +584,8 @@ public class PrintPdfController {
 				headList.add(new PDFCell("出库类别：", CreatePdfUtil.keyfont, Element.ALIGN_CENTER, 2, true));
 				headList.add(new PDFCell(jedisClient.get("bsFlagS:"+bsFlag), CreatePdfUtil.textfont, Element.ALIGN_LEFT, 3, true));
 				
-				String [] fields = {"makeName","prodNorm","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
-				String [] titles = {"生产批号","炉号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
+				String [] fields = {"makeName","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
+				String [] titles = {"生产批号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
 				List inList = new ArrayList<>();
 				
 				Integer prodNumSum = 0;
@@ -596,7 +594,6 @@ public class PrintPdfController {
 					inList.add(
 							new BslMakePlanInfoDetailExtra(
 									bslProductInfo.getProdPlanNo(),
-									bslProductInfo.getProdLuno(),
 									bslProductInfo.getProdOrirawid(),
 									bslProductInfo.getProdName(),
 									bslProductInfo.getProdNorm(),
@@ -1106,8 +1103,8 @@ public class PrintPdfController {
 				headList.add(new PDFCell("出库类别：", CreatePdfUtil.keyfont, Element.ALIGN_CENTER, 3, true));
 				headList.add(new PDFCell(jedisClient.get("bsFlagS:"+bslBsPlanInfo.getBsFlag()), CreatePdfUtil.textfont, Element.ALIGN_LEFT, 3, true));
 				
-				String [] fields = {"makeName","prodNorm","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
-				String [] titles = {"生产批号","炉号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
+				String [] fields = {"makeName","prodOrirawid","prodMaterial","prodLevel","prodNum","unit","planOutputVolume","prodWeight","planFinistDate"};
+				String [] titles = {"生产批号","厂家卷号","物料名称","规格", "钢种", "定尺(米)","数量(卷/支)", "重量(吨)","质量等级"};
 				List inList = new ArrayList<>();
 				
 				Integer prodNumSum = 0;
@@ -1116,7 +1113,6 @@ public class PrintPdfController {
 					inList.add(
 							new BslMakePlanInfoDetailExtra(
 									bslProductInfo.getProdPlanNo(),
-									bslProductInfo.getProdLuno(),
 									bslProductInfo.getProdOrirawid(),
 									bslProductInfo.getProdName(),
 									bslProductInfo.getProdNorm(),
